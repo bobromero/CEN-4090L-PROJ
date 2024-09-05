@@ -2,19 +2,23 @@
 
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://player.tscn" id="1_2qf7k"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_y1np6"]
-size = Vector2(300, 120)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpxta"]
+size = Vector2(250, 100)
 
-[sub_resource type="QuadMesh" id="QuadMesh_la6dh"]
+[sub_resource type="QuadMesh" id="QuadMesh_c2ckj"]
+size = Vector2(250, 100)
 
 [node name="MovementTest" type="Node2D"]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_2qf7k")]
+_isPlatformer = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(7, 160)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-shape = SubResource("RectangleShape2D_y1np6")
+shape = SubResource("RectangleShape2D_vpxta")
+debug_color = Color(0.122636, 0.583894, 0.759973, 0.42)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D"]
-mesh = SubResource("QuadMesh_la6dh")
+mesh = SubResource("QuadMesh_c2ckj")
