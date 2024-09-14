@@ -7,3 +7,6 @@ enum ItemType {Weapon, Health, Buff}
 
 @export var name: String = ""
 @export var type: ItemType = ItemType.Weapon
+
+func Use(player: Player):
+	pass
