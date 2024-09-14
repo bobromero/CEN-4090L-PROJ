@@ -12,4 +12,8 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	movement._physics_process(delta)
-	Inventory.Weapon._primaryAttack()
+	if Input.is_action_just_pressed("PrimaryFire"):
+		Inventory.Weapon._primaryAttack()
+		
+	if Input.is_action_just_pressed("SecondaryFire"):
+		Inventory.Weapon._secondaryAttack()
