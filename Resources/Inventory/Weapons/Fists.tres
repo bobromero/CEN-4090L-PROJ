@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bneebrro02nco"]
+
+[ext_resource type="Script" path="res://Scripts/Weapons/Fists.gd" id="1_vbfkf"]
+
+[resource]
+script = ExtResource("1_vbfkf")
+damage = 10
+name = "Fists"
+type = 0

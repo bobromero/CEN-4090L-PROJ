@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtj0cc7sxpk4k"]
+
+[ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_84dg8"]
+[ext_resource type="Script" path="res://Scripts/Items/Pickup.gd" id="2_mx5ws"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gy1hu"]
+
+[node name="Sprite2D" type="Sprite2D"]
+modulate = Color(1, 0, 0, 1)
+rotation = 0.785398
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_84dg8")
+script = ExtResource("2_mx5ws")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Item"]]
+scale = Vector2(7.66059, 7.66059)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_gy1hu")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

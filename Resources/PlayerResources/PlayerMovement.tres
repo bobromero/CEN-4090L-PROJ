@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="movement" load_steps=2 format=3 uid="uid://b2rjlohno4t8f"]
+
+[ext_resource type="Script" path="res://Scripts/movement.gd" id="1_estbj"]
+
+[resource]
+script = ExtResource("1_estbj")
+_isPlatformer = false
