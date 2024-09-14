@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="Item" load_steps=2 format=3 uid="uid://bneebrro02nco"]
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bneebrro02nco"]
 
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="1_aou0e"]
+[ext_resource type="Script" path="res://Scripts/Weapons/Fists.gd" id="1_vbfkf"]
 
 [resource]
-script = ExtResource("1_aou0e")
+script = ExtResource("1_vbfkf")
+damage = 10
 name = "Fists"
 type = 0
