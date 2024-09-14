@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="Inventory" load_steps=4 format=3 uid="uid://dv5nk8ngyjkcq"]
 
 [ext_resource type="Resource" uid="uid://bneebrro02nco" path="res://Resources/Inventory/Items/Fists.tres" id="1_p2lal"]
-[ext_resource type="Script" path="res://Scripts/Item.gd" id="2_gofe6"]
-[ext_resource type="Script" path="res://Scripts/Inventory.gd" id="3_1nxys"]
+[ext_resource type="Script" path="res://Scripts/Items/Item.gd" id="2_gofe6"]
+[ext_resource type="Script" path="res://Scripts/Items/Inventory.gd" id="3_1nxys"]
 
 [resource]
 script = ExtResource("3_1nxys")
-Weaopn = ExtResource("1_p2lal")
+Weapon = ExtResource("1_p2lal")
 nonWeaponItems = Array[ExtResource("2_gofe6")]([])
