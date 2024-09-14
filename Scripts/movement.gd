@@ -15,7 +15,6 @@ func SetPlayer(_player: CharacterBody2D):
 
 
 func _physics_process(delta: float) -> void:
-	print("working?")
 	if _isPlatformer:
 		# Add the gravity.
 		if not player.is_on_floor():
