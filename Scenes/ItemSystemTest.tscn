@@ -1,5 +1,9 @@
-[gd_scene format=3 uid="uid://bmj4g03b6wopy"]
+[gd_scene load_steps=2 format=3 uid="uid://bmj4g03b6wopy"]
+
+[ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="1_t5pjb"]
 
 [node name="ItemSystemTest" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_t5pjb")]
