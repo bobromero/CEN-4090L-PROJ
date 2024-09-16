@@ -1,12 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://orbgdvetlkju"]
 
-[ext_resource type="PackedScene" uid="uid://dxkljmk6sj4gd" path="res://Prefabs/hud.tscn" id="1_vfvak"]
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="2_774bw"]
+[ext_resource type="PackedScene" uid="uid://dj6qxqdr54bih" path="res://Prefabs/Coin.tscn" id="3_5vgxj"]
 [ext_resource type="PackedScene" uid="uid://3ym2qlv4tsf1" path="res://Prefabs/platform.tscn" id="3_ddiel"]
 
 [node name="ScoreTest" type="Node2D"]
-
-[node name="HUD" parent="." instance=ExtResource("1_vfvak")]
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_774bw")]
 position = Vector2(95, 199)
@@ -22,3 +20,6 @@ position = Vector2(622, 314)
 
 [node name="StaticBody2D4" parent="." instance=ExtResource("3_ddiel")]
 position = Vector2(868, 314)
+
+[node name="Sprite2D" parent="." instance=ExtResource("3_5vgxj")]
+position = Vector2(290.25, 205.25)

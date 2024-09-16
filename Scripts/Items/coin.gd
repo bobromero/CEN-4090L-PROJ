@@ -4,7 +4,7 @@ extends Item
 
 func Use(player: Player):
 	super(player)
-	
+	player.addScore(10)
 
 	
 	
