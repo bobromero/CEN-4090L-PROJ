@@ -43,8 +43,8 @@ func _topDownMovement():
 	player.move_and_slide()
 
 
-
 func _platformerMovement(delta: float):
+	#Checks if any of the three timers are currently running
 	if jump_buffered:
 		_jump_buffer_timer(delta)
 		
@@ -86,6 +86,7 @@ func _platformerMovement(delta: float):
 			print("Buffered jump")
 			jump()
 
+#Handles jumping
 func jump():
 	if player.is_on_floor() || can_coyote_jump:
 		#Gives you a grace period to jump off the edge of a platform
@@ -98,32 +99,32 @@ func jump():
 			jump_buffered = true
 			
 			
-			
-func _coyote_timer(delta) -> void:
-	coyote_timer -= delta
-	if coyote_timer <= 0:
-		_on_coyote_timer_timeout()
-		
-		
-func _jump_buffer_timer(delta) -> void:
-	jump_buffer_timer -= delta
-	if jump_buffer_timer <= 0:
-		_on_jump_buffer_timer_timeout()
-		
-		
+#Starts jump height timer (I think this is what's making the greater variation in
+#jump height we now have)
 func _jump_height_timer_start():
 	if jump_height_timer == 0.0:
 		jump_height_timer = 0.10
 		
 	jump_height_timer_on = true
-
-
+	
+#Functions to handle the countdown of the three timers
+func _coyote_timer(delta) -> void:
+	coyote_timer -= delta
+	if coyote_timer <= 0:
+		_on_coyote_timer_timeout()
+		
+func _jump_buffer_timer(delta) -> void:
+	jump_buffer_timer -= delta
+	if jump_buffer_timer <= 0:
+		_on_jump_buffer_timer_timeout()
 
 func _jump_height_timer(delta) -> void:
 	jump_height_timer -= delta
 	if jump_height_timer <= 0:
 		_on_jump_height_timer_timeout()
 			
+			
+#Functions deal with what happend when the timers timeout
 func _on_coyote_timer_timeout() -> void:
 	can_coyote_jump = false
 	coyote_timer = 0.15
