@@ -4,7 +4,6 @@
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_leqtn")
-currentscore = null
 
 [node name="scoreCount" type="Label" parent="."]
 offset_right = 303.0

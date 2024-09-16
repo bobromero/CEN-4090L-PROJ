@@ -9,9 +9,13 @@ class_name Player
 
 @export var health: float = 100
 
+@export var hud: CanvasLayer
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	movement.SetPlayer(self)
+	hud = $HUD
+	
 	
 	
 func _equipWeapon():
@@ -42,3 +46,9 @@ func RemoveFromInventory(id: int):
 
 func IncreaseHealth(num: float):
 	health += num
+	
+func addScore(int) -> void:
+	hud.currentscore += int
+	
+func rmScore(int) -> void:
+	hud.currentscore -= int
