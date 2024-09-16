@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7lqsen8g4gik"]
+
+[ext_resource type="PackedScene" uid="uid://dxkljmk6sj4gd" path="res://hud.tscn" id="1_vfvak"]
+[ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="2_774bw"]
+
+[node name="ScoreTest" type="Node2D"]
+
+[node name="HUD" parent="." instance=ExtResource("1_vfvak")]
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("2_774bw")]
+position = Vector2(-677, -199)
