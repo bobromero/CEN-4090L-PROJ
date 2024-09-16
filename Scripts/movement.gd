@@ -1,9 +1,17 @@
-extends CharacterBody2D
+extends Resource
+
+class_name movement
 
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 @export var _isPlatformer: bool = false
+var player:CharacterBody2D
+
+func SetPlayer(_player: CharacterBody2D):
+	player = _player
+	print("here")
+
 
 @onready var coyote_time = $CoyoteTimer 
 @onready var jump_buffer_timer = $JumpBufferTimer
@@ -26,10 +34,10 @@ func _topDownMovement():
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_vector("left", "right", "up", "down")
 	if direction:
-		velocity = direction * SPEED
+		player.velocity = direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+		player.velocity.x = move_toward(player.velocity.x, 0, SPEED)
+		player.velocity.y = move_toward(player.velocity.y, 0, SPEED)
 
 	move_and_slide()
 
@@ -41,6 +49,9 @@ func _platformerMovement(delta: float):
 		velocity += get_gravity() * delta
 		if velocity.y > 1000:
 			velocity.y = 1000
+	# Handle jump.
+	if Input.is_action_just_pressed("up") and player.is_on_floor():
+		player.velocity.y = JUMP_VELOCITY
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("up"):
@@ -50,7 +61,7 @@ func _platformerMovement(delta: float):
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
 	if direction:
-		velocity.x = direction * SPEED
+		player.velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		
@@ -94,3 +105,4 @@ func _on_jump_height_timer_timeout() -> void:
 			velocity.y = -90
 	else:
 		pass
+		player.velocity.x = move_toward(player.velocity.x, 0, SPEED)

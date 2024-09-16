@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://bi4ufgbogbq3k"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_6k2tp"]
+[ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_kg5i0"]
+[ext_resource type="Resource" uid="uid://b2rjlohno4t8f" path="res://Resources/PlayerResources/PlayerMovement.tres" id="2_mcwbx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hladd"]
+size = Vector2(120, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ww1cg"]
+size = Vector2(50, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v635p"]
+size = Vector2(128, 128)
+
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("attackRegion")]
+script = ExtResource("1_6k2tp")
+movement = ExtResource("2_mcwbx")
+attackRegion = NodePath("Sprite2D/Area2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hladd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kg5i0")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+position = Vector2(90, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("RectangleShape2D_ww1cg")
+disabled = true
+
+[node name="ItemArea2D" type="Area2D" parent="." groups=["Inventory", "Player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemArea2D"]
+shape = SubResource("RectangleShape2D_v635p")
