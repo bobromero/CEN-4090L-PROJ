@@ -34,4 +34,5 @@ disabled = true
 [node name="ItemArea2D" type="Area2D" parent="." groups=["Inventory", "Player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemArea2D"]
+position = Vector2(8, 2)
 shape = SubResource("RectangleShape2D_v635p")
