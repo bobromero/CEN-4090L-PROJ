@@ -21,7 +21,6 @@ func _ready() -> void:
 func _equipWeapon():
 	PlayerInventory.Weapon.attackRegion = attackRegion
 	
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	movement._physics_process(delta)
@@ -30,7 +29,6 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("SecondaryFire"):
 		PlayerInventory.Weapon._secondaryAttack()
-			
 
 	#if PlayerInventory.nonWeaponItems.size() > 0 and Input.is_action_just_pressed("pickup"):
 		#UseItem(0) #or selected index some how

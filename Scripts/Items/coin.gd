@@ -1,7 +1,9 @@
 extends Item
 
 
-func _on_body_entered(body):
-	pass
+func Use(player: Player):
+	super(player)
+	player.IncreaseHealth(100)
+	print(str("increased health to " , player.health))
 	
 	
