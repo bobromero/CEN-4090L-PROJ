@@ -5,6 +5,7 @@ class_name movement
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
+var _sprint_multiplier = 2.5
 @export var _isPlatformer: bool = false
 var player:CharacterBody2D
 
@@ -22,6 +23,8 @@ var jump_buffered = false
 var jump_height_timer_on = false
 
 
+
+
 func _physics_process(delta: float) -> void:
 	if _isPlatformer:
 		_platformerMovement(delta)
@@ -36,10 +39,12 @@ func _topDownMovement():
 	var direction := Input.get_vector("left", "right", "up", "down")
 	if direction:
 		player.velocity = direction * SPEED
+		if Input.is_action_pressed("Sprint"):
+			player.velocity *= _sprint_multiplier
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, SPEED)
 		player.velocity.y = move_toward(player.velocity.y, 0, SPEED)
-
+	
 	player.move_and_slide()
 
 
@@ -124,7 +129,7 @@ func _jump_height_timer(delta) -> void:
 		_on_jump_height_timer_timeout()
 			
 			
-#Functions deal with what happend when the timers timeout
+#Functions deal with what happens when the timers timeout
 func _on_coyote_timer_timeout() -> void:
 	can_coyote_jump = false
 	coyote_timer = 0.15
