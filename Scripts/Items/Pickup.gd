@@ -3,6 +3,7 @@ extends Node
 
 @export var item:Item
 
+
 var _playerEnetered: bool = false
 var _enemyEntered: bool = false
 var playerScript: Player
@@ -26,7 +27,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	playerScript = area.get_parent().get_script().new()
 	
 	_enemyEntered = area.is_in_group("Inventory") and area.is_in_group("Enemy")
-	
+
+func _on_coin_entered(coin: Area2D) -> void:
+	print(str("hi"))
 
 
 func _on_area_2d_area_exited(area: Area2D) -> void:

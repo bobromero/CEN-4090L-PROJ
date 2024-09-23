@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxkljmk6sj4gd"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_leqtn"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_leqtn")
+
+[node name="scoreCount" type="Label" parent="."]
+offset_left = 302.0
+offset_top = 240.0
+offset_right = 605.0
+offset_bottom = 345.0
+text = "Score: "
