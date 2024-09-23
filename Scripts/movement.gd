@@ -3,7 +3,7 @@ extends Resource
 class_name movement
 
 
-const SPEED = 250.0
+const SPEED = 300.0
 const JUMP_VELOCITY = -500.0
 var _sprint_multiplier = 2.5
 @export var _isPlatformer: bool = false
@@ -21,8 +21,6 @@ var jump_height_timer = 0.10
 var can_coyote_jump = false
 var jump_buffered = false
 var jump_height_timer_on = false
-
-
 
 
 func _physics_process(delta: float) -> void:
@@ -105,8 +103,6 @@ func jump():
 			jump_buffered = true
 			
 			
-
-	
 #Functions to handle the countdown of the three timers
 func _coyote_timer(delta) -> void:
 	coyote_timer -= delta
@@ -122,8 +118,7 @@ func _jump_height_timer(delta) -> void:
 	jump_height_timer -= delta
 	if jump_height_timer <= 0:
 		_on_jump_height_timer_timeout()
-			
-			
+
 #Functions deal with what happens when the timers timeout
 func _on_coyote_timer_timeout() -> void:
 	can_coyote_jump = false
@@ -143,4 +138,3 @@ func _on_jump_height_timer_timeout() -> void:
 		
 	jump_height_timer_on = false
 	jump_height_timer = 0.10
-		

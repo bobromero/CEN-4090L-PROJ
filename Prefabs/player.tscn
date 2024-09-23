@@ -26,12 +26,16 @@ texture = ExtResource("1_kg5i0")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
 position = Vector2(90, 0)
+gravity = 4096.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
 shape = SubResource("RectangleShape2D_ww1cg")
 disabled = true
 
 [node name="ItemArea2D" type="Area2D" parent="." groups=["Inventory", "Player"]]
+gravity_space_override = 3
+gravity = 1300.0
+linear_damp_space_override = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ItemArea2D"]
 shape = SubResource("RectangleShape2D_v635p")
