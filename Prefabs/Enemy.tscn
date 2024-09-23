@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dvn2m8hxl185a"]
+[gd_scene load_steps=8 format=3 uid="uid://dvn2m8hxl185a"]
 
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_4tb4e"]
 [ext_resource type="Script" path="res://Scripts/Enemy/enemy.gd" id="1_t5mc7"]
@@ -15,10 +15,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5k2u8"]
-size = Vector2(1454, 126)
+size = Vector2(1454, 127)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_282xr"]
-radius = 49.2544
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jeojf"]
+size = Vector2(128, 122.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_siqq3"]
+size = Vector2(127, 127)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ruqqc"]
+bg_color = Color(0.196078, 0.803922, 0.196078, 1)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_t5mc7")
@@ -30,11 +36,29 @@ sprite_frames = SubResource("SpriteFrames_1ik6h")
 [node name="DetectionArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2(0, -1)
+position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_5k2u8")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_282xr")
+[node name="EnemyHitboxArea" type="Area2D" parent="."]
+
+[node name="EnemyHitbox" type="CollisionShape2D" parent="EnemyHitboxArea"]
+position = Vector2(-1, -0.75)
+shape = SubResource("RectangleShape2D_jeojf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -0.5)
+shape = SubResource("RectangleShape2D_siqq3")
+
+[node name="EnemyHealthBar" type="ProgressBar" parent="."]
+modulate = Color(0.196078, 0.803922, 0.196078, 1)
+offset_left = -66.0
+offset_top = -118.0
+offset_right = 68.0
+offset_bottom = -79.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ruqqc")
+show_percentage = false
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="EnemyHitboxArea" to="." method="_on_enemy_hitbox_area_body_entered"]
+[connection signal="body_exited" from="EnemyHitboxArea" to="." method="_on_enemy_hitbox_area_body_exited"]

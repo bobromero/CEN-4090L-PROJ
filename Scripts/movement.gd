@@ -13,7 +13,6 @@ func SetPlayer(_player: CharacterBody2D):
 	print("here")
 
 
-
 func _physics_process(delta: float) -> void:
 	if _isPlatformer:
 		# Add the gravity.
@@ -49,3 +48,4 @@ func _platformerMovement(delta: float):
 		player.velocity.x = direction * SPEED
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, SPEED)
+		
