@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_ikk5u")
-amount = 0
+amount = 1
 name = "Coin"
 type = 3

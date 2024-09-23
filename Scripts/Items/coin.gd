@@ -2,9 +2,9 @@ extends Item
 
 @export var amount: int
 
-func Use(player: Player):
-	super(player)
-	player.addScore(10)
+func _on_body_entered(body):
+	if body.name == "Player":
+		queue_free()
 
 	
 	
