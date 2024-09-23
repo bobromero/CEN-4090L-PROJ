@@ -3,7 +3,7 @@ extends Resource
 class_name movement
 
 
-const SPEED = 300.0
+const SPEED = 250.0
 const JUMP_VELOCITY = -500.0
 var _sprint_multiplier = 2.5
 @export var _isPlatformer: bool = false
@@ -67,7 +67,8 @@ func _platformerMovement(delta: float):
 	
 	# Handle jump.
 	if Input.is_action_just_pressed("up"):
-		_jump_height_timer_start()
+		jump_height_timer_on = true
+		_jump_height_timer(delta)
 		jump()
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -104,13 +105,7 @@ func jump():
 			jump_buffered = true
 			
 			
-#Starts jump height timer (I think this is what's making the greater variation in
-#jump height we now have)
-func _jump_height_timer_start():
-	if jump_height_timer == 0.0:
-		jump_height_timer = 0.10
-		
-	jump_height_timer_on = true
+
 	
 #Functions to handle the countdown of the three timers
 func _coyote_timer(delta) -> void:
@@ -139,9 +134,13 @@ func _on_jump_buffer_timer_timeout() -> void:
 	jump_buffer_timer = 0.15
 
 func _on_jump_height_timer_timeout() -> void:
+	print("Jump height timeout")
 	if !Input.is_action_pressed("up"):
-		if player.velocity.y < -90:
-			player.velocity.y = -90
+		if player.velocity.y < -150:
+			player.velocity.y = -150
 	else:
 		pass
+		
+	jump_height_timer_on = false
+	jump_height_timer = 0.10
 		
