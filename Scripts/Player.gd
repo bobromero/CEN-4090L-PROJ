@@ -9,7 +9,7 @@ class_name Player
 
 @export var health: float = 100
 
-@export var hud: CanvasLayer
+@export var hud: playerHud
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,9 +30,10 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("SecondaryFire"):
 		PlayerInventory.Weapon._secondaryAttack()
-		
-	if PlayerInventory.nonWeaponItems.size() > 0 and Input.is_action_just_pressed("pickup"):
-		UseItem(0) #or selected index some how
+			
+
+	#if PlayerInventory.nonWeaponItems.size() > 0 and Input.is_action_just_pressed("pickup"):
+		#UseItem(0) #or selected index some how
 
 func UseItem(id: int):
 	PlayerInventory.nonWeaponItems[id].Use(self)
@@ -47,8 +48,8 @@ func RemoveFromInventory(id: int):
 func IncreaseHealth(num: float):
 	health += num
 	
-func addScore(int) -> void:
-	hud.currentscore += int
+func addScore(amount: int) -> void:
+	hud.addScore(amount)
 	
-func rmScore(int) -> void:
-	hud.currentscore -= int
+func rmScore(amount: int) -> void:
+	hud.rmScore(amount)
