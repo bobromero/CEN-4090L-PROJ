@@ -3,7 +3,7 @@ extends Resource
 class_name movement
 
 
-const SPEED = 300.0
+const SPEED = 450.0
 const JUMP_VELOCITY = -400.0
 @export var _isPlatformer: bool = false
 var player:CharacterBody2D
