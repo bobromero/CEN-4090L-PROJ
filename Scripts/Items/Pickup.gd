@@ -3,6 +3,7 @@ extends Node
 
 @export var item:Item
 
+
 var _playerEnetered: bool = false
 var _enemyEntered: bool = false
 var playerScript: Player
