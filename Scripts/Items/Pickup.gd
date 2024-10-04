@@ -34,7 +34,7 @@ func _on_coin_entered(coin: Area2D) -> void:
 	if coin.is_in_group("Player"):
 		var player = coin.get_parent() as Player  #Get the Player instance
 		if player != null:
-			player.addScore(10) 
+			player.addCoin(1) 
 			queue_free()  #delete the coin
 		else:
 			print("Error: Could not find the player instance")

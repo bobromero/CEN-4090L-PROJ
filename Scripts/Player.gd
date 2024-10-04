@@ -11,6 +11,7 @@ class_name Player
 
 @export var hud: playerHud
 @export var currentscore = 0
+@export var currentcoins = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -50,7 +51,10 @@ func IncreaseHealth(num: float):
 	
 	
 	
-
+func addCoin(int) -> void:
+	currentcoins += int
+	addScore(int*10)
+	hud.update_coin(currentcoins)
 
 #function to add 10 to the score
 func addScore(int) -> void:
