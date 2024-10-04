@@ -28,3 +28,12 @@ position = Vector2(290.25, 205.25)
 
 [node name="healthpack" parent="." instance=ExtResource("4_h81pt")]
 position = Vector2(566, 192)
+
+[node name="Sprite2D" parent="." instance=ExtResource("3_5vgxj")]
+position = Vector2(490.25, 73.25)
+
+[node name="Sprite2D2" parent="." instance=ExtResource("3_5vgxj")]
+position = Vector2(306, -21)
+
+[node name="Sprite2D3" parent="." instance=ExtResource("3_5vgxj")]
+position = Vector2(778.25, 190.25)

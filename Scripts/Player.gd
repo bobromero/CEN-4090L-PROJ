@@ -10,11 +10,12 @@ class_name Player
 @export var health: float = 100
 
 @export var hud: playerHud
+@export var currentscore = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	movement.SetPlayer(self)
-	hud = $HUD
+	hud = get_node("HUD")
 	
 	
 	
@@ -29,6 +30,7 @@ func _process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("SecondaryFire"):
 		PlayerInventory.Weapon._secondaryAttack()
+		
 
 	#if PlayerInventory.nonWeaponItems.size() > 0 and Input.is_action_just_pressed("pickup"):
 		#UseItem(0) #or selected index some how
@@ -46,8 +48,20 @@ func RemoveFromInventory(id: int):
 func IncreaseHealth(num: float):
 	health += num
 	
-func addScore(amount: int) -> void:
-	hud.addScore(amount)
 	
-func rmScore(amount: int) -> void:
-	hud.rmScore(amount)
+	
+
+
+#function to add 10 to the score
+func addScore(int) -> void:
+	currentscore += int
+	hud.update_score(currentscore)
+	
+func rmScore(int) -> void:
+	currentscore -= int
+	hud.update_score(currentscore)
+#func addScore(amount: int) -> void:
+	#hud.addScore(amount)
+	#
+#func rmScore(amount: int) -> void:
+	#hud.rmScore(amount)
