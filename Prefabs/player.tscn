@@ -7,8 +7,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hladd"]
 size = Vector2(120, 120)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sipwe"]
-radius = 87.2066
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_na8w0"]
+size = Vector2(124, 118)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c26v6"]
 bg_color = Color(0.196078, 0.803922, 0.196078, 1)
@@ -38,8 +38,8 @@ shape = SubResource("RectangleShape2D_hladd")
 [node name="PlayerHitbox" type="Area2D" parent="." groups=["Inventory", "Player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitbox"]
-position = Vector2(-2, 2)
-shape = SubResource("CircleShape2D_sipwe")
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_na8w0")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 offset_left = -107.0

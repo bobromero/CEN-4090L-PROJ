@@ -17,8 +17,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5k2u8"]
 size = Vector2(1454, 127)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jeojf"]
-size = Vector2(128, 122.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7g2p2"]
+size = Vector2(126, 125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_siqq3"]
 size = Vector2(127, 127)
@@ -42,8 +42,8 @@ shape = SubResource("RectangleShape2D_5k2u8")
 [node name="EnemyHitboxArea" type="Area2D" parent="."]
 
 [node name="EnemyHitbox" type="CollisionShape2D" parent="EnemyHitboxArea"]
-position = Vector2(-1, -0.75)
-shape = SubResource("RectangleShape2D_jeojf")
+position = Vector2(1, -0.5)
+shape = SubResource("RectangleShape2D_7g2p2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, -0.5)
