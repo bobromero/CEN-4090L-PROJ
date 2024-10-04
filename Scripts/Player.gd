@@ -118,4 +118,3 @@ func addScore(amount: int) -> void:
 	
 func rmScore(amount: int) -> void:
 	hud.rmScore(amount)
-
