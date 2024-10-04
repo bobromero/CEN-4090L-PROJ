@@ -14,7 +14,7 @@ texture = ExtResource("1_ed1cx")
 script = ExtResource("2_6a0em")
 item = ExtResource("3_61mtp")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["Item"]]
 position = Vector2(1, -2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
