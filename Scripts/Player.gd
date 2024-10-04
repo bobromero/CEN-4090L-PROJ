@@ -16,9 +16,13 @@ var knockback_time = 0.0
 @export var knockback_strength = 100
 @export var knockback_duration = 0.2
 
+@export var hud: playerHud
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	movement.SetPlayer(self)
+	hud = $HUD
+	
 	
 func _equipWeapon():
 	PlayerInventory.Weapon.attackRegion = attackRegion
@@ -108,3 +112,10 @@ func apply_knockback(body: Node2D):
 	var direction = (position - body.position).normalized()
 	knockback_velocity = direction * knockback_strength / knockback_duration
 	knockback_time = knockback_duration
+
+func addScore(amount: int) -> void:
+	hud.addScore(amount)
+	
+func rmScore(amount: int) -> void:
+	hud.rmScore(amount)
+

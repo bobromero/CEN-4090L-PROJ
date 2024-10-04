@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ch5jrj4ijg6sv"]
+
+[ext_resource type="Script" path="res://Scripts/Items/coin.gd" id="1_ikk5u"]
+
+[resource]
+script = ExtResource("1_ikk5u")
+amount = 1
+onplayer = null
+name = "Coin"
+type = 3

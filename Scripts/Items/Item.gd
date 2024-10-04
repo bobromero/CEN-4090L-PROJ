@@ -3,7 +3,7 @@ extends Resource
 
 class_name Item
 
-enum ItemType {Weapon, Health, Buff}
+enum ItemType {Weapon, Health, Buff, Currency}
 
 @export var name: String = ""
 @export var type: ItemType = ItemType.Weapon
