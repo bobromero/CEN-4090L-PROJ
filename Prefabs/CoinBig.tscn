@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://7q0xgek1ythw" path="res://Resources/Inventory/Items/coin.png" id="1_kjstn"]
 [ext_resource type="Script" path="res://Scripts/Items/Pickup.gd" id="2_fx40k"]
-[ext_resource type="Resource" uid="uid://ch5jrj4ijg6sv" path="res://Resources/Inventory/Items/Coin.tres" id="3_og50y"]
+[ext_resource type="Resource" uid="uid://eb2xide2oioj" path="res://Resources/Inventory/Items/BigCoin.tres" id="3_hmx2a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sas2t"]
 radius = 164.04
@@ -13,7 +13,7 @@ position = Vector2(34, 29)
 scale = Vector2(0.224662, 0.203072)
 texture = ExtResource("1_kjstn")
 script = ExtResource("2_fx40k")
-item = ExtResource("3_og50y")
+item = ExtResource("3_hmx2a")
 
 [node name="Area2D" type="Area2D" parent="." groups=["Item"]]
 position = Vector2(1, -2)

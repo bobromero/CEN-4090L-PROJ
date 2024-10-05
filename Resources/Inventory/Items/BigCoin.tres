@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://eb2xide2oioj"]
+
+[ext_resource type="Script" path="res://Scripts/Items/coin.gd" id="1_7n15t"]
+
+[resource]
+script = ExtResource("1_7n15t")
+value = 100
+name = "BigCoin"
+type = 3
