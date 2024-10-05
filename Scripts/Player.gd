@@ -49,23 +49,56 @@ func RemoveFromInventory(id: int):
 func IncreaseHealth(num: float):
 	health += num
 	
+func UpdateHealth():
+	var healthBar = $HealthBar
+	healthBar.value = health
 	
-	
-func addCoin(int) -> void:
-	currentcoins += int
-	addScore(int*10)
-	hud.update_coin(currentcoins)
+	if health >= 100:
+		healthBar.visible = false
+	else:
+		healthBar.visible = true
 
-#function to add 10 to the score
-func addScore(int) -> void:
-	currentscore += int
-	hud.update_score(currentscore)
+func _on_player_hitbox_body_entered(body: Node2D) -> void:
+	if body.has_method("enemy"):
+		enemy_in_attack_range = true
+	apply_knockback(body)
+
+func _on_player_hitbox_body_exited(body: Node2D) -> void:
+	if body.has_method("enemy"):
+		enemy_in_attack_range = false
+		
+func enemy_attack():
+	if enemy_in_attack_range and enemy_cooldown == true:
+		health -= 10
+		enemy_cooldown = false
+		$DamageCooldown.start()
+
+func player():
+	pass
+
+func _on_damage_cooldown_timeout():
+	enemy_cooldown = true
 	
-func rmScore(int) -> void:
-	currentscore -= int
-	hud.update_score(currentscore)
-#func addScore(amount: int) -> void:
-	#hud.addScore(amount)
-	#
-#func rmScore(amount: int) -> void:
-	#hud.rmScore(amount)
+func attack():
+	var direction := Input.get_axis("left", "right")
+	
+	if Input.is_action_just_pressed("melee"):
+		Global.player_current_attack = true
+		attack_ip = true
+
+func _on_attack_cooldown_timeout() -> void:
+	$AttackCooldown.stop()
+	Global.player_current_attack = false
+	attack_ip = false
+	
+func apply_knockback(body: Node2D):
+	var direction = (position - body.position).normalized()
+	knockback_velocity = direction * knockback_strength / knockback_duration
+	knockback_time = knockback_duration
+
+func addScore(amount: int) -> void:
+	hud.addScore(amount)
+	
+func rmScore(amount: int) -> void:
+	hud.rmScore(amount)
+
