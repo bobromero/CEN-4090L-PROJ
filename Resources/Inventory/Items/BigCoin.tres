@@ -7,3 +7,4 @@ script = ExtResource("1_7n15t")
 value = 100
 name = "BigCoin"
 type = 3
+InvId = -1

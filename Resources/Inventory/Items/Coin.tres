@@ -7,3 +7,4 @@ script = ExtResource("1_ikk5u")
 value = 10
 name = "Coin"
 type = 3
+InvId = -1
