@@ -42,7 +42,8 @@ func UseItem(id: int):
 
 func AddToInventory(item: Item):
 	PlayerInventory.AddItem(item)
-	print(PlayerInventory.nonWeaponItems.size())
+	item.OnPickup(self)
+	#print(PlayerInventory.nonWeaponItems.size())
 	
 func RemoveFromInventory(id: int):
 	PlayerInventory.RemoveItem(id)
