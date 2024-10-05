@@ -59,9 +59,12 @@ func UseItem(id: int):
 
 func AddToInventory(item: Item):
 	PlayerInventory.AddItem(item)
+	item.OnPickup(self)
+	#print(PlayerInventory.nonWeaponItems)
 	
 func RemoveFromInventory(id: int):
-	PlayerInventory.RemoveItem(id)
+	if id>=0:
+		PlayerInventory.RemoveItem(id)
 
 func IncreaseHealth(num: float):
 	health += num

@@ -29,17 +29,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	_enemyEntered = area.is_in_group("Inventory") and area.is_in_group("Enemy")
 	
 
-#when the coin is encountered
-func _on_coin_entered(coin: Area2D) -> void:
-	#print(str("coin entered"))
-	if coin.is_in_group("Player"):
-		var player = coin.get_parent() as Player  #Get the Player instance
-		if player != null:
-			player.addCoin(1) 
-			queue_free()  #delete the coin
-		else:
-			print("Error: Could not find the player instance")
-	
 
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
@@ -49,3 +38,13 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 	if area.is_in_group("Inventory") and area.is_in_group("Enemy"):
 		_enemyEntered = false
 	pass
+
+
+func _on_entered(area: Area2D) -> void:
+	if area.is_in_group("Player"):
+		var player = area.get_parent() as Player  #Get the Player instance
+		if player != null:
+			player.AddToInventory(item)
+			queue_free()  #delete the area
+		else:
+			print("Error: Could not find the player instance")
