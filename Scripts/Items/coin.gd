@@ -7,6 +7,7 @@ func OnPickup(player: Player):
 
 func Use(player: Player):
 	player.addScore(value)
+	#player.RemoveFromInventory(InvId)
 	super(player)
 	
 	

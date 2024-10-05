@@ -10,4 +10,5 @@ func OnPickup(player: Player):
 func Use(player: Player):
 	super(player)
 	player.IncreaseHealth(amount)
+	player.RemoveFromInventory(InvId)
 	#print(str("increased health to " , player.health))
