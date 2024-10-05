@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://35u4ck4g6nfp"]
+
+[ext_resource type="Texture2D" path="res://Resources/Inventory/Items/coin.png" id="1_kjstn"]
+[ext_resource type="Script" path="res://Scripts/Items/Pickup.gd" id="2_fx40k"]
+[ext_resource type="Resource" path="res://Resources/Inventory/Items/BigCoin.tres" id="3_hmx2a"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sas2t"]
+radius = 164.04
+
+[node name="Sprite2D2" type="Sprite2D"]
+modulate = Color(0.27451, 0.0980392, 1, 1)
+position = Vector2(34, 29)
+scale = Vector2(0.224662, 0.203072)
+texture = ExtResource("1_kjstn")
+script = ExtResource("2_fx40k")
+item = ExtResource("3_hmx2a")
+
+[node name="Area2D" type="Area2D" parent="." groups=["Item"]]
+position = Vector2(1, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_sas2t")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_entered"]
