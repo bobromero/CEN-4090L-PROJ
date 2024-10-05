@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_sas2t"]
 radius = 164.04
 
-[node name="Sprite2D" type="Sprite2D"]
+[node name="Sprite2D2" type="Sprite2D"]
 modulate = Color(0.27451, 0.0980392, 1, 1)
 position = Vector2(34, 29)
 scale = Vector2(0.224662, 0.203072)
