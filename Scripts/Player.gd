@@ -78,7 +78,7 @@ func UpdateHealth():
 func _on_player_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_in_attack_range = true
-	apply_knockback(body)
+		apply_knockback(body)
 
 func _on_player_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("enemy"):
