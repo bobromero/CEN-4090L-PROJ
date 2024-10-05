@@ -4,4 +4,4 @@
 
 [resource]
 script = ExtResource("1_estbj")
-_isPlatformer = false
+_isPlatformer = true

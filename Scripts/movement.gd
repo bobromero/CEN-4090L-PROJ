@@ -3,7 +3,7 @@ extends Resource
 class_name movement
 
 
-const SPEED = 450.0
+const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 @export var _isPlatformer: bool = false
 var player:CharacterBody2D
@@ -11,6 +11,7 @@ var player:CharacterBody2D
 func SetPlayer(_player: CharacterBody2D):
 	player = _player
 	print("here")
+
 
 
 func _physics_process(delta: float) -> void:
@@ -48,4 +49,3 @@ func _platformerMovement(delta: float):
 		player.velocity.x = direction * SPEED
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, SPEED)
-		
