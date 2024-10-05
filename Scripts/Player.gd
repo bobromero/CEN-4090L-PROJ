@@ -70,10 +70,7 @@ func RemoveFromInventory(id: int):
 func IncreaseHealth(num: float):
 	health += num
 	
-func UpdateHealth():
-	var healthBar = $HealthBar
-	healthBar.value = health
-	
+
 	if health >= 100:
 		healthBar.visible = false
 	else:
