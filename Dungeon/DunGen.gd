@@ -20,45 +20,53 @@ func _process(delta: float) -> void:
 	pass
 	
 func _generate():
-		var partitions:int = 4 #cube with height = n and width = n
-		var partitionSize:Vector2i = Vector2i(40,20)#is a vector for the ability to have rectangular partitions if needed
-		var partitionGap:Vector2i = Vector2i(5,5)
-		var SmallestRoom:int = 8
-		var startPoint:Vector2i = Vector2i(0,0) #start of partition is coords(ex. 0,1) * partitionSize
-		var roomSize:Vector2i
-		for x in partitions:
-			for y in partitions:
-				var dimension : Vector2i = Vector2i(x,y) * partitionSize
-				var randLeftPadding:int = randi_range(1,partitionSize.x - SmallestRoom)
-				var randRightPadding:int = randi_range(1, randLeftPadding) - 1
-				startPoint.x = dimension.x + randLeftPadding - randRightPadding
-				roomSize.x = partitionSize.x - randLeftPadding
-				var randUpPadding:int = randi_range(1,partitionSize.y - SmallestRoom)
-				var randDownPadding:int = randi_range(1, randUpPadding) - 1
-				startPoint.y = dimension.y + randUpPadding - randDownPadding
-				roomSize.y = partitionSize.y - randUpPadding
-				
-				var room : Room = Room.new(startPoint + partitionGap, roomSize)
-				_paintRoom(room)
-		#partions that each have 1 room
-		#partition gap allows for space between rooms
-		#build 1 room in each partition, then paint
-		#generate number size.x / n and add start point
+	_CreateRooms() #includes doors
+	#GenHallways()
+	_paintRooms()
+
+func _CreateRooms():
+	var partitions:int = 4 #cube with height = n and width = n
+	var partitionSize:Vector2i = Vector2i(40,20)#is a vector for the ability to have rectangular partitions if needed
+	var SmallestRoom:int = 8
+	var startPoint:Vector2i = Vector2i(0,0) #start of partition is coords(ex. 0,1) * partitionSize
+	var roomSize:Vector2i
+	for x in partitions:
+		for y in partitions:
+			var dimension : Vector2i = Vector2i(x,y) * partitionSize
+			
+			var randLeftPadding:int = randi_range(1,partitionSize.x - SmallestRoom)
+			var randRightPadding:int = randi_range(1, randLeftPadding) - 1
+			startPoint.x = dimension.x + randLeftPadding - randRightPadding
+			roomSize.x = partitionSize.x - randLeftPadding
+			
+			var randUpPadding:int = randi_range(1,partitionSize.y - SmallestRoom)
+			var randDownPadding:int = randi_range(1, randUpPadding) - 1
+			startPoint.y = dimension.y + randUpPadding - randDownPadding
+			roomSize.y = partitionSize.y - randUpPadding
+			
+			var room : Room = Room.new(startPoint, roomSize)
+			rooms.append(room)
+	#partions that each have 1 room
+	#partition gap allows for space between rooms
+	#build 1 room in each partition, then paint
+	#generate number size.x / n and add start point
 
 func _erase():
 	var cells = get_used_cells()
 	for c in cells:
 		erase_cell(Vector2i(c.x, c.y))
+	rooms.clear()
 
-func _paintRoom(room:Room):
-	for x in room.Dimensions.x:
-		for y in room.Dimensions.y:
-			var pos: Vector2i = Vector2i(x,y)
-			var offset: Vector2i = room.startPos
-			set_cell(pos + offset, 0, wall, 0)
-	for x in room.Dimensions.x - 2:
-		for y in room.Dimensions.y - 2:
-			var pos: Vector2i = Vector2i(x + 1,y + 1)
-			var offset: Vector2i = room.startPos
-			set_cell(pos + offset, 0, background, 0)
-			
+func _paintRooms():
+	for room in rooms:
+		for x in room.Dimensions.x:
+			for y in room.Dimensions.y:
+				var pos: Vector2i = Vector2i(x,y)
+				var offset: Vector2i = room.startPos
+				set_cell(pos + offset, 0, wall, 0)
+		for x in room.Dimensions.x - 2:
+			for y in room.Dimensions.y - 2:
+				var pos: Vector2i = Vector2i(x + 1,y + 1)
+				var offset: Vector2i = room.startPos
+				set_cell(pos + offset, 0, background, 0)
+				
