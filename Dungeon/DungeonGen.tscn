@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4r8rdhqa51sd"]
+[gd_scene load_steps=6 format=3 uid="uid://c4r8rdhqa51sd"]
 
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_sa6qf"]
 [ext_resource type="Script" path="res://Dungeon/DunGen.gd" id="2_jufm6"]
+[ext_resource type="Script" path="res://Scripts/DebugCam.gd" id="3_b7u00"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5s7w7"]
 texture = ExtResource("1_sa6qf")
@@ -76,3 +77,9 @@ sources/0 = SubResource("TileSetAtlasSource_5s7w7")
 [node name="TileMapLayer" type="TileMapLayer"]
 tile_set = SubResource("TileSet_55r0u")
 script = ExtResource("2_jufm6")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(928, 492)
+script = ExtResource("3_b7u00")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
