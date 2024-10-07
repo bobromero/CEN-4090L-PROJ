@@ -28,11 +28,15 @@ func _generate():
 func _CreateRooms():
 	var partitions:int = 4 #cube with height = n and width = n
 	var partitionSize:Vector2i = Vector2i(40,20)#is a vector for the ability to have rectangular partitions if needed
-	var SmallestRoom:int = 19
+	var SmallestRoom:int = 10
 	var startPoint:Vector2i = Vector2i(0,0) #start of partition is coords(ex. 0,1) * partitionSize
 	var roomSize:Vector2i
 	for x in partitions:
 		for y in partitions:
+			if x % 2 == y%2:
+				#we can make a different type of partition and change the rules on how to find the starting point of a partition
+				#only if its agreed its a little to far apart after hallways are put in
+				continue
 			var dimension : Vector2i = Vector2i(x,y) * partitionSize
 			
 			var randLeftPadding:int = randi_range(1,partitionSize.x - SmallestRoom)
