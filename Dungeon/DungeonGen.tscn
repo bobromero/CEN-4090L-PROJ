@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_sa6qf"]
 [ext_resource type="Script" path="res://Dungeon/DunGen.gd" id="2_jufm6"]
-[ext_resource type="Script" path="res://Scripts/DebugCam.gd" id="3_b7u00"]
+[ext_resource type="PackedScene" uid="uid://bfppymifpkb88" path="res://Dungeon/debug_cam.tscn" id="3_sgar3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5s7w7"]
 texture = ExtResource("1_sa6qf")
@@ -78,8 +78,4 @@ sources/0 = SubResource("TileSetAtlasSource_5s7w7")
 tile_set = SubResource("TileSet_55r0u")
 script = ExtResource("2_jufm6")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(928, 492)
-script = ExtResource("3_b7u00")
-
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="DebugCam" parent="." instance=ExtResource("3_sgar3")]
