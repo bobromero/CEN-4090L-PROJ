@@ -20,9 +20,10 @@ func _process(delta: float) -> void:
 	pass
 	
 func _generate():
-		var partitions:int = 3 #cube with height = n and width = n
-		var partitionSize:Vector2i = Vector2i(20,20)#is a vector for the ability to have rectangular partitions if needed
-		var SmallestRoom:int = 5 
+		var partitions:int = 4 #cube with height = n and width = n
+		var partitionSize:Vector2i = Vector2i(40,20)#is a vector for the ability to have rectangular partitions if needed
+		var partitionGap:Vector2i = Vector2i(5,5)
+		var SmallestRoom:int = 8
 		var startPoint:Vector2i = Vector2i(0,0) #start of partition is coords(ex. 0,1) * partitionSize
 		var roomSize:Vector2i
 		for x in partitions:
@@ -37,9 +38,10 @@ func _generate():
 				startPoint.y = dimension.y + randUpPadding - randDownPadding
 				roomSize.y = partitionSize.y - randUpPadding
 				
-				var room : Room = Room.new(startPoint, roomSize)
+				var room : Room = Room.new(startPoint + partitionGap, roomSize)
 				_paintRoom(room)
 		#partions that each have 1 room
+		#partition gap allows for space between rooms
 		#build 1 room in each partition, then paint
 		#generate number size.x / n and add start point
 
