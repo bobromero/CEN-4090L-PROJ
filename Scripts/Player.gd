@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 class_name Player
 
+static var Instance :Player
+
 var enemy_in_attack_range = false
 var enemy_cooldown = true
 var player_alive = true
@@ -18,10 +20,13 @@ var knockback_time = 0.0
 
 @export var hud: playerHud
 
+@export var Score: int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	movement.SetPlayer(self)
 	hud = $HUD
+	Instance = self
 	
 	
 func _equipWeapon():
@@ -117,7 +122,10 @@ func apply_knockback(body: Node2D):
 	knockback_time = knockback_duration
 
 func addScore(amount: int) -> void:
-	hud.addScore(amount)
+	Score += amount
+	
 	
 func rmScore(amount: int) -> void:
-	hud.rmScore(amount)
+	Score -= amount
+	if Score < 0:
+		Score = 0

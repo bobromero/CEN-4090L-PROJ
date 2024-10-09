@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	#print("Entered: " + area.get_parent().name)
 	_playerEntered = area.is_in_group("Inventory") and area.is_in_group("Player")
-	playerScript = area.get_parent().get_script().new()
+	playerScript = area.get_parent().get_parent().get_script().new()
 	
 	_enemyEntered = area.is_in_group("Inventory") and area.is_in_group("Enemy")
 	
@@ -42,7 +42,7 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 
 func _on_entered(area: Area2D) -> void:
 	if area.is_in_group("Player"):
-		var player = area.get_parent() as Player  #Get the Player instance
+		var player = area.get_parent().get_parent() as Player  #Get the Player instance
 		if player != null:
 			player.AddToInventory(item)
 			queue_free()  #delete the area
