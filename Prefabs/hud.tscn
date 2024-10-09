@@ -9,10 +9,3 @@ script = ExtResource("1_leqtn")
 offset_right = 303.0
 offset_bottom = 105.0
 text = "Score: "
-
-[node name="coinCount" type="Label" parent="."]
-offset_left = 141.0
-offset_top = -1.0
-offset_right = 356.0
-offset_bottom = 110.0
-text = "Coins:"
