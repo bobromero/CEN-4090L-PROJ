@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4isyuq61u8mf"]
+
+[ext_resource type="PackedScene" uid="uid://bx2aebudlta7s" path="res://Dungeon/debug_cam.tscn" id="1_40rvx"]
+[ext_resource type="PackedScene" uid="uid://dmyepj6o06yoo" path="res://Dungeon/DungeonGen.tscn" id="2_u23mn"]
+[ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="3_3ii1w"]
+
+[node name="DungeonTest" type="Node2D"]
+
+[node name="DebugCam" parent="." instance=ExtResource("1_40rvx")]
+speed = 50
+
+[node name="TileMapLayer" parent="." instance=ExtResource("2_u23mn")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_3ii1w")]
+position = Vector2(414, 191)
