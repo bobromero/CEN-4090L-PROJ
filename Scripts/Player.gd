@@ -12,7 +12,7 @@ var knockback_velocity = Vector2.ZERO
 var knockback_time = 0.0
 
 @export var movement: movement
-@export var PlayerInventory: Inventory = preload("res://Resources/Inventory/BaseInventory.tres")
+@export var PlayerInventory: Inventory = preload("res://Resources/PlayerResources/BaseInventory.tres")
 @export var attackRegion: Area2D
 @export var health: float = 100
 @export var knockback_strength = 100
