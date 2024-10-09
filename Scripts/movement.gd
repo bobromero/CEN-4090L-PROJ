@@ -11,7 +11,6 @@ var player:CharacterBody2D
 
 func SetPlayer(_player: CharacterBody2D):
 	player = _player
-	print("here")
 
 
 
