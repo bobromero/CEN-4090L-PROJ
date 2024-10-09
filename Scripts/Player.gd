@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 class_name Player
 
+static var Instance :Player
+
 var enemy_in_attack_range = false
 var enemy_cooldown = true
 var player_alive = true
@@ -22,6 +24,7 @@ var knockback_time = 0.0
 func _ready() -> void:
 	movement.SetPlayer(self)
 	hud = $HUD
+	Instance = self
 	
 	
 func _equipWeapon():
@@ -117,7 +120,15 @@ func apply_knockback(body: Node2D):
 	knockback_time = knockback_duration
 
 func addScore(amount: int) -> void:
-	hud.addScore(amount)
+	if (hud == null):
+		print("Error: No Hud Instance")
+		return
+		
+	hud.update_score(amount)
+	
 	
 func rmScore(amount: int) -> void:
+	if (hud == null):
+		print("Error: No Hud Instance")
+		return
 	hud.rmScore(amount)
