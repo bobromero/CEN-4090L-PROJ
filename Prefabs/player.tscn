@@ -35,7 +35,7 @@ movement = ExtResource("2_mcwbx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_aobjg")
 
-[node name="PlayerHitbox" type="Area2D" parent="AnimatedSprite2D" groups=["Player"]]
+[node name="PlayerHitbox" type="Area2D" parent="AnimatedSprite2D" groups=["Inventory", "Player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/PlayerHitbox"]
 shape = SubResource("RectangleShape2D_v134q")
