@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bi4ufgbogbq3k"]
+[gd_scene load_steps=10 format=3 uid="uid://bi4ufgbogbq3k"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_6k2tp"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_kg5i0"]
 [ext_resource type="Resource" uid="uid://b2rjlohno4t8f" path="res://Resources/PlayerResources/PlayerMovement.tres" id="2_mcwbx"]
+[ext_resource type="PackedScene" uid="uid://dxkljmk6sj4gd" path="res://Prefabs/hud.tscn" id="4_qsuhb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aobjg"]
 animations = [{
@@ -56,6 +57,8 @@ show_percentage = false
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_hladd")
+
+[node name="HUD" parent="." instance=ExtResource("4_qsuhb")]
 
 [connection signal="body_entered" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_body_exited"]
