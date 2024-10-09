@@ -20,6 +20,8 @@ var knockback_time = 0.0
 
 @export var hud: playerHud
 
+@export var Score: int = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	movement.SetPlayer(self)
@@ -120,15 +122,10 @@ func apply_knockback(body: Node2D):
 	knockback_time = knockback_duration
 
 func addScore(amount: int) -> void:
-	if (hud == null):
-		print("Error: No Hud Instance")
-		return
-		
-	hud.update_score(amount)
+	Score += amount
 	
 	
 func rmScore(amount: int) -> void:
-	if (hud == null):
-		print("Error: No Hud Instance")
-		return
-	hud.rmScore(amount)
+	Score -= amount
+	if Score < 0:
+		Score = 0
