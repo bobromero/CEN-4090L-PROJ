@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://orbgdvetlkju"]
+
+[ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="2_774bw"]
+[ext_resource type="PackedScene" uid="uid://dj6qxqdr54bih" path="res://Prefabs/Coin.tscn" id="3_5vgxj"]
+[ext_resource type="PackedScene" uid="uid://3ym2qlv4tsf1" path="res://Prefabs/platform.tscn" id="3_ddiel"]
+[ext_resource type="PackedScene" uid="uid://dtj0cc7sxpk4k" path="res://Prefabs/HealthPack.tscn" id="4_h81pt"]
+[ext_resource type="PackedScene" uid="uid://dpy22wvncade1" path="res://Prefabs/CoinBig.tscn" id="5_3g8ok"]
+
+[node name="ScoreTest" type="Node2D"]
+position = Vector2(2, 0)
+
+[node name="StaticBody2D" parent="." instance=ExtResource("3_ddiel")]
+position = Vector2(127, 314)
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("3_ddiel")]
+position = Vector2(376, 314)
+
+[node name="StaticBody2D3" parent="." instance=ExtResource("3_ddiel")]
+position = Vector2(622, 314)
+
+[node name="StaticBody2D4" parent="." instance=ExtResource("3_ddiel")]
+position = Vector2(868, 314)
+
+[node name="coin" parent="." instance=ExtResource("3_5vgxj")]
+position = Vector2(290.25, 205.25)
+
+[node name="healthpack" parent="." instance=ExtResource("4_h81pt")]
+position = Vector2(566, 192)
+
+[node name="Sprite2D" parent="." instance=ExtResource("3_5vgxj")]
+position = Vector2(490.25, 73.25)
+
+[node name="Sprite2D2" parent="." instance=ExtResource("3_5vgxj")]
+position = Vector2(306, -21)
+
+[node name="Sprite2D3" parent="." instance=ExtResource("3_5vgxj")]
+position = Vector2(778.25, 190.25)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_774bw")]
+position = Vector2(95, 199)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(469, 152)
+
+[node name="Sprite2D4" parent="." instance=ExtResource("5_3g8ok")]
+position = Vector2(372, 143)

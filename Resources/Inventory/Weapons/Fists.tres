@@ -7,3 +7,4 @@ script = ExtResource("1_vbfkf")
 damage = 10
 name = "Fists"
 type = 0
+InvId = -1

@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://3ym2qlv4tsf1"]
+[gd_scene load_steps=3 format=3 uid="uid://dm2cm1mcq72fu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vpxta"]
-size = Vector2(1727, 100)
+size = Vector2(250, 100)
 
 [sub_resource type="QuadMesh" id="QuadMesh_c2ckj"]
 size = Vector2(250, 100)
@@ -10,11 +10,8 @@ size = Vector2(250, 100)
 position = Vector2(7, 160)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(738.5, 0)
 shape = SubResource("RectangleShape2D_vpxta")
 debug_color = Color(0.122636, 0.583894, 0.759973, 0.42)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
-position = Vector2(741.5, 2.5)
-scale = Vector2(6.932, 1.05)
 mesh = SubResource("QuadMesh_c2ckj")

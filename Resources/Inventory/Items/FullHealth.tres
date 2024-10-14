@@ -7,3 +7,4 @@ script = ExtResource("1_ci81p")
 amount = 100.0
 name = "FullHealth"
 type = 1
+InvId = -1
