@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dclrmn1in5j08"]
+
+[ext_resource type="PackedScene" uid="uid://m56hw33ngc5r" path="res://player.tscn" id="1_2qf7k"]
+[ext_resource type="PackedScene" uid="uid://dhrtuevl5dvie" path="res://platform.tscn" id="2_tippg"]
+
+[node name="MovementTest" type="Node2D"]
+position = Vector2(674, 182)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_2qf7k")]
+position = Vector2(-384, 113)
+_isPlatformer = true
+
+[node name="StaticBody2D" parent="." instance=ExtResource("2_tippg")]
+position = Vector2(186, 57)
+
+[node name="StaticBody2D2" parent="." instance=ExtResource("2_tippg")]
+position = Vector2(-31, 347)
+
+[node name="StaticBody2D3" parent="." instance=ExtResource("2_tippg")]
+position = Vector2(-281, 347)
+
+[node name="StaticBody2D4" parent="." instance=ExtResource("2_tippg")]
+position = Vector2(-532, 347)
+
+[node name="StaticBody2D5" parent="." instance=ExtResource("2_tippg")]
+position = Vector2(217, 347)
+
+[node name="StaticBody2D6" parent="." instance=ExtResource("2_tippg")]
+position = Vector2(-587, 250)
+
+[node name="StaticBody2D7" parent="." instance=ExtResource("2_tippg")]
+position = Vector2(-120, 169)
