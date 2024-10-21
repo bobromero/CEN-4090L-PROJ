@@ -42,3 +42,4 @@ func RemoveFromInventory(id: int):
 
 func IncreaseHealth(num: float):
 	health += num
+	
