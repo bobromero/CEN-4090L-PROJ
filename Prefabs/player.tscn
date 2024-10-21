@@ -1,8 +1,71 @@
 [gd_scene load_steps=10 format=3 uid="uid://bi4ufgbogbq3k"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_6k2tp"]
-[ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_kg5i0"]
 [ext_resource type="Resource" uid="uid://b2rjlohno4t8f" path="res://Resources/PlayerResources/PlayerMovement.tres" id="2_mcwbx"]
+[ext_resource type="Texture2D" uid="uid://dubjxcg7lhwei" path="res://Prefabs/Player_sprite-Sheet.png" id="3_747jy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hladd"]
+size = Vector2(55.5, 98)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ww1cg"]
+size = Vector2(50, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v635p"]
+size = Vector2(56.25, 99)
+
+[sub_resource type="Animation" id="Animation_c3gyk"]
+resource_name = "Punch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_gnmsk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_84ael"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a0shr"]
+_data = {
+"Idle": SubResource("Animation_84ael"),
+"Punch": SubResource("Animation_c3gyk"),
+"RESET": SubResource("Animation_gnmsk")
+}
+
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("attackRegion")]
 [ext_resource type="PackedScene" uid="uid://dxkljmk6sj4gd" path="res://Prefabs/hud.tscn" id="4_qsuhb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aobjg"]
@@ -32,6 +95,37 @@ size = Vector2(130, 127)
 script = ExtResource("1_6k2tp")
 movement = ExtResource("2_mcwbx")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-10, 0)
+shape = SubResource("RectangleShape2D_hladd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_747jy")
+hframes = 2
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+position = Vector2(90, 0)
+gravity = 4096.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(-59, -14)
+shape = SubResource("RectangleShape2D_ww1cg")
+disabled = true
+
+[node name="ItemArea2D" type="Area2D" parent="." groups=["Inventory", "Player"]]
+gravity_space_override = 3
+gravity = 1300.0
+linear_damp_space_override = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemArea2D"]
+position = Vector2(-9.875, 0)
+shape = SubResource("RectangleShape2D_v635p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_a0shr")
+}
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_aobjg")
 
