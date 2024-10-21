@@ -5,6 +5,7 @@ class_name movement
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
+var _sprint_multiplier = 2.5
 @export var _isPlatformer: bool = false
 
 var player:CharacterBody2D
@@ -33,6 +34,8 @@ func _topDownMovement():
 	var direction := Input.get_vector("left", "right", "up", "down")
 	if direction:
 		player.velocity = direction * SPEED
+		if Input.is_action_pressed("Sprint"):
+			player.velocity *= _sprint_multiplier
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, SPEED)
 		player.velocity.y = move_toward(player.velocity.y, 0, SPEED)
