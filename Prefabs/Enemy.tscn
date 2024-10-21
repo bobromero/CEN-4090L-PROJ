@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://dwp0sxgwj1q2c"]
+
+[ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_6bj1d"]
+[ext_resource type="Script" path="res://Scripts/Enemy/enemy.gd" id="2_qhkco"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2qvhs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6bj1d")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i2u80"]
+size = Vector2(603.5, 558)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3lx8q"]
+size = Vector2(128, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_du47y"]
+size = Vector2(130, 130)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjb5g"]
+bg_color = Color(0.400191, 1, 0.369743, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26e3e"]
+bg_color = Color(0.400191, 1, 0.369743, 1)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("2_qhkco")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 3.14159
+sprite_frames = SubResource("SpriteFrames_2qvhs")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_i2u80")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_3lx8q")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-1, -2)
+shape = SubResource("RectangleShape2D_du47y")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(4.71681e-06, 0.653433, 0.152217, 1)
+self_modulate = Color(4.71681e-06, 0.653433, 0.152217, 1)
+offset_left = -68.0
+offset_top = -121.0
+offset_right = 67.0
+offset_bottom = -94.0
+theme_override_styles/background = SubResource("StyleBoxFlat_mjb5g")
+theme_override_styles/fill = SubResource("StyleBoxFlat_26e3e")
+show_percentage = false
+
+[node name="DamageCooldown" type="Timer" parent="."]
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
