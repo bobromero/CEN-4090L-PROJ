@@ -30,6 +30,8 @@ bg_color = Color(0.400191, 1, 0.369743, 1)
 bg_color = Color(0.400191, 1, 0.369743, 1)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+light_mask = 3
+visibility_layer = 3
 script = ExtResource("2_qhkco")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

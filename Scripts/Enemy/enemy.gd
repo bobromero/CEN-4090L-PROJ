@@ -8,7 +8,7 @@ const JUMP = 40
 @export var knockback_duration = 0.2
 @export var gravity = 500.0
 @export var knockback_enabled = false
-@export var knockback_timer = 0.0  
+@export var knockback_timer = 1.0  
 
 var player_in_attack_range = false
 var player_chase = false

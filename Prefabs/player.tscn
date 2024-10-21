@@ -29,6 +29,8 @@ bg_color = Color(0.36502, 0.997787, 0, 1)
 size = Vector2(130, 127)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_6k2tp")
 movement = ExtResource("2_mcwbx")
 

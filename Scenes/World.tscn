@@ -1,22 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0n6q2jo4pgdq"]
+[gd_scene load_steps=5 format=3 uid="uid://b0n6q2jo4pgdq"]
 
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="1_mxwje"]
 [ext_resource type="PackedScene" uid="uid://3ym2qlv4tsf1" path="res://Prefabs/platform.tscn" id="2_p8bc5"]
 [ext_resource type="PackedScene" uid="uid://dwp0sxgwj1q2c" path="res://Prefabs/Enemy.tscn" id="3_140kv"]
+[ext_resource type="PackedScene" uid="uid://dai362ag542pf" path="res://Prefabs/FlyingEnemy.tscn" id="4_4bsyh"]
 
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_mxwje")]
-position = Vector2(485, 265)
+position = Vector2(248, 479)
 
 [node name="StaticBody2D" parent="." instance=ExtResource("2_p8bc5")]
-position = Vector2(1282, 778)
+position = Vector2(1001, 881)
 
 [node name="StaticBody2D2" parent="." instance=ExtResource("2_p8bc5")]
-position = Vector2(546, 380)
+light_mask = 3
+visibility_layer = 3
+position = Vector2(309, 594)
 
 [node name="StaticBody2D3" parent="." instance=ExtResource("2_p8bc5")]
-position = Vector2(2518, 623)
+position = Vector2(2043, 594)
 
 [node name="Enemy" parent="." instance=ExtResource("3_140kv")]
-position = Vector2(1439, 266)
+position = Vector2(-343, 193)
+
+[node name="FlyingEnemy" parent="." instance=ExtResource("4_4bsyh")]
+position = Vector2(1719, 251)
+gravity = 0.0
