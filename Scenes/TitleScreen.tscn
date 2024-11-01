@@ -1,22 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://ct2o8txphn4s4"]
+[gd_scene load_steps=4 format=3 uid="uid://ct2o8txphn4s4"]
 
-[ext_resource type="Texture2D" uid="uid://c0dba28xlds15" path="res://Resources/Misc/newbg.png" id="1_48afm"]
-[ext_resource type="Texture2D" uid="uid://dxyrorsj77jnf" path="res://Resources/Misc/new logo.png" id="2_beyc0"]
-[ext_resource type="Texture2D" uid="uid://b6xt3t5w5gfq1" path="res://Resources/Misc/textstart.png" id="3_ugrk4"]
+[ext_resource type="Texture2D" uid="uid://dndy3840oa8it" path="res://Resources/Misc/newbg3.png" id="1_m5wnk"]
+[ext_resource type="Script" path="res://Scenes/startGameButton.gd" id="2_fhjuc"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hig31"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dnkou"]
 
 [node name="TitleScreen" type="Control"]
 material = SubResource("CanvasItemMaterial_hig31")
 layout_mode = 3
 anchor_right = 3.761
 anchor_bottom = 3.773
-offset_left = 123.0
-offset_top = 23.0
-offset_right = 0.327637
-offset_bottom = 0.0959473
+offset_left = -255.0
+offset_top = -29.0
+offset_right = -377.672
+offset_bottom = -51.9041
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -25,30 +22,19 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.998
-offset_left = -101.0
-offset_top = -7.0
-offset_right = 11.0
-offset_bottom = 6.84399
-texture = ExtResource("1_48afm")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_dnkou")
-use_parent_material = true
-position = Vector2(3084, 660)
-scale = Vector2(1.26125, 1.36385)
-texture = ExtResource("2_beyc0")
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(3009, 1601)
-scale = Vector2(0.696954, 0.712842)
-texture = ExtResource("3_ugrk4")
+offset_left = 254.0
+offset_top = 32.0
+offset_right = -2804.0
+offset_bottom = -1737.16
+texture = ExtResource("1_m5wnk")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 974.0
-offset_top = 1389.0
-offset_right = 1035.0
-offset_bottom = 1443.0
-scale = Vector2(62.4008, 7.7191)
-text = "button
-wr"
+offset_left = 999.0
+offset_top = 391.0
+offset_right = 1161.0
+offset_bottom = 430.0
+text = "Start Game"
+script = ExtResource("2_fhjuc")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
