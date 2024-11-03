@@ -54,7 +54,6 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("PrimaryFire"):
 		PlayerInventory.Weapon._primaryAttack()
-		health = 0
 		
 	if Input.is_action_just_pressed("SecondaryFire"):
 		PlayerInventory.Weapon._secondaryAttack()
