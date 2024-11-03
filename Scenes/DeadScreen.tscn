@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://qixsqv3b3j84"]
+
+[ext_resource type="Script" path="res://Scripts/dead_screen.gd" id="1_6qbye"]
+
+[node name="DeadScreen" type="Node2D"]
+script = ExtResource("1_6qbye")
+
+[node name="Retry" type="Button" parent="."]
+offset_left = 434.0
+offset_top = 302.0
+offset_right = 613.0
+offset_bottom = 333.0
+text = "Return To Title Screen"
+
+[node name="Menu" type="Button" parent="."]
+offset_left = 487.0
+offset_top = 235.0
+offset_right = 541.0
+offset_bottom = 272.0
+text = "Retry"
+
+[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
