@@ -12,7 +12,6 @@ var player:CharacterBody2D
 
 func SetPlayer(_player: CharacterBody2D):
 	player = _player
-	print("here")
 
 
 var coyote_timer = 0.15 #Time in seconds

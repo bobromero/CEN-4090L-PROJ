@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dohbsjuucmqvu"]
 
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="1_xx1ce"]
-[ext_resource type="PackedScene" uid="uid://8mxr7an7xjph" path="res://Dungeon/DungeonGen.tscn" id="2_x4qjs"]
+[ext_resource type="PackedScene" uid="uid://dp3rnp3bujrc7" path="res://Dungeon/DungeonGen.tscn" id="2_x4qjs"]
 
 [node name="Node2D" type="Node2D"]
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4isyuq61u8mf"]
+[gd_scene load_steps=5 format=3 uid="uid://gam52vw0o2em"]
 
-[ext_resource type="PackedScene" uid="uid://bx2aebudlta7s" path="res://Dungeon/debug_cam.tscn" id="1_40rvx"]
-[ext_resource type="PackedScene" uid="uid://dmyepj6o06yoo" path="res://Dungeon/DungeonGen.tscn" id="2_u23mn"]
+[ext_resource type="PackedScene" uid="uid://c7msovcglm6nn" path="res://Dungeon/debug_cam.tscn" id="1_40rvx"]
+[ext_resource type="PackedScene" uid="uid://dp3rnp3bujrc7" path="res://Dungeon/DungeonGen.tscn" id="2_u23mn"]
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="3_3ii1w"]
+[ext_resource type="Script" path="res://Dungeon/Dungen.cs" id="3_gsvc2"]
 
 [node name="DungeonTest" type="Node2D"]
 
@@ -10,6 +11,8 @@
 speed = 50
 
 [node name="TileMapLayer" parent="." instance=ExtResource("2_u23mn")]
+scale = Vector2(1, 1)
+script = ExtResource("3_gsvc2")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("3_3ii1w")]
 position = Vector2(414, 191)
