@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://v0cbro57so3r"]
+
+[node name="PauseMenu" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 498.0
+offset_top = 19.0
+offset_right = 809.0
+offset_bottom = 156.0
+text = "Pause
+"
+
+[node name="Button" type="Button" parent="."]
+offset_left = 475.0
+offset_top = 219.0
+offset_right = 586.0
+offset_bottom = 250.0
+text = "Quit to menu"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 464.0
+offset_top = 298.0
+offset_right = 589.0
+offset_bottom = 329.0
+text = "return to game"
