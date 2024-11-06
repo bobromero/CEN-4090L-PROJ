@@ -3,22 +3,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public partial class Dungen : TileMapLayer
-{	
-	
+public partial class Dungen : Node2D {
+	List<Room> rooms = new List<Room>();
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		var Layer = GD.Load<PackedScene>("res://Prefabs/Rooms/room0.tscn").Instantiate();
+		TileMapLayer Layer = (TileMapLayer)GD.Load<PackedScene>("res://Prefabs/Rooms/room0.tscn").Instantiate();
         AddChild(Layer);
+		Room room = new Room (Layer);
+		rooms.Add(room);
     }
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		if (Input.IsActionJustPressed("PrimaryFire")) {
-			var scene = GD.Load<PackedScene>("res://Prefabs/Rooms/room1.tscn").Instantiate();
+			//rooms.FirstOrDefault(). spawn the room
+            TileMapLayer scene = (TileMapLayer) GD.Load<PackedScene>("res://Prefabs/Rooms/room1.tscn").Instantiate();
 			AddChild(scene);
 		}
 	}
@@ -53,6 +55,7 @@ public partial class Dungen : TileMapLayer
 	 *	where there is a gap and potential offset fixed by a hallway
 	 *	
 	 *	******5. neon abyss style dungeons, each room locks you in but you still have variety in layout based on spawning scenes
+	 *	rooms are a new layer and can 
 	 *	
 	 */
 

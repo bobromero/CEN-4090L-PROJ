@@ -7,9 +7,12 @@
 
 [node name="DungeonTest" type="Node2D"]
 
-[node name="TileMapLayer" parent="." instance=ExtResource("2_u23mn")]
-tile_set = ExtResource("2_xn7yb")
+[node name="DungeonManger" type="Node2D" parent="."]
 script = ExtResource("3_gsvc2")
+
+[node name="TileMapLayer" parent="DungeonManger" instance=ExtResource("2_u23mn")]
+tile_set = ExtResource("2_xn7yb")
+script = null
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("3_3ii1w")]
 
