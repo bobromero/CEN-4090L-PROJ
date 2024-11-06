@@ -6,7 +6,6 @@ static var Instance :Player
 
 var enemy_in_attack_range = false
 var enemy_cooldown = true
-var player_alive = true
 var attack_ip = false
 var knockback_velocity = Vector2.ZERO
 var knockback_time = 0.0
@@ -46,11 +45,7 @@ func _process(delta: float) -> void:
 		movement._physics_process(delta)
 	
 	if health <= 0:
-		player_alive = false
-		health = 0
-		self.queue_free()
-		get_tree().change_scene_to_file("res://Scenes/DeadScreen.tscn") # Temporary holder for player death
-		# End Screen to go here
+		get_tree().change_scene_to_file("res://Scenes/DeadScreen.tscn")
 	
 	if Input.is_action_just_pressed("PrimaryFire"):
 		PlayerInventory.Weapon._primaryAttack()
