@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://gam52vw0o2em"]
+[gd_scene load_steps=5 format=3 uid="uid://ukfadluqbdrq"]
 
-[ext_resource type="PackedScene" uid="uid://dp3rnp3bujrc7" path="res://Dungeon/DungeonGen.tscn" id="2_u23mn"]
+[ext_resource type="PackedScene" path="res://Dungeon/DungeonGen.tscn" id="2_u23mn"]
+[ext_resource type="TileSet" uid="uid://da1gk2bidat3a" path="res://Resources/DefaultTileSet.tres" id="2_xn7yb"]
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="3_3ii1w"]
 [ext_resource type="Script" path="res://Dungeon/Dungen.cs" id="3_gsvc2"]
 
 [node name="DungeonTest" type="Node2D"]
 
 [node name="TileMapLayer" parent="." instance=ExtResource("2_u23mn")]
+tile_set = ExtResource("2_xn7yb")
 script = ExtResource("3_gsvc2")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("3_3ii1w")]
