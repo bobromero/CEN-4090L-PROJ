@@ -38,7 +38,6 @@ func _equipWeapon():
 func _process(delta: float) -> void:
 	UpdateHealth()
 	enemy_attack()
-	if health == 0: get_tree().change_scene_to_file("res://Scenes/DeadScreen.tscn")
 	
 	if knockback_time > 0:
 		position += knockback_velocity * delta
@@ -49,7 +48,8 @@ func _process(delta: float) -> void:
 	if health <= 0:
 		player_alive = false
 		health = 0
-		self.queue_free() # Temporary holder for player death
+		self.queue_free()
+		get_tree().change_scene_to_file("res://Scenes/DeadScreen.tscn") # Temporary holder for player death
 		# End Screen to go here
 	
 	if Input.is_action_just_pressed("PrimaryFire"):
