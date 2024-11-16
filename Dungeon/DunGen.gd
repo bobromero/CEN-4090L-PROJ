@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("PrimaryFire"):
 		_erase()
 		_generate()
@@ -64,7 +64,7 @@ func _CreateDoors():
 			var rand:int = randi_range(1,4)
 			if rand <=2:
 				continue
-			var position:Vector2i = room.startPos
+			#var position:Vector2i = room.startPos
 			var randShiftX:int = randi_range(0,(room.Dimensions.x / doorSize) - 2) #2 for each corner
 			var randShiftY:int = randi_range(0,(room.Dimensions.y / doorSize) - 2) #2 for each corner
 			if x == 0: #top
