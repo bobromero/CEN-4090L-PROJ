@@ -22,8 +22,7 @@ position = Vector2(309, 594)
 position = Vector2(2043, 594)
 
 [node name="Enemy" parent="." instance=ExtResource("3_140kv")]
-position = Vector2(-343, 193)
+position = Vector2(1077, 317)
 
 [node name="FlyingEnemy" parent="." instance=ExtResource("4_4bsyh")]
 position = Vector2(1719, 251)
-gravity = 0.0

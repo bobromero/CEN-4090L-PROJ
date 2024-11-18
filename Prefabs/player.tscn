@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bi4ufgbogbq3k"]
+[gd_scene load_steps=11 format=3 uid="uid://bi4ufgbogbq3k"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_6k2tp"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_kg5i0"]
@@ -18,6 +18,9 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v134q"]
 size = Vector2(136, 134)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r470o"]
+size = Vector2(306.5, 282)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbex3"]
 bg_color = Color(0, 0.643137, 0, 1)
@@ -42,6 +45,12 @@ sprite_frames = SubResource("SpriteFrames_aobjg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/PlayerHitbox"]
 shape = SubResource("RectangleShape2D_v134q")
 
+[node name="AttackHitbox" type="Area2D" parent="AnimatedSprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/AttackHitbox"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_r470o")
+
 [node name="HealthBar" type="ProgressBar" parent="."]
 modulate = Color(4.71681e-06, 0.653433, 0.152217, 1)
 offset_left = -120.0
@@ -62,7 +71,15 @@ shape = SubResource("RectangleShape2D_hladd")
 
 [node name="HUD" parent="." instance=ExtResource("4_qsuhb")]
 
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="KnockbackCooldown" type="Timer" parent="."]
+
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_entered" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_body_exited"]
+[connection signal="body_entered" from="AnimatedSprite2D/AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]
+[connection signal="body_exited" from="AnimatedSprite2D/AttackHitbox" to="." method="_on_attack_hitbox_body_exited"]
 [connection signal="timeout" from="DamageCooldown" to="." method="_on_damage_cooldown_timeout"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

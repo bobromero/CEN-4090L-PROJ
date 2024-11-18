@@ -1,29 +1,29 @@
 extends CharacterBody2D
 
-const JUMP = 40
-
-@export var speed = 80    # Higher speed = slower enemy and vice versa
+@export var speed = 150    # Higher speed = slower enemy and vice versa
 @export var health = 100
 @export var knockback_strength = 500
 @export var knockback_duration = 0.2
-@export var gravity = 500.0
 @export var knockback_enabled = false
-@export var knockback_timer = 1.0  
+@export var knockback_timer = 1.0 
 
 var player_in_attack_range = false
 var player_chase = false
 var player = null
+var knockback_velocity = Vector2.ZERO
+var player_cooldown = true
+
 
 func enemy():
 	pass
 
 func _physics_process(delta: float) -> void:
-	velocity.y = gravity
-	
 	if knockback_enabled:
 		apply_knockback(delta)
 	elif player_chase:
-		position += (player.position - position) / speed
+		velocity = (player.position - position).normalized() * speed
+	else:
+		velocity = Vector2.ZERO
 	
 	UpdateHealth()
 	move_and_slide()
@@ -39,37 +39,49 @@ func UpdateHealth():
 		healthBar.visible = true
 
 func deal_damage():
-	if player_in_attack_range and Global.player_current_attack == true:
+	if Global.player_attack_connect and player_in_attack_range:
 		health = health - 20
-		health -= 20
 		print("enemy health = ", health)
 		if health <= 0:
 			self.queue_free()
+		player_cooldown = false
+		Global.player_current_attack = false
+		Global.player_attack_connect = false
+		$DamageCooldown.start()
+		
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	player = body
 	player_chase = true
-	
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	player = null
 	player_chase = false
-	
+
 func apply_knockback_to_enemy():
 	if not knockback_enabled and player != null:
 		var knockback_direction = (position - player.position).normalized()
-		velocity = knockback_direction * knockback_strength
+		knockback_velocity = knockback_direction * knockback_strength
 		knockback_enabled = true
 		knockback_timer = knockback_duration
 
 func apply_knockback(delta: float) -> void:
+	# Apply knockback velocity
+	velocity = knockback_velocity
 	# Reduce the knockback timer
 	knockback_timer -= delta
 	if knockback_timer <= 0:
 		knockback_enabled = false
-		velocity = Vector2.ZERO
-
+		knockback_velocity = Vector2.ZERO  # Reset knockback velocity after knockback ends
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("player"):
+		player_in_attack_range = true
 		apply_knockback_to_enemy()
+
+func _on_hitbox_body_exited(body: Node2D) -> void:
+	if body.has_method("player"):
+		player_in_attack_range = false
+
+func _on_damage_cooldown_timeout():
+	player_cooldown = true

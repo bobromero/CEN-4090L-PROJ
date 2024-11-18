@@ -4,9 +4,11 @@ class_name Player
 
 static var Instance :Player
 
-var enemy_in_attack_range = false
-var enemy_cooldown = true
-var attack_ip = false
+var enemy_in_damage_range = false # Range for player to deal damage to enemy
+var enemy_in_attack_range = false # Range for player to take damage from enemy
+var enemy_cooldown = true 
+var player_attacking = false
+var player_attack_cooldown = true
 var knockback_velocity = Vector2.ZERO
 var knockback_time = 0.0
 
@@ -27,9 +29,6 @@ func _ready() -> void:
 	hud = $HUD
 	Instance = self
 	
-		
-	
-	
 func _equipWeapon():
 	PlayerInventory.Weapon.attackRegion = attackRegion
 
@@ -37,6 +36,7 @@ func _equipWeapon():
 func _process(delta: float) -> void:
 	UpdateHealth()
 	enemy_attack()
+	attack()
 	
 	if knockback_time > 0:
 		position += knockback_velocity * delta
@@ -46,9 +46,6 @@ func _process(delta: float) -> void:
 	
 	if health <= 0:
 		get_tree().change_scene_to_file("res://Scenes/DeadScreen.tscn")
-	
-	if Input.is_action_just_pressed("PrimaryFire"):
-		PlayerInventory.Weapon._primaryAttack()
 		
 	if Input.is_action_just_pressed("SecondaryFire"):
 		PlayerInventory.Weapon._secondaryAttack()
@@ -91,6 +88,16 @@ func _on_player_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_in_attack_range = false
 		
+func _on_attack_hitbox_body_entered(body: Node2D) -> void:
+	if body.has_method("enemy"):
+		enemy_in_damage_range = true
+		if player_attacking:
+			apply_knockback(body)
+
+func _on_attack_hitbox_body_exited(body: Node2D) -> void:
+	if body.has_method("enemy"):
+		enemy_in_damage_range = false
+		
 func enemy_attack():
 	if enemy_in_attack_range and enemy_cooldown == true:
 		health -= 10
@@ -102,19 +109,25 @@ func player():
 
 func _on_damage_cooldown_timeout():
 	enemy_cooldown = true
+
+func _on_attack_cooldown_timeout() -> void:
+	player_attack_cooldown = true
+	Global.player_current_attack = false
+	player_attacking = false
 	
 func attack():
 	var direction := Input.get_axis("left", "right")
 	
-	if Input.is_action_just_pressed("melee"):
+	if Input.is_action_just_pressed("PrimaryFire"):
+		player_attack_cooldown = false
+		player_attacking = true
+		print("Attacked") # Replace with animation
 		Global.player_current_attack = true
-		attack_ip = true
-
-func _on_attack_cooldown_timeout() -> void:
-	$AttackCooldown.stop()
-	Global.player_current_attack = false
-	attack_ip = false
-	
+		
+		if enemy_in_attack_range:
+			Global.player_attack_connect = true
+		$AttackCooldown.start()
+		
 func apply_knockback(body: Node2D):
 	var direction = (position - body.position).normalized()
 	knockback_velocity = direction * knockback_strength / knockback_duration
