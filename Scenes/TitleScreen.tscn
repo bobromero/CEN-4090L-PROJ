@@ -51,6 +51,7 @@ texture = ExtResource("5_hwnc8")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 visible = false
+z_index = -1
 layout_mode = 0
 offset_left = 216.0
 offset_top = 2.0

@@ -12,5 +12,6 @@ func _process(delta: float) -> void:
 
 
 func _on_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/GameplayLoopTest.tscn")
+	SceneManager.Enter_level(1) #calls the scene manager script to change the game to level 1
+	#get_tree().change_scene_to_file("res://Scenes/GameplayLoopTest.tscn")
 	pass # Replace with function body.

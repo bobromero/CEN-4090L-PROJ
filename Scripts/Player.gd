@@ -45,8 +45,7 @@ func _process(delta: float) -> void:
 		movement._physics_process(delta)
 	
 	if health <= 0:
-		SceneManager.Player_dead()
-		#insert transition to scenemanager
+		SceneManager.Player_dead() #transitions to the death screen
 	
 	if Input.is_action_just_pressed("PrimaryFire"):
 		PlayerInventory.Weapon._primaryAttack()
@@ -56,6 +55,7 @@ func _process(delta: float) -> void:
 		
 	if PlayerInventory.nonWeaponItems.size() > 0 and Input.is_action_just_pressed("pickup"):
 		UseItem(0) # or selected index somehow
+	
 
 func UseItem(id: int):
 	PlayerInventory.nonWeaponItems[id].Use(self)
