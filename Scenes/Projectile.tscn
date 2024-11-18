@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxewf8x07rqlo"]
+[gd_scene load_steps=4 format=3 uid="uid://bxewf8x07rqlo"]
 
+[ext_resource type="Script" path="res://Scripts/Weapons/projectile.gd" id="1_8syud"]
 [ext_resource type="Texture2D" uid="uid://b58r3wg48trq6" path="res://Resources/Misc/fireball.png" id="1_p0ach"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lfjcu"]
 
 [node name="Projectile" type="CharacterBody2D"]
 position = Vector2(-23, -1)
+script = ExtResource("1_8syud")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(23, 1)

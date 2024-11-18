@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://du1gj6sgegn7g"]
+
+[ext_resource type="Script" path="res://Prefabs/canon.gd" id="1_akiij"]
+[ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="2_slcjn"]
+
+[node name="ProjectileShooter" type="Node2D"]
+
+[node name="canon" type="Node2D" parent="."]
+script = ExtResource("1_akiij")
+
+[node name="Sprite2D" type="Sprite2D" parent="canon"]
+modulate = Color(1, 0.423529, 0.152941, 1)
+position = Vector2(513, 228)
+rotation = -2.64417
+scale = Vector2(0.695589, 0.689857)
+skew = 0.855211
+texture = ExtResource("2_slcjn")
