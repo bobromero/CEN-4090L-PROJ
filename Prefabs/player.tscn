@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_6k2tp"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_kg5i0"]
 [ext_resource type="Resource" uid="uid://b2rjlohno4t8f" path="res://Resources/PlayerResources/PlayerMovement.tres" id="2_mcwbx"]
-[ext_resource type="PackedScene" uid="uid://dxkljmk6sj4gd" path="res://Prefabs/hud.tscn" id="4_qsuhb"]
+[ext_resource type="PackedScene" uid="uid://crfhhwn3fbdrv" path="res://Prefabs/hud.tscn" id="4_qsuhb"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aobjg"]
 animations = [{
