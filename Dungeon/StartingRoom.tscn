@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="1_xx1ce"]
 [ext_resource type="PackedScene" uid="uid://3ym2qlv4tsf1" path="res://Prefabs/platform.tscn" id="2_325f3"]
 [ext_resource type="PackedScene" uid="uid://dwp0sxgwj1q2c" path="res://Prefabs/Enemy.tscn" id="3_hvvu8"]
+[ext_resource type="TileSet" uid="uid://3v8mbafwgvhj" path="res://Resources/Misc/Dungeon1Tileset.tres" id="3_wp5y6"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -14,3 +15,6 @@ position = Vector2(350, 272)
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("3_hvvu8")]
 position = Vector2(996, 130)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("3_wp5y6")
