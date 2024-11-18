@@ -14,4 +14,5 @@ func shoot():
 	instance.initialPos = global_position
 	instance.initialRot = rotation
 	ProjectileShooter.add_child.call_deferred(instance)
+	instance.zAxis = z_index-1
 	
