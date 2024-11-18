@@ -41,5 +41,6 @@ func _on_restart_pressed() -> void:
 
 
 func _on_return_menu_pressed() -> void:
+	resume()
 	SceneManager.Return_Menu()
 	pass # Replace with function body.
