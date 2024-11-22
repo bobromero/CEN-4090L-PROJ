@@ -5,7 +5,7 @@ class_name movement
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
-var _sprint_multiplier = 2.5
+var _sprint_multiplier = 1.2
 @export var _isPlatformer: bool = false
 
 var player:CharacterBody2D

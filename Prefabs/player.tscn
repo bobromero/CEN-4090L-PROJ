@@ -1,11 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://bi4ufgbogbq3k"]
+[gd_scene load_steps=20 format=3 uid="uid://bi4ufgbogbq3k"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_6k2tp"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_kg5i0"]
 [ext_resource type="Resource" uid="uid://b2rjlohno4t8f" path="res://Resources/PlayerResources/PlayerMovement.tres" id="2_mcwbx"]
 [ext_resource type="Texture2D" uid="uid://c5e380t4edlmi" path="res://Resources/Sprite Sheets/IdleAnimation-Sheet.png" id="4_aid2j"]
 [ext_resource type="PackedScene" uid="uid://crfhhwn3fbdrv" path="res://Prefabs/hud.tscn" id="4_qsuhb"]
-[ext_resource type="PackedScene" path="res://Scenes/PauseMenu.tscn" id="5_3m7x6"]
+[ext_resource type="PackedScene" uid="uid://c3h0cupr5voit" path="res://Scenes/PauseMenu.tscn" id="5_3m7x6"]
+[ext_resource type="Texture2D" uid="uid://dyf6arh8f1e2n" path="res://Resources/Sprite Sheets/MagicProjectilePrototype-Sheet.png" id="5_ta3cv"]
+[ext_resource type="Texture2D" uid="uid://dpvr860dlbxo5" path="res://Resources/Sprite Sheets/SwordAttackPrototype-Sheet.png" id="6_0ffqo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dg532"]
 atlas = ExtResource("4_aid2j")
@@ -22,6 +24,14 @@ region = Rect2(0, 23, 17, 23)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lfqvj"]
 atlas = ExtResource("4_aid2j")
 region = Rect2(17, 23, 17, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qiu7c"]
+atlas = ExtResource("5_ta3cv")
+region = Rect2(0, 0, 22, 23)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3qo7"]
+atlas = ExtResource("6_0ffqo")
+region = Rect2(0, 0, 22, 21)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aobjg"]
 animations = [{
@@ -49,10 +59,86 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}, {
+"duration": 60.0,
+"texture": SubResource("AtlasTexture_qiu7c")
+}],
+"loop": true,
+"name": &"proto_magic_projectile",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3qo7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0ffqo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0ffqo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0ffqo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0ffqo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0ffqo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0ffqo")
+}],
+"loop": false,
+"name": &"proto_sword_attack",
+"speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v134q"]
-size = Vector2(17.7391, 25.9273)
+size = Vector2(25.7999, 25.9273)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbex3"]
 bg_color = Color(0, 0.643137, 0, 1)
@@ -61,7 +147,7 @@ bg_color = Color(0, 0.643137, 0, 1)
 bg_color = Color(0.36502, 0.997787, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hladd"]
-size = Vector2(57, 89)
+size = Vector2(83, 90.75)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_6k2tp")
@@ -72,12 +158,12 @@ health = 20.0
 texture_filter = 1
 scale = Vector2(3.17831, 3.42391)
 sprite_frames = SubResource("SpriteFrames_aobjg")
-animation = &"idle"
-frame_progress = 0.900221
+animation = &"proto_sword_attack"
 
 [node name="PlayerHitbox" type="Area2D" parent="AnimatedSprite2D" groups=["Inventory", "Player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/PlayerHitbox"]
+position = Vector2(-4.50086e-07, 0)
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_v134q")
 
