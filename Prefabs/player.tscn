@@ -61,49 +61,25 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 60.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qiu7c")
 }, {
-"duration": 60.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qiu7c")
 }, {
-"duration": 60.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qiu7c")
 }, {
-"duration": 60.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qiu7c")
 }, {
-"duration": 60.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qiu7c")
 }, {
-"duration": 60.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qiu7c")
 }, {
-"duration": 60.0,
-"texture": SubResource("AtlasTexture_qiu7c")
-}, {
-"duration": 60.0,
-"texture": SubResource("AtlasTexture_qiu7c")
-}, {
-"duration": 60.0,
-"texture": SubResource("AtlasTexture_qiu7c")
-}, {
-"duration": 60.0,
-"texture": SubResource("AtlasTexture_qiu7c")
-}, {
-"duration": 60.0,
-"texture": SubResource("AtlasTexture_qiu7c")
-}, {
-"duration": 60.0,
-"texture": SubResource("AtlasTexture_qiu7c")
-}, {
-"duration": 60.0,
-"texture": SubResource("AtlasTexture_qiu7c")
-}, {
-"duration": 60.0,
-"texture": SubResource("AtlasTexture_qiu7c")
-}, {
-"duration": 60.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qiu7c")
 }],
 "loop": true,
@@ -158,13 +134,12 @@ health = 20.0
 texture_filter = 1
 scale = Vector2(3.17831, 3.42391)
 sprite_frames = SubResource("SpriteFrames_aobjg")
-animation = &"proto_sword_attack"
+animation = &"proto_magic_projectile"
 
 [node name="PlayerHitbox" type="Area2D" parent="AnimatedSprite2D" groups=["Inventory", "Player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/PlayerHitbox"]
 position = Vector2(-4.50086e-07, 0)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_v134q")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
