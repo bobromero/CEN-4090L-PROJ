@@ -19,6 +19,8 @@ var knockback_time = 0.0
 
 @export var hud: playerHud
 
+@onready var anim = $AnimatedSprite2D
+
 #@export var Score: int = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -48,9 +50,11 @@ func _process(delta: float) -> void:
 		SceneManager.Player_dead() #transitions to the death screen
 	
 	if Input.is_action_just_pressed("PrimaryFire"):
+		anim.play("proto_sword_attack")
 		PlayerInventory.Weapon._primaryAttack()
 		
 	if Input.is_action_just_pressed("SecondaryFire"):
+		anim.play("proto_magic_projectile")
 		PlayerInventory.Weapon._secondaryAttack()
 		
 	if PlayerInventory.nonWeaponItems.size() > 0 and Input.is_action_just_pressed("pickup"):
