@@ -19,6 +19,8 @@ var knockback_time = 0.0
 
 @export var hud: playerHud
 
+@onready var anim = $AnimatedSprite2D
+
 #@export var Score: int = 0
 
 # Called when the node enters the scene tree for the first time.
