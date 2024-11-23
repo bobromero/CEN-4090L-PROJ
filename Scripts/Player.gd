@@ -38,6 +38,9 @@ func _process(delta: float) -> void:
 	enemy_attack()
 	attack()
 	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		print("Attacked...")
+	
 	if knockback_time > 0:
 		position += knockback_velocity * delta
 		knockback_time -= delta
@@ -46,9 +49,6 @@ func _process(delta: float) -> void:
 	
 	if health <= 0:
 		get_tree().change_scene_to_file("res://Scenes/DeadScreen.tscn")
-		
-	if Input.is_action_just_pressed("SecondaryFire"):
-		PlayerInventory.Weapon._secondaryAttack()
 		
 	if PlayerInventory.nonWeaponItems.size() > 0 and Input.is_action_just_pressed("pickup"):
 		UseItem(0) # or selected index somehow
@@ -116,18 +116,10 @@ func _on_attack_cooldown_timeout() -> void:
 	Global.player_current_attack = false
 	player_attacking = false
 	
-func attack():
-	var direction := Input.get_axis("left", "right")
-	
-	if Input.is_action_just_pressed("PrimaryFire"):
-		player_attack_cooldown = false
-		player_attacking = true
+func attack():	
+	if Input.is_action_just_pressed("melee"):
 		print("Attacked") # Replace with animation
-		Global.player_current_attack = true
 		
-		if enemy_in_attack_range:
-			Global.player_attack_connect = true
-		$AttackCooldown.start()
 		
 func apply_knockback(body: Node2D):
 	var direction = (position - body.position).normalized()
