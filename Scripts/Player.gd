@@ -21,7 +21,7 @@ var knockback_time = 0.0
 
 @export var hud: playerHud
 
-@export var Score: int = 0
+#@export var Score: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -52,6 +52,7 @@ func _process(delta: float) -> void:
 		
 	if PlayerInventory.nonWeaponItems.size() > 0 and Input.is_action_just_pressed("pickup"):
 		UseItem(0) # or selected index somehow
+	
 
 func UseItem(id: int):
 	PlayerInventory.nonWeaponItems[id].Use(self)
@@ -134,10 +135,10 @@ func apply_knockback(body: Node2D):
 	knockback_time = knockback_duration
 
 func addScore(amount: int) -> void:
-	Score += amount
+	Global.playerScore += amount
 	
 	
 func rmScore(amount: int) -> void:
-	Score -= amount
-	if Score < 0:
-		Score = 0
+	Global.playerScore -= amount
+	if Global.playerScore < 0:
+		Global.playerScore = 0
