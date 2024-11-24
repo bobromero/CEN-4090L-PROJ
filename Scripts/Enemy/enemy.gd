@@ -18,7 +18,7 @@ func enemy():
 	pass
 
 func _physics_process(delta: float) -> void:
-	velocity.y = gravity
+	#velocity.y = gravity
 	
 	if knockback_enabled:
 		apply_knockback(delta)
