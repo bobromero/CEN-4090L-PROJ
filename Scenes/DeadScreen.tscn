@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://qixsqv3b3j84"]
+
+[ext_resource type="Script" path="res://Scripts/dead_screen.gd" id="1_6qbye"]
+[ext_resource type="Texture2D" uid="uid://23nvmanmbgbs" path="res://Resources/Misc/youdied.png" id="2_dtngo"]
+
+[node name="DeadScreen" type="Node2D"]
+script = ExtResource("1_6qbye")
+
+[node name="Menu" type="Button" parent="."]
+offset_left = 487.0
+offset_top = 235.0
+offset_right = 541.0
+offset_bottom = 272.0
+text = "Menu"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(515, 166)
+scale = Vector2(2.625, 2.52)
+texture = ExtResource("2_dtngo")
+
+[node name="scoreCount" type="RichTextLabel" parent="."]
+offset_left = 471.0
+offset_top = 176.0
+offset_right = 611.0
+offset_bottom = 216.0
+
+[connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
