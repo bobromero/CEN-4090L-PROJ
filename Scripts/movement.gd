@@ -15,7 +15,6 @@ var anim
 func SetPlayer(_player: CharacterBody2D):
 	player = _player
 	anim = player.get_node("AnimatedSprite2D")
-	print("here")
 
 
 var coyote_timer = 0.15 #Time in seconds

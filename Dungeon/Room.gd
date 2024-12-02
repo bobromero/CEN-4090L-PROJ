@@ -13,5 +13,15 @@ func _ready() -> void:
 func TouchedDoor(area : Area2D):
 	var MyCSharpScript = load("res://Dungeon/Dungen.cs")
 	var myNode = MyCSharpScript.new()
-	#get_tree().root.find_child("DungeonManager") as 
-	print("Touched door")
+	var dir:int = -1
+	if area == NorthDoor:
+		dir = 0
+	elif area == SouthDoor:
+		dir = 1
+	elif area == EastDoor:
+		dir = 2
+	elif area == WestDoor:
+		dir = 3
+		
+	#This is an abomination but blame godot not me entirely
+	myNode.ChangeDirection(dir)

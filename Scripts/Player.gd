@@ -10,7 +10,7 @@ var attack_ip = false
 var knockback_velocity = Vector2.ZERO
 var knockback_time = 0.0
 
-@export var movement: movement
+@export var Movement: movement
 @export var PlayerInventory: Inventory = preload("res://Resources/PlayerResources/BaseInventory.tres")
 @export var attackRegion: Area2D
 @export var health: float = 100
@@ -25,7 +25,7 @@ var knockback_time = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	movement.SetPlayer(self)
+	Movement.SetPlayer(self)
 	hud = $HUD
 	Instance = self
 	
@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 		position += knockback_velocity * delta
 		knockback_time -= delta
 	else:
-		movement._physics_process(delta)
+		Movement._physics_process(delta)
 	
 	if health <= 0:
 		SceneManager.Player_dead() #transitions to the death screen

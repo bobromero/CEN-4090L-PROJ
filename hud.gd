@@ -6,5 +6,5 @@ class_name playerHud
 func update_score(new_score: int) -> void:
 	$scoreCount.text = "Score: " + str(new_score)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	update_score(Global.playerScore)

@@ -46,8 +46,8 @@ public partial class Dungen : Node2D {
 		public void ChangeActiveRoom(Room newActiveRoom) {
 			ActiveRoom.ChangeRoomActive(false);
 			ActiveRoom = newActiveRoom;
-            ActiveRoom.ChangeRoomActive(true);
-        }
+			ActiveRoom.ChangeRoomActive(true);
+		}
 	}
 
 	public class Room
@@ -69,20 +69,20 @@ public partial class Dungen : Node2D {
 			}
 
 			public static Direction IntToDirection(int number) {
-                switch (number) {
-                    case 0:
-                        return Direction.North;
-                    case 1:
-                        return Direction.South;
-                    case 2:
-                        return Direction.West;
-                    case 3:
-                        return Direction.East;
-                    default:
-                        break;
-                }
+				switch (number) {
+					case 0:
+						return Direction.North;
+					case 1:
+						return Direction.South;
+					case 2:
+						return Direction.West;
+					case 3:
+						return Direction.East;
+					default:
+						break;
+				}
 				return Direction.StartDir;
-            }
+			}
 
 			public Direction direction;
 		}
@@ -154,18 +154,18 @@ public partial class Dungen : Node2D {
 
 			for (int i = 0; i < doors.Count(); i++) {
 				
-                if (connectedDir == Door.IntToDirection(i))
-                {
+				if (connectedDir == Door.IntToDirection(i))
+				{
 					continue;
-                }
+				}
 
 				Door.Direction workingNeighbor = Door.IntToDirection(i);
 				
 				Room room = MakeRoom(d, depth);
 
-                Neighbors[workingNeighbor] = room;
+				Neighbors[workingNeighbor] = room;
 				room.ChangeRoomActive(false);
-                Neighbors[workingNeighbor].GenerateNeighbors(d, this, workingNeighbor, depth + 1);
+				Neighbors[workingNeighbor].GenerateNeighbors(d, this, workingNeighbor, depth + 1);
 			}
 		}
 
@@ -204,10 +204,12 @@ public partial class Dungen : Node2D {
 				default:
 					break;
 			}
+			RandomNumberGenerator rng = new RandomNumberGenerator();
 			var scene = (TileMapLayer)GD.Load<PackedScene>(path).Instantiate();
-            d.HostNode.AddChild(scene);
-            return new Room(scene, d.roomCount++);
-        }
+			scene.Modulate = Color.Color8((byte)(rng.Randi()%255), (byte)(rng.Randi() % 255), (byte)(rng.Randi() % 255));
+			d.HostNode.AddChild(scene);
+			return new Room(scene, d.roomCount++);
+		}
 
 		
 		public Room GetNeighbor(Door.Direction direction) {
@@ -218,21 +220,59 @@ public partial class Dungen : Node2D {
 
 	List<Room> rooms = new List<Room>();
 
-	Dungeon dungeon;
-	
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		
-		dungeon = new Dungeon(this, 2);
-	}
+	public static Dungeon dungeon;
 
+	private static Room.Door.Direction direction = Room.Door.Direction.StartDir; //used as an interface between godot and c#
+
+	public static double RoomChangeBuffer = 2;
+
+	public static void ChangeDirection(int value) {
+		switch (value) {
+			case 0:
+				direction = Room.Door.Direction.North;
+				break;
+			case 1:
+				direction = Room.Door.Direction.South;
+				break;
+			case 2:
+				direction = Room.Door.Direction.East;
+				break;
+			case 3:
+				direction = Room.Door.Direction.West;
+				break;
+			default:
+				direction = Room.Door.Direction.StartDir;
+				break;
+		}
+		
+		if (changeRoomTimer > RoomChangeBuffer) {
+			changeRoomTimer = 0;
+
+			dungeon.ChangeActiveRoom(dungeon.ActiveRoom.GetNeighbor(direction));
+		} else {
+			return;
+		}
+		GD.Print(direction);
+	}
+	
+	public static double changeRoomTimer = 0;
+
+
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready() {
+		if (dungeon == null) {
+
+			dungeon = new Dungeon(this, 2);
+
+		}
+	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		
+		changeRoomTimer += delta;
 		if (Input.IsActionJustPressed("PrimaryFire")) {
 			GD.Print(dungeon.ActiveRoom.Self.GetInstanceId());
-			dungeon.ChangeActiveRoom(dungeon.ActiveRoom.GetNeighbor(Room.Door.Direction.North));
 		}
 	}
 
