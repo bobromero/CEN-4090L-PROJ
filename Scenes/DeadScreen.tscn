@@ -28,9 +28,8 @@ offset_top = 176.0
 offset_right = 611.0
 offset_bottom = 216.0
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1146.0
-offset_bottom = 640.0
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(577, 324)
 texture = ExtResource("3_cr3sn")
 
 [connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
