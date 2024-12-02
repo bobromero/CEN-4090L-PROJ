@@ -19,6 +19,7 @@ var knockback_time = 0.0
 @export var knockback_strength = 100
 @export var knockback_duration = 0.2
 
+@onready var anim = $AnimatedSprite2D
 var hud: playerHud
 
 # @export var Score: int = 0
@@ -41,7 +42,15 @@ func _process(delta: float) -> void:
 	movement._physics_process(delta)
 	
 	if health <= 0:
-		get_tree().change_scene_to_file("res://Scenes/DeadScreen.tscn")
+		SceneManager.Player_dead() #transitions to the death screen
+	
+	if Input.is_action_just_pressed("PrimaryFire"):
+		anim.play("proto_sword_attack")
+		PlayerInventory.Weapon._primaryAttack()
+		
+	if Input.is_action_just_pressed("SecondaryFire"):
+		anim.play("proto_magic_projectile")
+		PlayerInventory.Weapon._secondaryAttack()
 		
 	if PlayerInventory.nonWeaponItems.size() > 0 and Input.is_action_just_pressed("pickup"):
 		UseItem(0) # or selected index somehow

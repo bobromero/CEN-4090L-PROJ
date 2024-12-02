@@ -5,13 +5,16 @@ class_name movement
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
-var _sprint_multiplier = 2.5
+var _sprint_multiplier = 1.2
 @export var _isPlatformer: bool = false
 
 var player:CharacterBody2D
+var anim
+
 
 func SetPlayer(_player: CharacterBody2D):
 	player = _player
+	anim = player.get_node("AnimatedSprite2D")
 	print("here")
 
 
@@ -43,7 +46,9 @@ func _topDownMovement():
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, SPEED)
 		player.velocity.y = move_toward(player.velocity.y, 0, SPEED)
-	
+		anim.play("idle")
+		
+		
 	player.move_and_slide()
 
 
