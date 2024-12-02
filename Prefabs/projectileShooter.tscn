@@ -1,28 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://du1gj6sgegn7g"]
+[gd_scene load_steps=5 format=3 uid="uid://bkd7s0dhlbokt"]
 
 [ext_resource type="Script" path="res://Prefabs/canon.gd" id="1_akiij"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="2_slcjn"]
+[ext_resource type="PackedScene" uid="uid://3ym2qlv4tsf1" path="res://Prefabs/platform.tscn" id="3_nbsdj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_00b8d"]
-size = Vector2(652, 84)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnpbc"]
+size = Vector2(146, 99)
 
 [node name="ProjectileShooter" type="Node2D"]
 position = Vector2(462, 309)
 
 [node name="canon" type="Node2D" parent="."]
-position = Vector2(37, 23)
+position = Vector2(37, 117)
 script = ExtResource("1_akiij")
 
 [node name="Sprite2D" type="Sprite2D" parent="canon"]
 modulate = Color(1, 0.423529, 0.152941, 1)
+position = Vector2(2, -1)
 rotation = -2.64417
 scale = Vector2(0.695589, 0.689857)
 skew = 0.855211
 texture = ExtResource("2_slcjn")
 
-[node name="Area2D" type="Area2D" parent="." groups=["hitable"]]
+[node name="StaticBody2D" parent="." instance=ExtResource("3_nbsdj")]
 position = Vector2(-245, -239)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(296, 9)
-shape = SubResource("RectangleShape2D_00b8d")
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(283, 5)
+shape = SubResource("RectangleShape2D_xnpbc")

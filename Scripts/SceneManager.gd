@@ -11,6 +11,7 @@ func _process(delta: float) -> void:
 	pass
 	
 func Return_Menu():
+	Global.playerScore=0
 	get_tree().change_scene_to_file("res://Scenes/TitleScreen.tscn")
 
 func Player_dead():

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dubjxcg7lhwei"
-path="res://.godot/imported/Player_sprite-Sheet.png-0109c4302cd36d928b247b36f918272d.ctex"
+uid="uid://d22bhburpcxth"
+path="res://.godot/imported/deadcastle.png-c4a0f9d4cee899d3008a59afc35dccca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Prefabs/Player_sprite-Sheet.png"
-dest_files=["res://.godot/imported/Player_sprite-Sheet.png-0109c4302cd36d928b247b36f918272d.ctex"]
+source_file="res://Resources/Misc/deadcastle.png"
+dest_files=["res://.godot/imported/deadcastle.png-c4a0f9d4cee899d3008a59afc35dccca.ctex"]
 
 [params]
 
