@@ -24,4 +24,4 @@ func TouchedDoor(area : Area2D):
 		dir = 3
 		
 	#This is an abomination but blame godot not me entirely
-	myNode.ChangeDirection(dir)
+	myNode.ChangeDirection(dir, Player)

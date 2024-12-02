@@ -134,6 +134,8 @@ func rmScore(amount: int) -> void:
 	if Global.playerScore < 0:
 		Global.playerScore = 0
 
+static func changePos(newPos:Vector2):
+	Player.Instance.position = newPos;
 
 func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Door"):
