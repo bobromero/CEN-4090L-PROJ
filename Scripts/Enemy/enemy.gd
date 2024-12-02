@@ -13,7 +13,6 @@ var player = null
 var knockback_velocity = Vector2.ZERO
 var player_cooldown = true
 
-
 func enemy():
 	pass
 

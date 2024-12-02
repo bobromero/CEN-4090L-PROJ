@@ -12,16 +12,16 @@ var player_attack_cooldown = true
 var knockback_velocity = Vector2.ZERO
 var knockback_time = 0.0
 
-@export var movement: movement
+@export var movement: movement = preload("res://Resources/PlayerResources/PlayerMovement.tres")
 @export var PlayerInventory: Inventory = preload("res://Resources/PlayerResources/BaseInventory.tres")
 @export var attackRegion: Area2D
 @export var health: float = 100
 @export var knockback_strength = 100
 @export var knockback_duration = 0.2
 
-@export var hud: playerHud
+var hud: playerHud
 
-#@export var Score: int = 0
+# @export var Score: int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,14 +38,7 @@ func _process(delta: float) -> void:
 	enemy_attack()
 	attack()
 	
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		print("Attacked...")
-	
-	if knockback_time > 0:
-		position += knockback_velocity * delta
-		knockback_time -= delta
-	else:
-		movement._physics_process(delta)
+	movement._physics_process(delta)
 	
 	if health <= 0:
 		get_tree().change_scene_to_file("res://Scenes/DeadScreen.tscn")
@@ -83,21 +76,11 @@ func UpdateHealth():
 func _on_player_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_in_attack_range = true
-		apply_knockback(body)
+		print("Enemy in attack range")
 
 func _on_player_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_in_attack_range = false
-		
-func _on_attack_hitbox_body_entered(body: Node2D) -> void:
-	if body.has_method("enemy"):
-		enemy_in_damage_range = true
-		if player_attacking:
-			apply_knockback(body)
-
-func _on_attack_hitbox_body_exited(body: Node2D) -> void:
-	if body.has_method("enemy"):
-		enemy_in_damage_range = false
 		
 func enemy_attack():
 	if enemy_in_attack_range and enemy_cooldown == true:
@@ -110,16 +93,6 @@ func player():
 
 func _on_damage_cooldown_timeout():
 	enemy_cooldown = true
-
-func _on_attack_cooldown_timeout() -> void:
-	player_attack_cooldown = true
-	Global.player_current_attack = false
-	player_attacking = false
-	
-func attack():	
-	if Input.is_action_just_pressed("melee"):
-		print("Attacked") # Replace with animation
-		
 		
 func apply_knockback(body: Node2D):
 	var direction = (position - body.position).normalized()
@@ -134,3 +107,7 @@ func rmScore(amount: int) -> void:
 	Global.playerScore -= amount
 	if Global.playerScore < 0:
 		Global.playerScore = 0
+
+func attack():
+	if Input.is_action_just_pressed("melee"):
+		print("Attacked")

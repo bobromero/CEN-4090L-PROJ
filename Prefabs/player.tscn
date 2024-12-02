@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bi4ufgbogbq3k"]
+[gd_scene load_steps=11 format=3 uid="uid://bi4ufgbogbq3k"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_6k2tp"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_kg5i0"]
-[ext_resource type="Resource" uid="uid://b2rjlohno4t8f" path="res://Resources/PlayerResources/PlayerMovement.tres" id="2_mcwbx"]
 [ext_resource type="PackedScene" uid="uid://crfhhwn3fbdrv" path="res://Prefabs/hud.tscn" id="4_qsuhb"]
-[ext_resource type="PackedScene" path="res://Scenes/PauseMenu.tscn" id="5_3m7x6"]
+[ext_resource type="PackedScene" uid="uid://v0cbro57so3r" path="res://Scenes/PauseMenu.tscn" id="5_3m7x6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_aobjg"]
 animations = [{
@@ -18,7 +17,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v134q"]
-size = Vector2(136, 134)
+size = Vector2(279, 202)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r470o"]
 size = Vector2(306.5, 282)
@@ -36,8 +35,6 @@ size = Vector2(130, 127)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_6k2tp")
-movement = ExtResource("2_mcwbx")
-health = 20.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_aobjg")
