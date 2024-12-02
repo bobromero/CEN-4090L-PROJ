@@ -8,19 +8,19 @@ public partial class Dungen : Node2D {
 	public class Dungeon {
 		public String[] StartPaths = new string[] {
 			"res://Prefabs/Rooms/room0.tscn",
-			"res://Prefabs/Rooms/room1.tscn"
+			//"res://Prefabs/Rooms/room1.tscn"
 		};
 		public String[] CommonPaths = new string[] {
 			"res://Prefabs/Rooms/room0.tscn",
-			"res://Prefabs/Rooms/room1.tscn"
+			//"res://Prefabs/Rooms/room1.tscn"
 		};
 		public String[] LootPaths = new string[] {
 			"res://Prefabs/Rooms/room0.tscn",
-			"res://Prefabs/Rooms/room1.tscn"
+			//"res://Prefabs/Rooms/room1.tscn"
 		};
 		public String[] BossPaths = new string[] {
 			"res://Prefabs/Rooms/room0.tscn",
-			"res://Prefabs/Rooms/room1.tscn"
+			//"res://Prefabs/Rooms/room1.tscn"
 		};
 		Room StartRoom;
 		public Room ActiveRoom;
@@ -40,7 +40,7 @@ public partial class Dungen : Node2D {
 
 			Room room = new Room(Layer, roomCount++);
 			ActiveRoom = room;
-			room.GenerateNeighbors(this, room, Room.Door.Direction.StartDir, 0);
+			room.GenerateNeighbors(this, room, Room.Door.Direction.Missing, 0);
 		}
 
 		public void ChangeActiveRoom(Room newActiveRoom) {
@@ -65,7 +65,7 @@ public partial class Dungen : Node2D {
 				South,
 				East,
 				West,
-				StartDir
+				Missing
 			}
 
 			public static Direction IntToDirection(int number) {
@@ -75,13 +75,27 @@ public partial class Dungen : Node2D {
 					case 1:
 						return Direction.South;
 					case 2:
-						return Direction.West;
-					case 3:
 						return Direction.East;
+					case 3:
+						return Direction.West;
 					default:
 						break;
 				}
-				return Direction.StartDir;
+				return Direction.Missing;
+			}
+
+            public static Direction FlipDirection(Direction ori) {
+				if (ori == Direction.North) {
+					return Direction.South;
+				} else if (ori == Direction.South) {
+					return Direction.North;
+				}
+                if (ori == Direction.East) {
+                    return Direction.West;
+                } else if (ori == Direction.West) {
+                    return Direction.East;
+                }
+				return Direction.Missing;
 			}
 
 			public Direction direction;
@@ -109,6 +123,7 @@ public partial class Dungen : Node2D {
 		public Room(Node2D self, int _id) {
 			Self = self;
 			id = _id;
+			Neighbors = new Dictionary<Door.Direction, Room>();
 			doors = GetDoors(self);
 		}
 
@@ -146,11 +161,10 @@ public partial class Dungen : Node2D {
 		}
 		
 		public void GenerateNeighbors(Dungeon d, Room ParentRoom, Door.Direction connectedDir, int depth) {
+			Neighbors[Door.FlipDirection(connectedDir)] = ParentRoom;
 			if (depth >= d.MaxDepth) {
 				return;
 			}
-			Neighbors = new Dictionary<Door.Direction, Room>();
-			Neighbors[connectedDir] = ParentRoom;
 
 			for (int i = 0; i < doors.Count(); i++) {
 				
@@ -213,6 +227,10 @@ public partial class Dungen : Node2D {
 
 		
 		public Room GetNeighbor(Door.Direction direction) {
+			if (Neighbors == null) {
+                GD.Print("Somthing has gone terribly wrong");
+                return this;
+			}
 			return Neighbors[direction];
 		}
 	}
@@ -222,37 +240,21 @@ public partial class Dungen : Node2D {
 
 	public static Dungeon dungeon;
 
-	private static Room.Door.Direction direction = Room.Door.Direction.StartDir; //used as an interface between godot and c#
+	private static Room.Door.Direction direction = Room.Door.Direction.Missing; //used as an interface between godot and c#
 
 	public static double RoomChangeBuffer = 2;
 
 	public static void ChangeDirection(int value) {
-		switch (value) {
-			case 0:
-				direction = Room.Door.Direction.North;
-				break;
-			case 1:
-				direction = Room.Door.Direction.South;
-				break;
-			case 2:
-				direction = Room.Door.Direction.East;
-				break;
-			case 3:
-				direction = Room.Door.Direction.West;
-				break;
-			default:
-				direction = Room.Door.Direction.StartDir;
-				break;
-		}
 		
-		if (changeRoomTimer > RoomChangeBuffer) {
-			changeRoomTimer = 0;
-
-			dungeon.ChangeActiveRoom(dungeon.ActiveRoom.GetNeighbor(direction));
-		} else {
+		
+		if (changeRoomTimer < RoomChangeBuffer) {
 			return;
-		}
-		GD.Print(direction);
+		} else {
+            changeRoomTimer = 0;
+			direction = Room.Door.IntToDirection(value);
+            dungeon.ChangeActiveRoom(dungeon.ActiveRoom.GetNeighbor(direction));
+			GD.Print("Touched " + Room.Door.IntToDirection(value) + " door, coming out the " + Room.Door.FlipDirection(direction));
+        }
 	}
 	
 	public static double changeRoomTimer = 0;
@@ -262,7 +264,7 @@ public partial class Dungen : Node2D {
 	public override void _Ready() {
 		if (dungeon == null) {
 
-			dungeon = new Dungeon(this, 2);
+			dungeon = new Dungeon(this, 1);
 
 		}
 	}
@@ -273,7 +275,7 @@ public partial class Dungen : Node2D {
 		changeRoomTimer += delta;
 		if (Input.IsActionJustPressed("PrimaryFire")) {
 			GD.Print(dungeon.ActiveRoom.Self.GetInstanceId());
-		}
+        }
 	}
 
 }
