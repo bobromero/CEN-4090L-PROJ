@@ -1,12 +1,17 @@
-extends Resource
-class_name Room
+extends TileMapLayer
 
-var startPos : Vector2i
+class_name DunRoom
 
-var Dimensions: Vector2i
+@export var NorthDoor:Area2D
+@export var SouthDoor:Node2D
+@export var EastDoor:Node2D
+@export var WestDoor:Node2D
 
-var Doors:Array[Vector2i]
+func _ready() -> void:
+	pass
 
-func _init(_startPos: Vector2i, _dimensions : Vector2i):
-	startPos = _startPos
-	Dimensions = _dimensions
+func TouchedDoor(area : Area2D):
+	var MyCSharpScript = load("res://Dungeon/Dungen.cs")
+	var myNode = MyCSharpScript.new()
+	#get_tree().root.find_child("DungeonManager") as 
+	print("Touched door")

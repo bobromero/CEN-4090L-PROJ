@@ -165,6 +165,7 @@ shape = SubResource("RectangleShape2D_hladd")
 position = Vector2(441, 431)
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="area_entered" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_area_entered"]
 [connection signal="body_entered" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="timeout" from="DamageCooldown" to="." method="_on_damage_cooldown_timeout"]

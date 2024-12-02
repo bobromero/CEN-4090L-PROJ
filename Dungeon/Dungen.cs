@@ -44,10 +44,10 @@ public partial class Dungen : Node2D {
 		}
 
 		public void ChangeActiveRoom(Room newActiveRoom) {
-			ActiveRoom.Self.Visible = false;
+			ActiveRoom.ChangeRoomActive(false);
 			ActiveRoom = newActiveRoom;
-			ActiveRoom.Self.Visible = true;
-		}
+            ActiveRoom.ChangeRoomActive(true);
+        }
 	}
 
 	public class Room
@@ -97,6 +97,14 @@ public partial class Dungen : Node2D {
 
 		private Dictionary<Door.Direction, Room> Neighbors;
 
+		public void ChangeRoomActive(bool value) {
+			Self.Visible = value;
+			foreach (Area2D child in Self.GetChildren()) {
+				child.ProcessMode = ProcessModeEnum.Inherit;
+			}
+			Self.ProcessMode = (value == true ? ProcessModeEnum.Always: ProcessModeEnum.Disabled);
+			Self.SetProcess(value);
+		}
 
 		public Room(Node2D self, int _id) {
 			Self = self;
@@ -156,8 +164,8 @@ public partial class Dungen : Node2D {
 				Room room = MakeRoom(d, depth);
 
                 Neighbors[workingNeighbor] = room;
-				room.Self.Visible = false;
-				Neighbors[workingNeighbor].GenerateNeighbors(d, this, workingNeighbor, depth + 1);
+				room.ChangeRoomActive(false);
+                Neighbors[workingNeighbor].GenerateNeighbors(d, this, workingNeighbor, depth + 1);
 			}
 		}
 
