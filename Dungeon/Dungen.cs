@@ -23,6 +23,7 @@ public partial class Dungen : Node2D {
 			"res://Prefabs/Rooms/room1.tscn"
 		};
 		Room StartRoom;
+		public Room ActiveRoom;
 		public int roomCount = 0;
 		public int MaxDepth; // how long before force terminating a path
 		public bool hasBoss = false;
@@ -31,16 +32,21 @@ public partial class Dungen : Node2D {
 		public Dungeon(Node host, int maxDepth) {
 			HostNode = host;
 			MaxDepth = maxDepth;
+
 			TileMapLayer Layer = (TileMapLayer)GD.Load<PackedScene>(StartPaths[0]).Instantiate();
 			HostNode.AddChild(Layer);
-			Room.Door door = new Room.Door {
-				offset = Layer.GetChild(0).GetChild<Node2D>(0).Position,
-				direction = Room.Door.Direction.North,
-				GlobalPos = new Vector2(0, 0)
-			};
 
-			Room room = new Room(Layer, roomCount++, door);
-			room.GenerateNeighbors(this, room, door, 0);
+			GD.Print("Start Room");
+
+			Room room = new Room(Layer, roomCount++);
+			ActiveRoom = room;
+			room.GenerateNeighbors(this, room, Room.Door.Direction.StartDir, 0);
+		}
+
+		public void ChangeActiveRoom(Room newActiveRoom) {
+			ActiveRoom.Self.Visible = false;
+			ActiveRoom = newActiveRoom;
+			ActiveRoom.Self.Visible = true;
 		}
 	}
 
@@ -51,7 +57,6 @@ public partial class Dungen : Node2D {
 			Common, // enemy room
 			Loot, //end room
 			Boss // end boss room, only 1
-
 		}
 		public class Door
 		{
@@ -59,11 +64,27 @@ public partial class Dungen : Node2D {
 				North,
 				South,
 				East,
-				West
+				West,
+				StartDir
 			}
+
+			public static Direction IntToDirection(int number) {
+                switch (number) {
+                    case 0:
+                        return Direction.North;
+                    case 1:
+                        return Direction.South;
+                    case 2:
+                        return Direction.West;
+                    case 3:
+                        return Direction.East;
+                    default:
+                        break;
+                }
+				return Direction.StartDir;
+            }
+
 			public Direction direction;
-			public Vector2 GlobalPos;
-			public Vector2 offset;
 		}
 		public Node2D Self;
 		private int id;
@@ -74,15 +95,13 @@ public partial class Dungen : Node2D {
 			get { return this.doors; }
 		}
 
-		private Room[] Neighbors;
-		private Door Connector;
+		private Dictionary<Door.Direction, Room> Neighbors;
 
 
-		public Room(Node2D self, int _id, Door connector) {
+		public Room(Node2D self, int _id) {
 			Self = self;
 			id = _id;
 			doors = GetDoors(self);
-			Connector = connector;
 		}
 
 		public Door[] GetDoors(Node Scene) {
@@ -110,65 +129,40 @@ public partial class Dungen : Node2D {
 						break;
 				}
 				var _offset = input[i].GetChild<Node2D>(0).Position;
-				GD.Print(input[i].GetChild<Node2D>(0).Name.ToString());
+				//GD.Print(input[i].GetChild<Node2D>(0).Name.ToString());
 				result[i] = new Door {
 					direction = pos,
-					offset = _offset,
-					GlobalPos = _offset
 				};
 			}
 			return result.ToArray();
 		}
 		
-		public void GenerateNeighbors(Dungeon d, Room ParentRoom, Door connectedDoor, int depth) {
+		public void GenerateNeighbors(Dungeon d, Room ParentRoom, Door.Direction connectedDir, int depth) {
 			if (depth >= d.MaxDepth) {
 				return;
 			}
-			Neighbors = new Room[doors.Count()];
-			Neighbors[0] = ParentRoom;
+			Neighbors = new Dictionary<Door.Direction, Room>();
+			Neighbors[connectedDir] = ParentRoom;
 
-			Door CorrespondingDoor = new Door();
-			switch (connectedDoor.direction) {
-				case Door.Direction.North:
-					CorrespondingDoor.direction = Door.Direction.South;
-					break;
-				case Door.Direction.South:
-					CorrespondingDoor.direction = Door.Direction.North;
-					break;
-				case Door.Direction.East:
-					CorrespondingDoor.direction = Door.Direction.West;
-					break;
-				case Door.Direction.West:
-					CorrespondingDoor.direction = Door.Direction.East;
-					break;
-				default:
-					break;
-			}
+			GD.Print(doors.Count());
 
-			for (int i = 0; i < doors.Count(); i++)
-			{
-				if (doors[i].direction == CorrespondingDoor.direction)
-				{
-					CorrespondingDoor.offset = doors[i].offset;
-				}
-			}
-			for (int i = 1; i < doors.Count(); i++) {
+			for (int i = 0; i < doors.Count(); i++) {
+				
+                if (connectedDir == Door.IntToDirection(i))
+                {
+					continue;
+                }
+
+				Door.Direction workingNeighbor = Door.IntToDirection(i);
+				
 				var scene = SpawnRoom(d, depth);
 				d.HostNode.AddChild(scene);
+				
+				Room room = new Room(scene, d.roomCount++);
 
-
-
-				scene.GlobalPosition = connectedDoor.GlobalPos;
-
-				Room room = new Room(scene, d.roomCount++, doors[i]);
-
-				GD.Print("Corresponding Door " + CorrespondingDoor.GlobalPos);
-				GD.Print("Room Pos " + room.Self.GlobalPosition);
-
-				doors[i].GlobalPos = scene.GlobalPosition + doors[i].offset;
-
-				Neighbors[i] = room;
-				Neighbors[i].GenerateNeighbors(d, this, doors[i], ++depth);
+				Neighbors[workingNeighbor] = room;
+				room.Self.Visible = false;
+				Neighbors[workingNeighbor].GenerateNeighbors(d, this, workingNeighbor, ++depth);
 			}
 		}
 
@@ -194,15 +188,15 @@ public partial class Dungen : Node2D {
 			switch (type) {
 				case RoomType.Common:
 					path = d.CommonPaths[rand.Next(0, d.CommonPaths.Count())];
-					// GD.Print("Spawning Common");
+					GD.Print("Spawning Common");
 					break;
 				case RoomType.Loot:
 					path = d.LootPaths[rand.Next(0, d.LootPaths.Count())];
-					// GD.Print("Spawning Loot");
+					GD.Print("Spawning Loot");
 					break;
 				case RoomType.Boss:
 					path = d.BossPaths[rand.Next(0, d.BossPaths.Count())];
-					// GD.Print("Spawning Boss");
+					GD.Print("Spawning Boss");
 					break;
 				default:
 					break;
@@ -211,54 +205,10 @@ public partial class Dungen : Node2D {
 			
 		}
 
-		//public void GeneratNeighbors(Dungeon d, Room ParentRoom, Door connectedDoor, int depth) {
-		//	if (depth >= d.MaxDepth) {
-		//		return;
-		//	}
-		//	Neighbors = new Room[doors.Count()];
-		//	Neighbors[0] = ParentRoom;
-
-		//	Door CorrespondingDoor = new Door();
-		//	switch (connectedDoor.direction) {
-		//		case Door.Direction.North:
-		//			CorrespondingDoor.direction = Door.Direction.South;
-		//			break;
-		//		case Door.Direction.South:
-		//			CorrespondingDoor.direction = Door.Direction.North;
-		//			break;
-		//		case Door.Direction.East:
-		//			CorrespondingDoor.direction = Door.Direction.West;
-		//			break;
-		//		case Door.Direction.West:
-		//			CorrespondingDoor.direction = Door.Direction.East;
-		//			break;
-		//		default:
-		//			break;
-		//	}
-		//	CorrespondingDoor.GlobalPos = new Vector2(0, 0);
-		//	CorrespondingDoor.GlobalPos += connectedDoor.offset;
-		//	CorrespondingDoor.offset = (doors.Where(door => door.direction == CorrespondingDoor.direction) as Door).offset;
-
-		//          for (int i = 1; i < doors.Count(); i++) {
-		//              var scene = SpawnRoom(d, depth);
-		//              d.HostNode.AddChild(scene);
-
-		//              scene.GlobalPosition = connectedDoor.GlobalPos + CorrespondingDoor.offset;
-
-		//              Room room = new Room(scene, d.roomCount++, doors[i]);
-
-		//              //GD.Print("Corresponding Door " + CorrespondingDoor.offset + " " +  CorrespondingDoor.direction);
-		//              GD.Print("Room Pos " + room.Self.GlobalPosition);
-
-		//              Neighbors[i] = room;
-		//          }
-		//          for (int i = 1; i < Neighbors.Length; i++) {
-		//              depth++;
-		//              Neighbors[i].GenerateNeighbors(d, this, doors[i], depth);
-		//          }
-		//      }
-
-
+		
+		public Room GetNeighbor(Door.Direction direction) {
+			return Neighbors[direction];
+		}
 	}
 
 
@@ -270,34 +220,16 @@ public partial class Dungen : Node2D {
 	public override void _Ready()
 	{
 		
-		dungeon = new Dungeon(this, 2);
+		dungeon = new Dungeon(this, 1);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		if (Input.IsActionJustPressed("PrimaryFire")) {
-			GD.Print("Hello");
-			
+			GD.Print(dungeon.ActiveRoom.Self.GetInstanceId());
+			dungeon.ChangeActiveRoom(dungeon.ActiveRoom.GetNeighbor(Room.Door.Direction.North));
 		}
 	}
 
-	/**
-	 *	I need to know where the doors are for each room
-	 *	I can add a door to each scene as well as a teleporter, and when I change the room, I can get the coresponding door
-	 */
-
-
-
-	//spawn room
-	//add offset to room
-	//that offset is the local position of the corresponding door
-	//send down and repeat
-
-	//room spawns at 0,0
-	//spawn new room
-	//new room spawns at 0,0
-	//move new room to room.connectedDoor.doorGlobalPos
-	//add new room's corresponding doorPos offset
-	//repeat
 }

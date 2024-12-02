@@ -21,24 +21,24 @@ tile_set = ExtResource("1_txhtc")
 
 [node name="NorthArea" type="Area2D" parent="."]
 
-[node name="NorthDoor" type="CollisionShape2D" parent="NorthArea"]
+[node name="NorthDoor" type="CollisionShape2D" parent="NorthArea" groups=["Door"]]
 position = Vector2(8.16667, -173.5)
 shape = SubResource("RectangleShape2D_8lgrf")
 
 [node name="EastArea" type="Area2D" parent="."]
 
-[node name="EastDoor" type="CollisionShape2D" parent="EastArea"]
+[node name="EastDoor" type="CollisionShape2D" parent="EastArea" groups=["Door"]]
 position = Vector2(56, 39.75)
 shape = SubResource("RectangleShape2D_45w2d")
 
 [node name="WestArea" type="Area2D" parent="."]
 
-[node name="WestDoor" type="CollisionShape2D" parent="WestArea"]
+[node name="WestDoor" type="CollisionShape2D" parent="WestArea" groups=["Door"]]
 position = Vector2(-188.167, 39.5)
 shape = SubResource("RectangleShape2D_u4kgy")
 
 [node name="SouthArea" type="Area2D" parent="."]
 
-[node name="SouthDoor" type="CollisionShape2D" parent="SouthArea"]
+[node name="SouthDoor" type="CollisionShape2D" parent="SouthArea" groups=["Door"]]
 position = Vector2(-102.333, 110.333)
 shape = SubResource("RectangleShape2D_g4kxj")
