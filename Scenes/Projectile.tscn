@@ -25,4 +25,5 @@ position = Vector2(23, 1)
 shape = SubResource("CircleShape2D_lfjcu")
 one_way_collision_margin = 0.0
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

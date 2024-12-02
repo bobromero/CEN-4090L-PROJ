@@ -33,6 +33,7 @@ project/assembly_name="Project"
 Item=""
 Player=""
 Inventory=""
+hitable=""
 
 [input]
 

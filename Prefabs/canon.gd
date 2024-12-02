@@ -8,6 +8,8 @@ func _ready() -> void:
 	shoot()
 	pass # Replace with function body.
 
+
+
 func shoot():
 	var instance = projectile.instantiate()
 	instance.direction = rotation
