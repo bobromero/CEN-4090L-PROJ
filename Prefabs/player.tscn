@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_kg5i0"]
 [ext_resource type="Resource" uid="uid://b2rjlohno4t8f" path="res://Resources/PlayerResources/PlayerMovement.tres" id="2_mcwbx"]
 [ext_resource type="Texture2D" uid="uid://c5e380t4edlmi" path="res://Resources/Sprite Sheets/IdleAnimation-Sheet.png" id="4_aid2j"]
-[ext_resource type="PackedScene" uid="uid://crfhhwn3fbdrv" path="res://Prefabs/hud.tscn" id="4_qsuhb"]
-[ext_resource type="PackedScene" uid="uid://c3h0cupr5voit" path="res://Scenes/PauseMenu.tscn" id="5_3m7x6"]
+[ext_resource type="PackedScene" uid="uid://dxkljmk6sj4gd" path="res://Prefabs/hud.tscn" id="4_qsuhb"]
+[ext_resource type="PackedScene" uid="uid://v0cbro57so3r" path="res://Scenes/PauseMenu.tscn" id="5_3m7x6"]
 [ext_resource type="Texture2D" uid="uid://dyf6arh8f1e2n" path="res://Resources/Sprite Sheets/MagicProjectilePrototype-Sheet.png" id="5_ta3cv"]
 [ext_resource type="Texture2D" uid="uid://dpvr860dlbxo5" path="res://Resources/Sprite Sheets/SwordAttackPrototype-Sheet.png" id="6_0ffqo"]
 
