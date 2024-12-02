@@ -144,8 +144,6 @@ public partial class Dungen : Node2D {
 			Neighbors = new Dictionary<Door.Direction, Room>();
 			Neighbors[connectedDir] = ParentRoom;
 
-			GD.Print(doors.Count());
-
 			for (int i = 0; i < doors.Count(); i++) {
 				
                 if (connectedDir == Door.IntToDirection(i))
@@ -162,7 +160,7 @@ public partial class Dungen : Node2D {
 
 				Neighbors[workingNeighbor] = room;
 				room.Self.Visible = false;
-				Neighbors[workingNeighbor].GenerateNeighbors(d, this, workingNeighbor, ++depth);
+				Neighbors[workingNeighbor].GenerateNeighbors(d, this, workingNeighbor, depth + 1);
 			}
 		}
 
@@ -170,7 +168,7 @@ public partial class Dungen : Node2D {
 		private TileMapLayer SpawnRoom(Dungeon d,int depth) {
 			RoomType type;
 
-			if (depth > d.MaxDepth - 1) {
+			if (depth >= d.MaxDepth - 1) {
 				if (d.hasBoss) {
 					type = RoomType.Loot;
 
@@ -220,7 +218,7 @@ public partial class Dungen : Node2D {
 	public override void _Ready()
 	{
 		
-		dungeon = new Dungeon(this, 1);
+		dungeon = new Dungeon(this, 2);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
