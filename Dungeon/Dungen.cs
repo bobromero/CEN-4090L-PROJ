@@ -153,25 +153,22 @@ public partial class Dungen : Node2D {
 
 				Door.Direction workingNeighbor = Door.IntToDirection(i);
 				
-				var scene = SpawnRoom(d, depth);
-				d.HostNode.AddChild(scene);
-				
-				Room room = new Room(scene, d.roomCount++);
+				Room room = MakeRoom(d, depth);
 
-				Neighbors[workingNeighbor] = room;
+                Neighbors[workingNeighbor] = room;
 				room.Self.Visible = false;
 				Neighbors[workingNeighbor].GenerateNeighbors(d, this, workingNeighbor, depth + 1);
 			}
 		}
 
 
-		private TileMapLayer SpawnRoom(Dungeon d,int depth) {
+		private Room MakeRoom(Dungeon d,int depth) {
 			RoomType type;
 
 			if (depth >= d.MaxDepth - 1) {
 				if (d.hasBoss) {
 					type = RoomType.Loot;
-
+					//add ending common loot room
 				} else {
 					type = RoomType.Boss;
 					d.hasBoss = true;
@@ -199,9 +196,10 @@ public partial class Dungen : Node2D {
 				default:
 					break;
 			}
-			return (TileMapLayer)GD.Load<PackedScene>(path).Instantiate();
-			
-		}
+			var scene = (TileMapLayer)GD.Load<PackedScene>(path).Instantiate();
+            d.HostNode.AddChild(scene);
+            return new Room(scene, d.roomCount++);
+        }
 
 		
 		public Room GetNeighbor(Door.Direction direction) {
