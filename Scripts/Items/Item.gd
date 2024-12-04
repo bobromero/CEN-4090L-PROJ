@@ -9,8 +9,8 @@ enum ItemType {Weapon, Health, Buff, Currency}
 @export var type: ItemType = ItemType.Weapon
 @export var InvId: int = -1 # -1 means not in an inventory
 
-func OnPickup(player: Player):
+func OnPickup(_player: Player):
 	pass
 
-func Use(player: Player):
+func Use(_player: Player):
 	pass

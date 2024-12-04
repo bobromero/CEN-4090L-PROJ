@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpy22wvncade1"]
+[gd_scene load_steps=5 format=3 uid="uid://35u4ck4g6nfp"]
 
-[ext_resource type="Texture2D" uid="uid://7q0xgek1ythw" path="res://Resources/Inventory/Items/coin.png" id="1_kjstn"]
+[ext_resource type="Texture2D" path="res://Resources/Inventory/Items/coin.png" id="1_kjstn"]
 [ext_resource type="Script" path="res://Scripts/Items/Pickup.gd" id="2_fx40k"]
-[ext_resource type="Resource" uid="uid://eb2xide2oioj" path="res://Resources/Inventory/Items/BigCoin.tres" id="3_hmx2a"]
+[ext_resource type="Resource" path="res://Resources/Inventory/Items/BigCoin.tres" id="3_hmx2a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sas2t"]
 radius = 164.04

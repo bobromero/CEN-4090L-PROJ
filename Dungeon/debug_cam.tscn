@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7msovcglm6nn"]
+
+[ext_resource type="Script" path="res://Scripts/DebugCam.gd" id="1_g47cs"]
+
+[node name="DebugCam" type="CharacterBody2D"]
+position = Vector2(928, 492)
+script = ExtResource("1_g47cs")
+
+[node name="Camera2D" type="Camera2D" parent="."]
