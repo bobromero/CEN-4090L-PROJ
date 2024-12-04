@@ -1,7 +1,7 @@
 extends Node2D
 
-@onready var ProjectileShooter = get_tree().get_root().get_node("CharacterBody2D")
-@onready var projectile = load("res://Scenes/Projectile.tscn")
+@onready var ProjectileShooter = get_parent()
+@onready var projectile = preload("res://Scenes/Projectile.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
