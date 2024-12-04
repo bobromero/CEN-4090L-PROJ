@@ -1,19 +1,32 @@
-[gd_scene load_steps=7 format=4 uid="uid://tls85rak0606"]
+[gd_scene load_steps=12 format=4 uid="uid://tls85rak0606"]
 
 [ext_resource type="TileSet" uid="uid://da1gk2bidat3a" path="res://Resources/DefaultTileSet.tres" id="1_txhtc"]
 [ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_j0nhh"]
+[ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="3_agxbk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8lgrf"]
 size = Vector2(46, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5xxwp"]
+size = Vector2(45.6667, 20)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_45w2d"]
-size = Vector2(12.3333, 75.8333)
+size = Vector2(12.3333, 79.3333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8knn"]
+size = Vector2(13, 76.1667)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u4kgy"]
-size = Vector2(20, 66)
+size = Vector2(20, 77.6667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njli0"]
+size = Vector2(20, 76.3333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g4kxj"]
-size = Vector2(74.3333, 20)
+size = Vector2(80, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_137v6"]
+size = Vector2(79.5, 20)
 
 [node name="TileMapLayer" type="TileMapLayer" node_paths=PackedStringArray("NorthDoor", "SouthDoor", "EastDoor", "WestDoor")]
 scale = Vector2(6, 6)
@@ -28,23 +41,64 @@ WestDoor = NodePath("WestArea")
 [node name="NorthArea" type="Area2D" parent="." groups=["Door"]]
 
 [node name="NorthDoor" type="CollisionShape2D" parent="NorthArea"]
-position = Vector2(8.16667, -173.5)
+position = Vector2(8, -170.667)
 shape = SubResource("RectangleShape2D_8lgrf")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NorthArea/NorthDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NorthArea/NorthDoor/StaticBody2D"]
+shape = SubResource("RectangleShape2D_5xxwp")
+
+[node name="Sprite2D" type="Sprite2D" parent="NorthArea/NorthDoor/StaticBody2D"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.363281, 0.175)
+texture = ExtResource("3_agxbk")
 
 [node name="EastArea" type="Area2D" parent="." groups=["Door"]]
 
 [node name="EastDoor" type="CollisionShape2D" parent="EastArea"]
-position = Vector2(56, 39.75)
+position = Vector2(56, 40)
 shape = SubResource("RectangleShape2D_45w2d")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="EastArea/EastDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EastArea/EastDoor/StaticBody2D"]
+shape = SubResource("RectangleShape2D_v8knn")
+
+[node name="Sprite2D" type="Sprite2D" parent="EastArea/EastDoor/StaticBody2D"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.110677, 0.597656)
+texture = ExtResource("3_agxbk")
 
 [node name="WestArea" type="Area2D" parent="." groups=["Door"]]
 
 [node name="WestDoor" type="CollisionShape2D" parent="WestArea"]
-position = Vector2(-188.167, 39.5)
+position = Vector2(-186.5, 39.8333)
 shape = SubResource("RectangleShape2D_u4kgy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WestArea/WestDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WestArea/WestDoor/StaticBody2D"]
+shape = SubResource("RectangleShape2D_njli0")
+
+[node name="Sprite2D" type="Sprite2D" parent="WestArea/WestDoor/StaticBody2D"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.154953, 0.609375)
+texture = ExtResource("3_agxbk")
 
 [node name="SouthArea" type="Area2D" parent="." groups=["Door"]]
 
 [node name="SouthDoor" type="CollisionShape2D" parent="SouthArea"]
-position = Vector2(-102.333, 110.333)
+position = Vector2(-103.667, 110.333)
 shape = SubResource("RectangleShape2D_g4kxj")
+
+[node name="Blocker" type="StaticBody2D" parent="SouthArea/SouthDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SouthArea/SouthDoor/Blocker"]
+position = Vector2(0.416672, 0)
+shape = SubResource("RectangleShape2D_137v6")
+
+[node name="Sprite2D" type="Sprite2D" parent="SouthArea/SouthDoor/Blocker"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.61849, 0.175)
+texture = ExtResource("3_agxbk")

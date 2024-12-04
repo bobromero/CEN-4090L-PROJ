@@ -2,7 +2,7 @@ extends TileMapLayer
 
 class_name DunRoom
 
-@export var NorthDoor:Area2D
+@export var NorthDoor:Node2D
 @export var SouthDoor:Node2D
 @export var EastDoor:Node2D
 @export var WestDoor:Node2D
