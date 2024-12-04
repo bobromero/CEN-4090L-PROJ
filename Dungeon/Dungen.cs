@@ -124,9 +124,9 @@ public partial class Dungen : Node2D {
 			public Node2D blocker;
 
 			public void SetBlockerEnabled(bool enabled) {
-                blocker.Visible = enabled;
-                blocker.ProcessMode = ProcessModeEnum.Disabled;
-            }
+				blocker.Visible = enabled;
+				blocker.ProcessMode = ProcessModeEnum.Disabled;
+			}
 		}
 		public Node2D Self;
 		public Vector2I id;
@@ -184,7 +184,7 @@ public partial class Dungen : Node2D {
 					blocker = input[i].GetChild<Node2D>(0).GetChild<Node2D>(0)
 				};
 				door.SetBlockerEnabled(false);
-                result.Add(dir, door);
+				result.Add(dir, door);
 			}
 			return result;
 		}
@@ -197,15 +197,15 @@ public partial class Dungen : Node2D {
 
 			Neighbors[ParentDir] = ParentRoom;
 			if (depth >= d.MaxDepth) {
-                foreach (var door in doors)
-                {
-                    if (ParentDir == door.Key)
-                    {
+				foreach (var door in doors)
+				{
+					if (ParentDir == door.Key)
+					{
 						continue;
-                    }
+					}
 					door.Value.SetBlockerEnabled(true);
-                }
-                return;
+				}
+				return;
 			}
 
 			for (int i = 0; i < doors.Count(); i++) {
@@ -232,7 +232,7 @@ public partial class Dungen : Node2D {
 					//GD.Print("skipping " + workingNeighbor + " from " + ParentRoom.id + " room already exists");
 					Vector2I existingRoomPos = Door.DirectionToVector2I(workingNeighbor.direction) + ParentRoom.id;
 					Door.Direction flippedDir = Door.FlipDirection(workingNeighbor.direction);
-                    d.RoomGraph[existingRoomPos].doors[flippedDir].SetBlockerEnabled(false);
+					d.RoomGraph[existingRoomPos].doors[flippedDir].SetBlockerEnabled(false);
 				}
 
 			}

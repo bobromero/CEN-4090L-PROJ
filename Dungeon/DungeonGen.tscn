@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dp3rnp3bujrc7"]
+[gd_scene load_steps=4 format=3 uid="uid://dp3rnp3bujrc7"]
 
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_sa6qf"]
-[ext_resource type="Script" path="res://Dungeon/DunGen.gd" id="2_jufm6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5s7w7"]
 texture = ExtResource("1_sa6qf")
@@ -76,4 +75,3 @@ sources/0 = SubResource("TileSetAtlasSource_5s7w7")
 [node name="DunGen" type="TileMapLayer"]
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_55r0u")
-script = ExtResource("2_jufm6")
