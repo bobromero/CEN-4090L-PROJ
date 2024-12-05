@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/startGameButton.gd" id="2_fhjuc"]
 [ext_resource type="Texture2D" uid="uid://6mdiabn54nwe" path="res://Resources/Misc/smallstart.png" id="3_kekpt"]
 [ext_resource type="Texture2D" uid="uid://ci0vaihwl1x0j" path="res://Resources/Misc/smalllogo.png" id="5_hwnc8"]
-[ext_resource type="VideoStream" path="res://Resources/Misc/clouds.ogv" id="6_eirlp"]
+[ext_resource type="VideoStream" path="res://Resources/Misc/new-clouds.ogv" id="6_xuk65"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hig31"]
 
@@ -59,12 +59,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 39.0
 offset_top = -30.0
-offset_right = 6940.55
-offset_bottom = -29.7451
+offset_right = -5139.45
+offset_bottom = -3001.94
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-stream = ExtResource("6_eirlp")
+stream = ExtResource("6_xuk65")
 autoplay = true
 loop = true
 
