@@ -30,24 +30,24 @@ anchor_right = 1.0
 anchor_bottom = 0.998
 offset_left = 129.0
 offset_top = -26.0
-offset_right = -2929.0
-offset_bottom = -1795.16
+offset_right = -5223.45
+offset_bottom = -2989.83
 texture = ExtResource("2_exofw")
 
 [node name="Button" type="Button" parent="."]
 z_index = 1
 layout_mode = 0
-offset_left = 867.0
-offset_top = 275.0
-offset_right = 1019.0
-offset_bottom = 319.0
+offset_left = 1355.0
+offset_top = 431.0
+offset_right = 1507.0
+offset_bottom = 492.0
 icon = ExtResource("3_kekpt")
 script = ExtResource("2_fhjuc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(945.895, 122)
-scale = Vector2(1.28473, 1.35053)
+position = Vector2(1466, 192)
+scale = Vector2(2.00912, 2.0668)
 texture = ExtResource("5_hwnc8")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
@@ -57,10 +57,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 41.0
-offset_top = -28.0
-offset_right = 41.0
-offset_bottom = -28.0
+offset_left = 39.0
+offset_top = -30.0
+offset_right = 6940.55
+offset_bottom = -29.7451
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

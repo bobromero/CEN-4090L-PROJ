@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7msovcglm6nn"]
+[gd_scene load_steps=2 format=3 uid="uid://b07a2fwls86lt"]
 
 [ext_resource type="Script" path="res://Scripts/DebugCam.gd" id="1_g47cs"]
 

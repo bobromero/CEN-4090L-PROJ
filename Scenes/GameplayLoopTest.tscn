@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="1_xwkma"]
 [ext_resource type="PackedScene" uid="uid://dwp0sxgwj1q2c" path="res://Prefabs/Enemy.tscn" id="2_y50gh"]
-[ext_resource type="PackedScene" uid="uid://dj6qxqdr54bih" path="res://Prefabs/Coin.tscn" id="3_rabgm"]
+[ext_resource type="PackedScene" uid="uid://b8wx6t5bexvts" path="res://Prefabs/Coin.tscn" id="3_rabgm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vpxta"]
 size = Vector2(1727, 100)
