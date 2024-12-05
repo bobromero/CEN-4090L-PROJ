@@ -29,7 +29,8 @@ bg_color = Color(0.400191, 1, 0.369743, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26e3e"]
 bg_color = Color(0.400191, 1, 0.369743, 1)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["hitable"]]
+collision_layer = 3
 script = ExtResource("2_qhkco")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -42,11 +43,13 @@ sprite_frames = SubResource("SpriteFrames_2qvhs")
 position = Vector2(-1, -1)
 shape = SubResource("RectangleShape2D_i2u80")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["hitable"]]
 position = Vector2(-1, -1)
 shape = SubResource("RectangleShape2D_3lx8q")
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-1, -2)

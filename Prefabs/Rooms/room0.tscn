@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=4 uid="uid://tls85rak0606"]
 
-[ext_resource type="TileSet" uid="uid://da1gk2bidat3a" path="res://Resources/DefaultTileSet.tres" id="1_txhtc"]
+[ext_resource type="TileSet" uid="uid://duvtinmkgoayr" path="res://Resources/DefaultTileSet.tres" id="1_txhtc"]
 [ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_j0nhh"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="3_agxbk"]
 
