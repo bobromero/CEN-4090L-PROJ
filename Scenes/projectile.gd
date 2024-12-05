@@ -11,6 +11,8 @@ func _ready():
 	global_position = initialPos
 	global_rotation = initialRot
 	z_index = zAxis
+	var timer = get_tree().create_timer(5.0) #deletes all projectiles after 5 seconds
+	timer.timeout.connect(queue_free)
 	
 func _physics_process(delta: float) -> void:
 	velocity = Vector2(0, -SPEED).rotated(direction)
