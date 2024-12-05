@@ -126,7 +126,7 @@ bg_color = Color(0.36502, 0.997787, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hladd"]
 size = Vector2(83, 90.75)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D2" type="CharacterBody2D"]
 script = ExtResource("1_6k2tp")
 movement = ExtResource("2_mcwbx")
 health = 20.0
