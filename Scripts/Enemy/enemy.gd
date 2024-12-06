@@ -48,8 +48,8 @@ func deal_damage():
 			self.queue_free()
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	player = body
-	player_chase = true
+		player = body
+		player_chase = true
 	
 
 func _on_detection_area_body_exited(body: Node2D) -> void:

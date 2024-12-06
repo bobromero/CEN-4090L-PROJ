@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://naisirc7oad4"]
+
+[ext_resource type="Script" path="res://Prefabs/DonutKing.gd" id="1_mm1bl"]
+[ext_resource type="Texture2D" uid="uid://d4gqmvo0pqa0i" path="res://Resources/Misc/animation/sprite_sheet.png" id="1_ykx6y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3j1f"]
+atlas = ExtResource("1_ykx6y")
+region = Rect2(0, 0, 500, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4x1el"]
+atlas = ExtResource("1_ykx6y")
+region = Rect2(500, 0, 500, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sju4c"]
+atlas = ExtResource("1_ykx6y")
+region = Rect2(0, 411, 500, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xii1i"]
+atlas = ExtResource("1_ykx6y")
+region = Rect2(500, 411, 500, 411)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3gsdi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y3j1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x1el")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sju4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xii1i")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_mm1bl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(607, 268)
+sprite_frames = SubResource("SpriteFrames_3gsdi")
+frame_progress = 0.17459
