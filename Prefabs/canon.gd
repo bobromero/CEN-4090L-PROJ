@@ -9,27 +9,28 @@ var cooldownTime = 0.2 # sets the cooldown time
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
-	
+
 func _process(delta: float) -> void:	
-	if Input.is_action_just_pressed("shoot") and onCooldown == false: #shoots when spacebar is hit
-		shoot()
+	var direction = Vector2.ZERO
+	
+	if Input.is_action_pressed("Rightarrow"):
+		direction.y +=1
+	if Input.is_action_pressed("Leftarrow"):
+		direction.y -=1
+	if Input.is_action_pressed("Uparrow"):
+		direction.x +=1
+	if Input.is_action_pressed("Downarrow"):
+		direction.x -=1
+	if onCooldown == false and direction != Vector2.ZERO:
+		shoot(direction)
 		cooldown()
-	pass
 
 
 
-func shoot():
+
+func shoot(direction):
 	var instance = projectile.instantiate()
 	
-	var direction = Vector2.ZERO #for some reason these are inverted but it works.
-	if Input.is_action_pressed("right"):
-		direction.y +=1
-	if Input.is_action_pressed("left"):
-		direction.y -=1
-	if Input.is_action_pressed("up"):
-		direction.x +=1
-	if Input.is_action_pressed("down"):
-		direction.x -=1
 
 	if direction == Vector2.ZERO:
 		direction = Vector2.DOWN #shoots right by default
