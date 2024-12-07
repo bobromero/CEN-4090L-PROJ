@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_6k2tp"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_kg5i0"]
-[ext_resource type="Resource" uid="uid://b2rjlohno4t8f" path="res://Resources/PlayerResources/PlayerMovement.tres" id="2_mcwbx"]
 [ext_resource type="Texture2D" uid="uid://c5e380t4edlmi" path="res://Resources/Sprite Sheets/IdleAnimation-Sheet.png" id="4_aid2j"]
 [ext_resource type="PackedScene" uid="uid://dxkljmk6sj4gd" path="res://Prefabs/hud.tscn" id="4_qsuhb"]
 [ext_resource type="PackedScene" uid="uid://v0cbro57so3r" path="res://Scenes/PauseMenu.tscn" id="5_3m7x6"]
@@ -114,13 +113,13 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v134q"]
-size = Vector2(279, 202)
+size = Vector2(27.0584, 27.1619)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r470o"]
-size = Vector2(306.5, 282)
+size = Vector2(30.5194, 30.9588)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbex3"]
-bg_color = Color(0, 0.643137, 0, 1)
+bg_color = Color(0, 0.835294, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bhd7"]
 bg_color = Color(0.36502, 0.997787, 0, 1)
@@ -142,13 +141,14 @@ animation = &"proto_magic_projectile"
 [node name="PlayerHitbox" type="Area2D" parent="AnimatedSprite2D" groups=["Inventory", "Player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/PlayerHitbox"]
-position = Vector2(-4.50086e-07, 0)
+position = Vector2(4.68839e-07, -0.146032)
 shape = SubResource("RectangleShape2D_v134q")
 
 [node name="AttackHitbox" type="Area2D" parent="AnimatedSprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/AttackHitbox"]
-position = Vector2(1, 0)
+position = Vector2(0.157316, 4.17801e-07)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_r470o")
 
 [node name="HealthBar" type="ProgressBar" parent="."]

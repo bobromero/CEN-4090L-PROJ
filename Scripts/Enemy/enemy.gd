@@ -13,6 +13,9 @@ var player = null
 var knockback_velocity = Vector2.ZERO
 var player_cooldown = true
 
+func _ready() -> void:
+	add_to_group("Enemy")
+
 func enemy():
 	pass
 
@@ -26,7 +29,6 @@ func _physics_process(delta: float) -> void:
 	
 	UpdateHealth()
 	move_and_slide()
-	deal_damage()
 
 func UpdateHealth():
 	var healthBar = $HealthBar
@@ -36,18 +38,6 @@ func UpdateHealth():
 		healthBar.visible = false
 	else:
 		healthBar.visible = true
-
-func deal_damage():
-	if Global.player_attack_connect and player_in_attack_range:
-		health = health - 20
-		print("enemy health = ", health)
-		if health <= 0:
-			self.queue_free()
-		player_cooldown = false
-		Global.player_current_attack = false
-		Global.player_attack_connect = false
-		$DamageCooldown.start()
-		
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	player = body
@@ -72,11 +62,12 @@ func apply_knockback(delta: float) -> void:
 	if knockback_timer <= 0:
 		knockback_enabled = false
 		knockback_velocity = Vector2.ZERO  # Reset knockback velocity after knockback ends
+		print("Knockbacked")
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("player"):
 		player_in_attack_range = true
-		apply_knockback_to_enemy()
+		#apply_knockback_to_enemy()
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("player"):
