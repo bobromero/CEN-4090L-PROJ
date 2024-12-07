@@ -2,7 +2,6 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static Dungen;
 
 public partial class Dungen : Node2D {
 	
@@ -125,7 +124,7 @@ public partial class Dungen : Node2D {
 
 			public void SetBlockerEnabled(bool enabled) {
 				blocker.Visible = enabled;
-				blocker.ProcessMode = ProcessModeEnum.Disabled;
+				blocker.ProcessMode = enabled ? ProcessModeEnum.Always : ProcessModeEnum.Disabled;
 			}
 		}
 		public Node2D Self;
@@ -133,23 +132,39 @@ public partial class Dungen : Node2D {
 		
 
 		public Dictionary<Door.Direction, Door> doors;
+		public List<Door.Direction> lockedDoors;
+		public bool isLocked = false;
 
 		private Dictionary<Door.Direction, Room> Neighbors;
 
+		public void ToggleDoors() {
+
+			isLocked = !isLocked;
+            foreach (var door in doors)
+            {
+				if (!lockedDoors.Contains(door.Key)) {
+					door.Value.SetBlockerEnabled(isLocked);
+				}
+            }
+        }
+
 		public void ChangeActivity(bool value) {
-			Self.Visible = value;
-			foreach (Area2D child in Self.GetChildren()) {
+            ProcessModeEnum procMode = (value ? ProcessModeEnum.Always : ProcessModeEnum.Disabled);
+            Self.Visible = value;
+			foreach (Node2D child in Self.GetChildren()) {
 				child.ProcessMode = ProcessModeEnum.Inherit;
+				//child.di
 			}
-			Self.ProcessMode = (value == true ? ProcessModeEnum.Always: ProcessModeEnum.Disabled);
-			Self.SetProcess(value);
-		}
+			Self.ProcessMode = procMode;
+            Self.SetProcess(value);
+        }
 
 		public Room(Node2D self, Vector2I pos) {
 			Self = self;
 			id = pos;
 			Neighbors = new Dictionary<Door.Direction, Room>();
 			doors = GetDoors(self);
+			lockedDoors = new List<Door.Direction>();
 		}
 
 		public Dictionary<Door.Direction, Door> GetDoors(Node Scene) {
@@ -177,7 +192,7 @@ public partial class Dungen : Node2D {
 						break;
 				}
 				var _offset = input[i].GetChild<Node2D>(0).GlobalPosition;
-				//GD.Print(input[i].GetChild<Node2D>(0).Name);
+
 				Door door = new Door {
 					direction = dir,
 					position = _offset,
@@ -204,6 +219,7 @@ public partial class Dungen : Node2D {
 						continue;
 					}
 					door.Value.SetBlockerEnabled(true);
+					lockedDoors.Add(ParentDir);
 				}
 				return;
 			}
@@ -334,8 +350,7 @@ public partial class Dungen : Node2D {
 		
 		changeRoomTimer += delta;
 		if (Input.IsActionJustPressed("PrimaryFire")) {
-			GD.Print(dungeon.ActiveRoom.id);
-			GD.Print(dungeon.RoomGraph.Count);
+			dungeon.ActiveRoom.ToggleDoors();
 		}
 	}
 

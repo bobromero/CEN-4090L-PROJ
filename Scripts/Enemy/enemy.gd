@@ -12,7 +12,7 @@ const JUMP = 40
 
 var player_in_attack_range = false
 var player_chase = false
-var player = null
+var player:CharacterBody2D = null
 
 func enemy():
 	pass
@@ -21,9 +21,10 @@ func _physics_process(delta: float) -> void:
 	#velocity.y = gravity
 	
 	if knockback_enabled:
+		print("knockback")
 		apply_knockback(delta)
 	elif player_chase:
-		position += (player.position - position) / speed
+		global_position += (player.global_position - global_position) / speed
 	
 	UpdateHealth()
 	move_and_slide()
@@ -48,13 +49,17 @@ func deal_damage():
 			self.queue_free()
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	player = body
-	player_chase = true
+	print(body.name)
+	if body.is_in_group("Player"):
+		player = body
+		player_chase = true
 	
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
-	player = null
-	player_chase = false
+	if body.is_in_group("Player"):
+		player = null
+		player_chase = false
+	
 	
 func apply_knockback_to_enemy():
 	if not knockback_enabled and player != null:
