@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://naisirc7oad4"]
+[gd_scene load_steps=13 format=3 uid="uid://dcf2ml1qumvqj"]
 
 [ext_resource type="Script" path="res://Scripts/DonutKing.gd" id="1_mm1bl"]
 [ext_resource type="Texture2D" uid="uid://d4gqmvo0pqa0i" path="res://Resources/Misc/animation/sprite_sheet.png" id="1_ykx6y"]
