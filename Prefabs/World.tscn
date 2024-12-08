@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0n6q2jo4pgdq"]
+[gd_scene load_steps=4 format=3 uid="uid://b12r8o85800wu"]
 
 [ext_resource type="PackedScene" uid="uid://dwp0sxgwj1q2c" path="res://Prefabs/Enemy.tscn" id="1_s1dwc"]
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="2_yxdgt"]
@@ -8,6 +8,9 @@
 
 [node name="Player" parent="." instance=ExtResource("2_yxdgt")]
 position = Vector2(485, 265)
+collision_layer = 1
+collision_mask = 1
+health = 20.0
 
 [node name="StaticBody2D" parent="." instance=ExtResource("3_u4k64")]
 position = Vector2(1282, 778)

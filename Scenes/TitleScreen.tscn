@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/startGameButton.gd" id="2_fhjuc"]
 [ext_resource type="Texture2D" uid="uid://6mdiabn54nwe" path="res://Resources/Misc/smallstart.png" id="3_kekpt"]
 [ext_resource type="Texture2D" uid="uid://ci0vaihwl1x0j" path="res://Resources/Misc/smalllogo.png" id="5_hwnc8"]
-[ext_resource type="VideoStream" path="res://Resources/Misc/clouds.ogv" id="6_eirlp"]
+[ext_resource type="VideoStream" path="res://Resources/Misc/new-clouds.ogv" id="6_xuk65"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hig31"]
 
@@ -14,9 +14,10 @@ material = SubResource("CanvasItemMaterial_hig31")
 layout_mode = 3
 anchor_right = 3.761
 anchor_bottom = 3.773
-offset_left = -217.0
-offset_right = -339.672
-offset_bottom = -22.9041
+offset_left = -42.0
+offset_top = 28.0
+offset_right = -164.672
+offset_bottom = 5.09595
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g5i7w")
@@ -27,37 +28,53 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.998
-offset_left = 254.0
-offset_top = 32.0
-offset_right = -2804.0
-offset_bottom = -1737.16
+offset_left = 129.0
+offset_top = -26.0
+offset_right = -5223.45
+offset_bottom = -2989.83
 texture = ExtResource("2_exofw")
 
 [node name="Button" type="Button" parent="."]
 z_index = 1
 layout_mode = 0
-offset_left = 1011.0
-offset_top = 347.0
-offset_right = 1163.0
-offset_bottom = 391.0
+offset_left = 1355.0
+offset_top = 431.0
+offset_right = 1507.0
+offset_bottom = 492.0
 icon = ExtResource("3_kekpt")
 script = ExtResource("2_fhjuc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(1107, 185)
-scale = Vector2(1.28473, 1.35053)
+position = Vector2(1466, 192)
+scale = Vector2(2.00912, 2.0668)
 texture = ExtResource("5_hwnc8")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 216.0
-offset_top = 2.0
-offset_right = 1368.0
-offset_bottom = 658.0
-stream = ExtResource("6_eirlp")
+process_priority = 1
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 39.0
+offset_top = -30.0
+offset_right = -5139.45
+offset_bottom = -3001.94
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+stream = ExtResource("6_xuk65")
 autoplay = true
 loop = true
 
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1389.0
+offset_top = 524.0
+offset_right = 1476.0
+offset_bottom = 555.0
+text = "Exit Game"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

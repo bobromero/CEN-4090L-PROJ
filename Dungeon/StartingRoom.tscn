@@ -1,11 +1,35 @@
-[gd_scene load_steps=3 format=3 uid="uid://dohbsjuucmqvu"]
+[gd_scene load_steps=7 format=3 uid="uid://evbl3ltas3ru"]
 
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="1_xx1ce"]
 [ext_resource type="PackedScene" uid="uid://3ym2qlv4tsf1" path="res://Prefabs/platform.tscn" id="2_325f3"]
+[ext_resource type="PackedScene" uid="uid://dwp0sxgwj1q2c" path="res://Prefabs/Enemy.tscn" id="3_hvvu8"]
+[ext_resource type="TileSet" uid="uid://dkt0y153fngne" path="res://Resources/Misc/Dungeon1Tileset.tres" id="3_wp5y6"]
+[ext_resource type="PackedScene" uid="uid://b8wx6t5bexvts" path="res://Prefabs/Coin.tscn" id="5_bn5a2"]
+[ext_resource type="PackedScene" uid="uid://35u4ck4g6nfp" path="res://Prefabs/CoinBig.tscn" id="6_si8d2"]
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(-22, 10)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_xx1ce")]
+position = Vector2(404, 145)
+collision_layer = 1
+collision_mask = 1
+health = 20.0
 
 [node name="StaticBody2D" parent="." instance=ExtResource("2_325f3")]
-position = Vector2(350, 272)
+position = Vector2(266, 276)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("3_hvvu8")]
+position = Vector2(996, 130)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("3_wp5y6")
+
+[node name="Sprite2D" parent="." instance=ExtResource("5_bn5a2")]
+position = Vector2(601.25, 128.25)
+
+[node name="Sprite2D2" parent="." instance=ExtResource("6_si8d2")]
+position = Vector2(1387, 132)
+
+[node name="Sprite2D3" parent="." instance=ExtResource("5_bn5a2")]
+position = Vector2(777.25, 116.25)

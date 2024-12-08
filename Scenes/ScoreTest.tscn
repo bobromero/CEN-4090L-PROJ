@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://orbgdvetlkju"]
 
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="2_774bw"]
-[ext_resource type="PackedScene" uid="uid://dj6qxqdr54bih" path="res://Prefabs/Coin.tscn" id="3_5vgxj"]
+[ext_resource type="PackedScene" uid="uid://b8wx6t5bexvts" path="res://Prefabs/Coin.tscn" id="3_5vgxj"]
 [ext_resource type="PackedScene" uid="uid://3ym2qlv4tsf1" path="res://Prefabs/platform.tscn" id="3_ddiel"]
 [ext_resource type="PackedScene" uid="uid://dtj0cc7sxpk4k" path="res://Prefabs/HealthPack.tscn" id="4_h81pt"]
-[ext_resource type="PackedScene" uid="uid://dpy22wvncade1" path="res://Prefabs/CoinBig.tscn" id="5_3g8ok"]
+[ext_resource type="PackedScene" uid="uid://35u4ck4g6nfp" path="res://Prefabs/CoinBig.tscn" id="5_3g8ok"]
 
 [node name="ScoreTest" type="Node2D"]
 position = Vector2(2, 0)

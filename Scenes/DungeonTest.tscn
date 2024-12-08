@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cugjeg0waq10y"]
+
+[ext_resource type="PackedScene" uid="uid://c4nut2v2efpkm" path="res://Dungeon/DungeonGen.tscn" id="2_u23mn"]
+[ext_resource type="TileSet" uid="uid://duvtinmkgoayr" path="res://Resources/DefaultTileSet.tres" id="2_xn7yb"]
+[ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="3_3ii1w"]
+[ext_resource type="Script" path="res://Dungeon/Dungen.cs" id="3_gsvc2"]
+
+[node name="DungeonTest" type="Node2D"]
+
+[node name="DungeonManager" type="Node2D" parent="."]
+script = ExtResource("3_gsvc2")
+
+[node name="TileMapLayer" parent="DungeonManager" instance=ExtResource("2_u23mn")]
+tile_set = ExtResource("2_xn7yb")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_3ii1w")]
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]

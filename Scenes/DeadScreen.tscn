@@ -1,30 +1,36 @@
-[gd_scene load_steps=2 format=3 uid="uid://qixsqv3b3j84"]
+[gd_scene load_steps=4 format=3 uid="uid://qixsqv3b3j84"]
 
 [ext_resource type="Script" path="res://Scripts/dead_screen.gd" id="1_6qbye"]
+[ext_resource type="Texture2D" uid="uid://23nvmanmbgbs" path="res://Resources/Misc/youdied.png" id="2_dtngo"]
+[ext_resource type="Texture2D" uid="uid://d22bhburpcxth" path="res://Resources/Misc/deadcastle.png" id="3_cr3sn"]
 
 [node name="DeadScreen" type="Node2D"]
 script = ExtResource("1_6qbye")
 
-[node name="Retry" type="Button" parent="."]
-offset_left = 434.0
-offset_top = 302.0
-offset_right = 613.0
-offset_bottom = 333.0
-text = "Return To Title Screen"
-
 [node name="Menu" type="Button" parent="."]
-offset_left = 487.0
-offset_top = 235.0
-offset_right = 541.0
-offset_bottom = 272.0
-text = "Retry"
+z_index = 1
+offset_left = 857.0
+offset_top = 427.0
+offset_right = 983.0
+offset_bottom = 488.0
+text = "Menu"
 
-[node name="Label" type="Label" parent="."]
-offset_left = 481.0
-offset_top = 161.0
-offset_right = 550.0
-offset_bottom = 189.0
-text = "You Died"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(968.25, 354)
+scale = Vector2(7.1575, 6.28)
+texture = ExtResource("2_dtngo")
 
-[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
+[node name="scoreCount" type="RichTextLabel" parent="."]
+z_index = 1
+offset_left = 845.0
+offset_top = 370.0
+offset_right = 985.0
+offset_bottom = 410.0
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(957, 543)
+scale = Vector2(1.65972, 1.66358)
+texture = ExtResource("3_cr3sn")
+
 [connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]
