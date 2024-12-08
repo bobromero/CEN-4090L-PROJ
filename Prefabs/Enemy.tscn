@@ -29,7 +29,7 @@ bg_color = Color(0, 0.835294, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26e3e"]
 bg_color = Color(0.364706, 0.996078, 0, 1)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D5" type="CharacterBody2D"]
 light_mask = 3
 visibility_layer = 3
 script = ExtResource("2_qhkco")
