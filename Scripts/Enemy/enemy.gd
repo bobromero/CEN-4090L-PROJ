@@ -49,7 +49,7 @@ func deal_damage():
 			self.queue_free()
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	print(body.name)
+	#print(body.name)
 	if body.is_in_group("Player"):
 		player = body
 		player_chase = true

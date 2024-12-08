@@ -139,5 +139,5 @@ static func changePos(newPos:Vector2):
 
 func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Door"):
-		var room:DunRoom = area.get_parent() as DunRoom
+		var room:DunRoom = area.get_parent().get_parent() as DunRoom
 		room.TouchedDoor(area)

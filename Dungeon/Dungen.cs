@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static Dungen;
 
 public partial class Dungen : Node2D {
 	
@@ -22,13 +23,16 @@ public partial class Dungen : Node2D {
 			"res://Prefabs/Rooms/room0.tscn",
 			"res://Prefabs/Rooms/room1.tscn"
 		};
+
 		Room StartRoom;
 		public Room ActiveRoom;
+
 		public int MaxDepth; // how long before force terminating a path
 		public bool hasBoss = false;
 		public Node HostNode;
 
 		public Dictionary<Vector2I, Room> RoomGraph = new Dictionary<Vector2I, Room>();
+		//public HashSet<Vector2I> visitedRooms = new HashSet<Vector2I>();
 
 		public Dungeon(Node host, int maxDepth) {
 			HostNode = host;
@@ -40,8 +44,10 @@ public partial class Dungen : Node2D {
 
 			Room room = new Room(Layer, new Vector2I(0, 0));
 			ActiveRoom = room;
-			room.GenerateNeighbors(this, room, null, 0);
 			RoomGraph.Add(new Vector2I(0, 0), room);
+			room.visited = true;
+			//visitedRooms.Add(room.id);
+			//room.GenerateNeighbors(this, room.id, null, 0);
 		}
 
 		public bool RoomExists(Room.Door.Direction direction) {
@@ -49,9 +55,24 @@ public partial class Dungen : Node2D {
 		}
 
 		public void ChangeActiveRoom(Room.Door.Direction direction) {
-			ActiveRoom.ChangeActivity(false);
+
+			//disable all rooms
+
+			foreach (var room in RoomGraph)
+			{
+				room.Value.SetRoomActive(false);
+			}
+
+			//enable correct room
+
 			ActiveRoom = RoomGraph[ActiveRoom.id + Room.Door.DirectionToVector2I(direction)];
-			ActiveRoom.ChangeActivity(true);
+			ActiveRoom.SetRoomActive(true);
+
+			ActiveRoom.visited = true;
+		}
+
+		public bool IsInGraph(Vector2I pos) {
+			return RoomGraph.ContainsKey(pos);
 		}
 	}
 
@@ -118,11 +139,31 @@ public partial class Dungen : Node2D {
 			}
 
 			public Direction direction;
-			public Vector2 position;
+			public Vector2 position; // needed for player teleport
 
-			public Node2D blocker;
+			private Node2D blocker;
+			public Node2D self;
 
-			public void SetBlockerEnabled(bool enabled) {
+
+			private bool blocked;
+			public bool IsBlocked {
+				set { 
+					SetBlockerEnabled(value);
+					blocked = value;
+				}
+				get {
+					return blocked;
+				}
+			}
+
+			public Door(Direction dir, Vector2 pos, Node2D _self, Node2D block) {
+				direction = dir;
+				position = pos;
+				blocker = block;
+				self = _self;
+			}
+
+			private void SetBlockerEnabled(bool enabled) {
 				blocker.Visible = enabled;
 				blocker.ProcessMode = enabled ? ProcessModeEnum.Always : ProcessModeEnum.Disabled;
 			}
@@ -132,47 +173,66 @@ public partial class Dungen : Node2D {
 		
 
 		public Dictionary<Door.Direction, Door> doors;
-		public List<Door.Direction> lockedDoors;
-		public bool isLocked = false;
+		public HashSet<Door.Direction> lockedDoors;
 
-		private Dictionary<Door.Direction, Room> Neighbors;
+		private Dictionary<Door.Direction, Vector2I> Neighbors;
 
-		public void ToggleDoors() {
+		public bool visited = false;
 
-			isLocked = !isLocked;
-            foreach (var door in doors)
-            {
+		public void UnLockRoom() {
+			foreach(var door in doors) {
 				if (!lockedDoors.Contains(door.Key)) {
-					door.Value.SetBlockerEnabled(isLocked);
+					door.Value.IsBlocked = false;
 				}
-            }
-        }
-
-		public void ChangeActivity(bool value) {
-            ProcessModeEnum procMode = (value ? ProcessModeEnum.Always : ProcessModeEnum.Disabled);
-            Self.Visible = value;
-			foreach (Node2D child in Self.GetChildren()) {
-				child.ProcessMode = ProcessModeEnum.Inherit;
-				//child.di
+			}
+		}
+		public void SetRoomActive(bool value) {
+			ProcessModeEnum procMode = (value ? ProcessModeEnum.Always : ProcessModeEnum.Disabled);
+			Self.Visible = value;
+			foreach (var child in doors.Values) {
+				GD.Print(child.self.Name);
+				child.IsBlocked = value;
+				child.self.ProcessMode = ProcessModeEnum.Inherit;
+				//Self.ProcessMode = procMode;
+				//Self.SetProcess(value);
 			}
 			Self.ProcessMode = procMode;
-            Self.SetProcess(value);
-        }
+			Self.SetProcess(value);
+			UpdateDoors();
+		}
 
 		public Room(Node2D self, Vector2I pos) {
 			Self = self;
 			id = pos;
-			Neighbors = new Dictionary<Door.Direction, Room>();
+			Neighbors = new Dictionary<Door.Direction, Vector2I>();
 			doors = GetDoors(self);
-			lockedDoors = new List<Door.Direction>();
+			lockedDoors = new HashSet<Door.Direction>();
+		}
+
+		public void UpdateDoors() {
+			UnLockRoom();
+			foreach (var door in doors) {
+				if (!visited) {
+					door.Value.IsBlocked = true;
+					continue;
+				}
+
+                if (!dungeon.RoomGraph.ContainsKey(id + Door.DirectionToVector2I(door.Key))) {
+					lockedDoors.Add(door.Key);
+				}
+                door.Value.IsBlocked = lockedDoors.Contains(door.Key);
+				
+			}
 		}
 
 		public Dictionary<Door.Direction, Door> GetDoors(Node Scene) {
-			Node[] input = Scene.GetChildren().Where(r => r.GetChild(0).Name.ToString().Contains("Door")).ToArray();
+			Node[] input = Scene.FindChild("Doors").GetChildren(true).ToArray(); // all of the areas only
+
 			Dictionary<Door.Direction, Door> result = new Dictionary<Door.Direction, Door>();
 
 			for (int i = 0; i < input.Count(); i++)
 			{
+				//GD.Print(input[i].Name);
 				Door.Direction dir = Door.Direction.North;
 
 				switch (input[i].Name.ToString()[0]) {
@@ -191,36 +251,29 @@ public partial class Dungen : Node2D {
 					default:
 						break;
 				}
-				var _offset = input[i].GetChild<Node2D>(0).GlobalPosition;
+				var doorNode = input[i].GetChild<Node2D>(0);
 
-				Door door = new Door {
-					direction = dir,
-					position = _offset,
-					blocker = input[i].GetChild<Node2D>(0).GetChild<Node2D>(0)
-				};
-				door.SetBlockerEnabled(false);
+				var _offset = doorNode.GlobalPosition;
+
+				var blocker = input[i].GetChild<Node2D>(1).GetChild<Node2D>(0);
+
+				Door door = new Door (dir, _offset, doorNode, blocker);
+
 				result.Add(dir, door);
 			}
 			return result;
 		}
 		
-		public void GenerateNeighbors(Dungeon d, Room ParentRoom, Door connectedDoor, int depth) {
+		public void GenerateNeighbors(Dungeon d, Vector2I ParentRoom, Door connectedDoor, int depth) {
 			if (connectedDoor == null) { 
-				connectedDoor = new Door{ direction = Door.Direction.Missing };
+				connectedDoor = new Door(Door.Direction.Missing, new Vector2(0,0), null,null);
 			}
 			var ParentDir = Door.FlipDirection(connectedDoor.direction);
 
 			Neighbors[ParentDir] = ParentRoom;
+
 			if (depth >= d.MaxDepth) {
-				foreach (var door in doors)
-				{
-					if (ParentDir == door.Key)
-					{
-						continue;
-					}
-					door.Value.SetBlockerEnabled(true);
-					lockedDoors.Add(ParentDir);
-				}
+				
 				return;
 			}
 
@@ -238,17 +291,15 @@ public partial class Dungen : Node2D {
 					//GD.Print("spawning " + workingNeighbor + " from " + ParentRoom.id);
 
 					Room room = MakeRoom(d, newPos, depth);
-					Neighbors[workingNeighbor.direction] = room;
+					Neighbors[workingNeighbor.direction] = room.id;
 					d.RoomGraph.Add(newPos, room);
 
-					room.ChangeActivity(false);
-					Neighbors[workingNeighbor.direction].GenerateNeighbors(d, room, workingNeighbor, depth + 1);
-
+					room.SetRoomActive(false);
+					room.GenerateNeighbors(d, room.id, workingNeighbor, depth + 1);
 				} else {
 					//GD.Print("skipping " + workingNeighbor + " from " + ParentRoom.id + " room already exists");
-					Vector2I existingRoomPos = Door.DirectionToVector2I(workingNeighbor.direction) + ParentRoom.id;
-					Door.Direction flippedDir = Door.FlipDirection(workingNeighbor.direction);
-					d.RoomGraph[existingRoomPos].doors[flippedDir].SetBlockerEnabled(false);
+					//Door.Direction flippedDir = Door.FlipDirection(workingNeighbor.direction);
+					//d.RoomGraph[newPos].doors[flippedDir].IsBlocked = false;
 				}
 
 			}
@@ -305,7 +356,7 @@ public partial class Dungen : Node2D {
 				GD.Print("Somthing has gone terribly wrong");
 				return this;
 			}
-			return Neighbors[direction];
+			return dungeon.RoomGraph[Neighbors[direction]];
 		}
 	}
 
@@ -326,7 +377,7 @@ public partial class Dungen : Node2D {
 			if (dungeon.RoomExists(direction)) {
 				dungeon.ChangeActiveRoom(direction);
 
-				GD.Print("Touched " + Room.Door.IntToDirection(value) + " door, coming out the " + Room.Door.FlipDirection(direction));
+				//GD.Print("Touched " + Room.Door.IntToDirection(value) + " door, coming out the " + Room.Door.FlipDirection(direction));
 				player.Call("changePos", dungeon.ActiveRoom.doors[Room.Door.FlipDirection(direction)].position);
 			}
 			
@@ -341,17 +392,18 @@ public partial class Dungen : Node2D {
 		if (dungeon == null) {
 
 			dungeon = new Dungeon(this, 2);
-
-		}
-	}
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+            dungeon.ActiveRoom.GenerateNeighbors(dungeon, dungeon.ActiveRoom.id, null, 0);
+        }
+    }
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		
 		changeRoomTimer += delta;
 		if (Input.IsActionJustPressed("PrimaryFire")) {
-			dungeon.ActiveRoom.ToggleDoors();
+			dungeon.ActiveRoom.UpdateDoors();
 		}
+
 	}
 
 }
