@@ -12,6 +12,9 @@ position = Vector2(-22, 10)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_xx1ce")]
 position = Vector2(404, 145)
+collision_layer = 1
+collision_mask = 1
+health = 20.0
 
 [node name="StaticBody2D" parent="." instance=ExtResource("2_325f3")]
 position = Vector2(266, 276)

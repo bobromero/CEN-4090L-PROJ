@@ -69,7 +69,6 @@ func deal_damage():
 
 
 func _on_d_khitbox_body_entered(body: Node2D) -> void:
-	print("hit")
 	if body.is_in_group("projectiles"):  # added functionality for when an enemy is hit by a projectile.
 		health -= 50
 		if health <= 0:

@@ -8,6 +8,9 @@
 
 [node name="Player" parent="." instance=ExtResource("2_yxdgt")]
 position = Vector2(485, 265)
+collision_layer = 1
+collision_mask = 1
+health = 20.0
 
 [node name="StaticBody2D" parent="." instance=ExtResource("3_u4k64")]
 position = Vector2(1282, 778)
