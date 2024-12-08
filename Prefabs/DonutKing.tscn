@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://naisirc7oad4"]
+[gd_scene load_steps=12 format=3 uid="uid://naisirc7oad4"]
 
-[ext_resource type="Script" path="res://Prefabs/DonutKing.gd" id="1_mm1bl"]
+[ext_resource type="Script" path="res://Scripts/DonutKing.gd" id="1_mm1bl"]
 [ext_resource type="Texture2D" uid="uid://d4gqmvo0pqa0i" path="res://Resources/Misc/animation/sprite_sheet.png" id="1_ykx6y"]
+[ext_resource type="Script" path="res://Scripts/kingcanon.gd" id="3_s8fkj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y3j1f"]
 atlas = ExtResource("1_ykx6y")
@@ -39,10 +40,42 @@ animations = [{
 "speed": 7.0
 }]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0l6aa"]
+radius = 155.013
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bxnwv"]
+bg_color = Color(0.400191, 1, 0.369743, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wtao5"]
+bg_color = Color(0.400191, 1, 0.369743, 1)
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["hitable"]]
+z_index = 3
 script = ExtResource("1_mm1bl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(607, 268)
 sprite_frames = SubResource("SpriteFrames_3gsdi")
 frame_progress = 0.152823
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(594, 273)
+shape = SubResource("CircleShape2D_0l6aa")
+
+[node name="Kingcanon" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(591, 278)
+script = ExtResource("3_s8fkj")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+modulate = Color(4.71681e-06, 0.653433, 0.152217, 1)
+self_modulate = Color(4.71681e-06, 0.653433, 0.152217, 1)
+offset_left = 523.0
+offset_top = 38.0
+offset_right = 658.0
+offset_bottom = 65.0
+theme_override_styles/background = SubResource("StyleBoxFlat_bxnwv")
+theme_override_styles/fill = SubResource("StyleBoxFlat_wtao5")
+show_percentage = false
+
+[node name="DamageCooldown" type="Timer" parent="."]

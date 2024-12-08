@@ -18,8 +18,8 @@ func _physics_process(delta: float) -> void:
 	velocity = Vector2(0, -SPEED).rotated(direction)
 	var collision = move_and_collide(velocity * delta)
 
-	if collision:  # Check if we collided with an enemy
+	if collision:  # Check if we collided with the player
 		var collider = collision.get_collider()
-		if collider.is_in_group("hitable"):
+		if collider.is_in_group("player"):
 			await get_tree().create_timer(0.05).timeout #allows for hit processing on enemy script before the fireball deletes itself.
 			queue_free()  # Delete the projectile immediately on collision

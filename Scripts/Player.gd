@@ -77,6 +77,8 @@ func RemoveFromInventory(id: int):
 func IncreaseHealth(num: float):
 	health += num
 	
+func DecreaseHealth(num: float):
+	health -= num
 	
 func UpdateHealth():
 	var healthBar = $HealthBar
