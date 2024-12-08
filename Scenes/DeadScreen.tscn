@@ -9,27 +9,29 @@ script = ExtResource("1_6qbye")
 
 [node name="Menu" type="Button" parent="."]
 z_index = 1
-offset_left = 487.0
-offset_top = 235.0
-offset_right = 541.0
-offset_bottom = 272.0
+offset_left = 857.0
+offset_top = 427.0
+offset_right = 983.0
+offset_bottom = 488.0
 text = "Menu"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
-position = Vector2(515, 166)
-scale = Vector2(2.625, 2.52)
+position = Vector2(968.25, 354)
+scale = Vector2(7.1575, 6.28)
 texture = ExtResource("2_dtngo")
 
 [node name="scoreCount" type="RichTextLabel" parent="."]
 z_index = 1
-offset_left = 471.0
-offset_top = 176.0
-offset_right = 611.0
-offset_bottom = 216.0
+offset_left = 845.0
+offset_top = 370.0
+offset_right = 985.0
+offset_bottom = 410.0
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(577, 324)
+visible = false
+position = Vector2(957, 543)
+scale = Vector2(1.65972, 1.66358)
 texture = ExtResource("3_cr3sn")
 
 [connection signal="pressed" from="Menu" to="." method="_on_menu_pressed"]

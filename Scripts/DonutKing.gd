@@ -1,36 +1,52 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-
-
 @onready var _animated_sprite = $AnimatedSprite2D
-
-func _ready() -> void:
-	
-	_animated_sprite.play("default")
-
-
-
 @export var speed = 80    # Higher speed = slower enemy and vice versa
-@export var health = 100
+@export var health = 500
 
 var player_in_attack_range = false
 var player_chase = false
 var player = null
+var direction = Vector2.RIGHT  # Initial movement direction
+var movement_timer = 0
+var time_to_change_direction = 2.0
+
+const SPEED = 300.0
+const JUMP_VELOCITY = -400.0
+
+func _ready() -> void:
+	_animated_sprite.play("default")
 
 func enemy():
 	pass
 
 func _physics_process(delta: float) -> void:
-	#velocity.y = gravity
-	position += (player.position - position) / speed
+	movement_timer += delta
+	
+	if movement_timer >= time_to_change_direction:
+		changeDirection()
+		movement_timer = 0
+	
+	velocity = direction * speed
 	
 	UpdateHealth()
 	move_and_slide()
 	deal_damage()
+	
+	
+func changeDirection():
+	#chose to move up/down or side to side
+	if randf() > 0.5:
+		#side to side
+		direction.x = [-1, 1][randi() % 2] 
+		direction.y = 0
+	else:
+		#up and down
+		direction.x = 0
+		direction.y = [-1, 1][randi() % 2] 
 
+	
 func UpdateHealth():
 	var healthBar = $HealthBar
 	healthBar.value = health
@@ -52,7 +68,7 @@ func deal_damage():
 
 
 
-func _on_hitbox_body_entered(body: Node2D) -> void:
+func _on_d_khitbox_body_entered(body: Node2D) -> void:
 	print("hitbox body entered")
 	if body.has_method("player"):
 		pass
@@ -61,4 +77,4 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		if health <= 0:
 			self.queue_free()
 			Global.playerScore +=1000
-		
+			#SceneManager.Game_Win()
