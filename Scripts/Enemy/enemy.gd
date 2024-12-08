@@ -86,9 +86,9 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 
 func _on_damage_cooldown_timeout():
 	player_cooldown = true
-	if body.is_in_group("projectiles"):  # added functionality for when an enemy is hit by a projectile.
-		health -= 50
-		if health <= 0:
-			self.queue_free()
-			Global.playerScore +=100
-		apply_knockback_to_enemy()
+	#if body.is_in_group("projectiles"):  # added functionality for when an enemy is hit by a projectile.
+	#	health -= 50
+	#	if health <= 0:
+	#		self.queue_free()
+	#		Global.playerScore +=100
+	#	apply_knockback_to_enemy()
