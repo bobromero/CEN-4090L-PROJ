@@ -97,6 +97,9 @@ func _on_player_hitbox_body_entered(body: Node2D) -> void:
 func _on_player_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemy_in_attack_range = false
+	if body.has_method("boss"):
+		print("boss touched")
+		DecreaseHealth(500)
 		
 func enemy_attack():
 	if enemy_in_attack_range and enemy_cooldown == true:
@@ -143,3 +146,4 @@ func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Door"):
 		var room:DunRoom = area.get_parent() as DunRoom
 		room.TouchedDoor(area)
+	

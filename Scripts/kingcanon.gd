@@ -1,11 +1,11 @@
 extends Node2D
 
-@onready var ProjectileShooter = get_parent()
+@onready var King = get_parent()
 @onready var projectile = preload("res://Scenes/DonutProjectile.tscn")
 
 var onCooldown = false
 var cooldownTime = 1 # sets the cooldown time
-var rotation_angle = 0  #for near death mode.
+var rotation_angle = 25  #for near death mode.
 var superMode = false # flag to control the mode
 
 # Called when the node enters the scene tree for the first time.
@@ -14,7 +14,12 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:	#each second it shoots 8 donuts, with the directions rotating 
 	var direction = Vector2.ZERO
-	if superMode == true:
+	
+	print(str(King.health))
+	
+	if King.health <= 100:
+		superMode = true
+	if superMode == true: #makes it alot harder when the king is low on health
 		cooldownTime = 0.3
 	if onCooldown == false: #shoots and rotates to make it harder
 				#Create the 8 directions for shooting the donutes

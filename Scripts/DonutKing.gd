@@ -18,7 +18,7 @@ const JUMP_VELOCITY = -400.0
 func _ready() -> void:
 	_animated_sprite.play("default")
 
-func enemy():
+func boss():
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -69,12 +69,9 @@ func deal_damage():
 
 
 func _on_d_khitbox_body_entered(body: Node2D) -> void:
-	print("hitbox body entered")
-	if body.has_method("player"):
-		pass
 	if body.is_in_group("projectiles"):  # added functionality for when an enemy is hit by a projectile.
 		health -= 50
 		if health <= 0:
 			self.queue_free()
 			Global.playerScore +=1000
-			#SceneManager.Game_Win()
+			SceneManager.Win()
