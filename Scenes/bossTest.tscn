@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4f4rdy1hf1k0"]
+[gd_scene load_steps=3 format=3 uid="uid://cnlnuht3fk5cn"]
 
 [ext_resource type="PackedScene" path="res://Prefabs/DonutKing.tscn" id="1_nb4la"]
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="2_5a3xs"]
