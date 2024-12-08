@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c4f4rdy1hf1k0"]
 
-[ext_resource type="PackedScene" uid="uid://naisirc7oad4" path="res://Prefabs/DonutKing.tscn" id="1_nb4la"]
+[ext_resource type="PackedScene" path="res://Prefabs/DonutKing.tscn" id="1_nb4la"]
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="2_5a3xs"]
 
 [node name="BossTest" type="Node2D"]
