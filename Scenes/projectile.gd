@@ -24,5 +24,5 @@ func _physics_process(delta: float) -> void:
 			await get_tree().create_timer(0.05).timeout #allows for hit processing on enemy script before the fireball deletes itself.
 			queue_free()  # Delete the projectile immediately on collision
 		if collider.is_in_group("hitable"):
-			await get_tree().create_timer(0.5).timeout #allows for hit processing on enemy script before the fireball deletes itself.
+			await get_tree().create_timer(0.05).timeout #allows for hit processing on enemy script before the fireball deletes itself.
 			queue_free()  # Delete the proj
