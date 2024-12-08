@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://v0cbro57so3r" path="res://Scenes/PauseMenu.tscn" id="5_3m7x6"]
 [ext_resource type="Texture2D" uid="uid://dyf6arh8f1e2n" path="res://Resources/Sprite Sheets/MagicProjectilePrototype-Sheet.png" id="5_ta3cv"]
 [ext_resource type="Texture2D" uid="uid://dpvr860dlbxo5" path="res://Resources/Sprite Sheets/SwordAttackPrototype-Sheet.png" id="6_0ffqo"]
-[ext_resource type="Script" path="res://Scripts/canon.gd" id="9_8el2b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dg532"]
 atlas = ExtResource("4_aid2j")
@@ -149,7 +148,6 @@ shape = SubResource("RectangleShape2D_v134q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/AttackHitbox"]
 position = Vector2(0.314633, -1.19209e-07)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_r470o")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
