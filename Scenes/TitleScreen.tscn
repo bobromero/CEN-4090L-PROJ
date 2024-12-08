@@ -68,4 +68,13 @@ stream = ExtResource("6_xuk65")
 autoplay = true
 loop = true
 
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1389.0
+offset_top = 524.0
+offset_right = 1476.0
+offset_bottom = 555.0
+text = "Exit Game"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]

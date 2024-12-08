@@ -38,6 +38,7 @@ Inventory=""
 hitable=""
 projectiles=""
 Door=""
+enemyprojectile=""
 
 [input]
 

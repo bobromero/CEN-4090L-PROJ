@@ -27,3 +27,6 @@ func Enter_level(level: int) -> void:
 func Pause():
 	get_tree().change_scene_to_file("res://Scenes/PauseMenu.tscn")
 	pass
+	
+func Win():
+	get_tree().change_scene_to_file("res://Scenes/GameWin.tscn")

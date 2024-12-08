@@ -27,3 +27,7 @@ func _on_button_pressed() -> void:
 	video_player.stop()
 	SceneManager.Enter_level(1) #calls the scene manager script to change the game to level 1
 	#get_tree().change_scene_to_file("res://Scenes/GameplayLoopTest.tscn")
+
+
+func _on_button_2_pressed() -> void:
+	get_tree().quit()
