@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://b2mjgx3hfyjg2"]
+[gd_scene load_steps=7 format=4 uid="uid://b2mjgx3hfyjg2"]
 
 [ext_resource type="TileSet" uid="uid://duvtinmkgoayr" path="res://Resources/DefaultTileSet.tres" id="1_orqia"]
 [ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_xa2ol"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="3_x5i16"]
+[ext_resource type="PackedScene" uid="uid://dcf2ml1qumvqj" path="res://Prefabs/DonutKing.tscn" id="4_rmvxu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sfwml"]
 size = Vector2(79, 20)
@@ -16,6 +17,10 @@ tile_map_data = PackedByteArray("AAD9/wEAAAADAAIAAAD9/wIAAAADAAIAAAD8////AAADAAI
 tile_set = ExtResource("1_orqia")
 script = ExtResource("2_xa2ol")
 SouthDoor = NodePath("SourthArea")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("4_rmvxu")]
+position = Vector2(-100.167, -184.333)
+scale = Vector2(0.165, 0.165)
 
 [node name="SourthArea" type="Area2D" parent="." groups=["Door"]]
 
