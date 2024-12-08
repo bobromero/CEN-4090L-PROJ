@@ -178,6 +178,7 @@ shape = SubResource("RectangleShape2D_hladd")
 position = Vector2(972, 517)
 
 [node name="canon" type="Node2D" parent="."]
+z_index = 1
 script = ExtResource("9_8el2b")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
