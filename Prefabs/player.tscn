@@ -116,7 +116,7 @@ animations = [{
 size = Vector2(27.0584, 27.1619)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r470o"]
-size = Vector2(30.5194, 30.9588)
+size = Vector2(38.4638, 38.7715)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbex3"]
 bg_color = Color(0, 0.835294, 0, 1)
@@ -125,7 +125,7 @@ bg_color = Color(0, 0.835294, 0, 1)
 bg_color = Color(0.36502, 0.997787, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hladd"]
-size = Vector2(83, 90.75)
+size = Vector2(125.443, 135.518)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 3
@@ -134,7 +134,7 @@ script = ExtResource("1_6k2tp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(3.17831, 3.42391)
+scale = Vector2(5, 5.387)
 sprite_frames = SubResource("SpriteFrames_aobjg")
 animation = &"proto_magic_projectile"
 
@@ -147,7 +147,7 @@ shape = SubResource("RectangleShape2D_v134q")
 [node name="AttackHitbox" type="Area2D" parent="AnimatedSprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/AttackHitbox"]
-position = Vector2(0.157316, 4.17801e-07)
+position = Vector2(0.314633, -1.19209e-07)
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_r470o")
 
@@ -164,8 +164,10 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_1bhd7")
 show_percentage = false
 
 [node name="DamageCooldown" type="Timer" parent="."]
+one_shot = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+rotation = 0.00411673
 shape = SubResource("RectangleShape2D_hladd")
 
 [node name="HUD" parent="." instance=ExtResource("4_qsuhb")]
@@ -173,15 +175,9 @@ shape = SubResource("RectangleShape2D_hladd")
 [node name="PauseMenu" parent="HUD" instance=ExtResource("5_3m7x6")]
 position = Vector2(441, 431)
 
-[node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.5
-
-[node name="KnockbackCooldown" type="Timer" parent="."]
-
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="body_entered" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="body_entered" from="AnimatedSprite2D/AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]
 [connection signal="body_exited" from="AnimatedSprite2D/AttackHitbox" to="." method="_on_attack_hitbox_body_exited"]
 [connection signal="timeout" from="DamageCooldown" to="." method="_on_damage_cooldown_timeout"]
-[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

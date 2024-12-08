@@ -9,9 +9,9 @@ var enemy_in_attack_range = false # Range for player to take damage from enemy
 var enemy_cooldown = true 
 var player_attacking = false
 var damage_applied = false
-var player_attack_cooldown = true
 var knockback_velocity = Vector2.ZERO
 var knockback_time = 0.0
+var enemies_in_damage_range: Array = []
 
 @onready var anim = $AnimatedSprite2D
 @onready var attack_cooldown_timer = $AttackCooldown
@@ -41,12 +41,19 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("PrimaryFire") or event.is_action_pressed("SecondaryFire"):
 		apply_damage_to_enemy()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	UpdateHealth()
 	enemy_attack()
 	
 	movement._physics_process(delta)
+	
+	if Input.is_action_just_pressed("PrimaryFire"):
+		anim.play("proto_sword_attack")
+		PlayerInventory.Weapon._primaryAttack()
+	
+	if Input.is_action_just_pressed("SecondaryFire"):
+		anim.play("proto_magic_projectile")
+		PlayerInventory.Weapon._secondaryAttack()
 	
 	if health <= 0:
 		SceneManager.Player_dead() #transitions to the death screen
@@ -62,7 +69,6 @@ func UseItem(id: int):
 func AddToInventory(item: Item):
 	PlayerInventory.AddItem(item)
 	item.OnPickup(self)
-	#print(PlayerInventory.nonWeaponItems)
 	
 func RemoveFromInventory(id: int):
 	if id>=0:
@@ -92,29 +98,24 @@ func _on_player_hitbox_body_exited(body: Node2D) -> void:
 
 func _on_attack_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy"):
+		enemies_in_damage_range.append(body)
 		enemy_in_damage_range = true
 		Global.player_attack_connect = true
-		print("Enemy can be attacked", "\nAttack Connect = ", Global.player_attack_connect)
 
 func _on_attack_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("enemy"):
+		enemies_in_damage_range.erase(body)
 		enemy_in_damage_range = false
-		print("Enemy cannot be attacked", "\nAttack Connect = ", Global.player_attack_connect)
 
 func enemy_attack():
 	if enemy_in_attack_range and enemy_cooldown == true:
 		health -= 10
+		flash_sprite()
 		enemy_cooldown = false
 		$DamageCooldown.start()
 
 func player():
 	pass
-
-func _on_damage_cooldown_timeout():
-	enemy_cooldown = true
-
-func _on_attack_cooldown_timeout():
-	player_attack_cooldown = true
 
 func addScore(amount: int) -> void:
 	Global.playerScore += amount
@@ -125,28 +126,28 @@ func rmScore(amount: int) -> void:
 		Global.playerScore = 0
 
 func apply_damage_to_enemy() -> void:
-	if not damage_applied:  # Prevent continuous damage
-		if (Input.is_action_just_pressed("PrimaryFire") or Input.is_action_just_pressed("SecondaryFire")) and player_attack_cooldown:
-			damage_applied = true
-			player_attack_cooldown = false
-			attack_cooldown_timer.start()
-
-	# Play the appropriate attack animation
-	if Input.is_action_just_pressed("PrimaryFire"):
-		anim.play("proto_sword_attack")
-		PlayerInventory.Weapon._primaryAttack()
-	elif Input.is_action_just_pressed("SecondaryFire"):
-		anim.play("proto_magic_projectile")
-		PlayerInventory.Weapon._secondaryAttack()
-
-	for enemy in get_tree().get_nodes_in_group("Enemy"):
-		if enemy.is_in_group("Enemy"):
+	for enemy in enemies_in_damage_range:
+		if enemy.health > 0:  
 			enemy.health -= 20
-			print("Enemy took 20 damage")
 			enemy.UpdateHealth()
 			enemy.apply_knockback_to_enemy()
+
 		if enemy.health <= 0:
 			enemy.queue_free()
-			break
+			enemies_in_damage_range.erase(enemy)
 
 		Global.player_attack_connect = false
+
+func flash_sprite():
+	anim.visible = false
+	await get_tree().create_timer(0.1).timeout
+	anim.visible = true
+	await get_tree().create_timer(0.1).timeout
+	if $DamageCooldown.is_stopped():
+		anim.visible = true 
+	else:
+		flash_sprite()
+
+func _on_damage_cooldown_timeout() -> void:
+	enemy_cooldown = true
+	anim.visible = true

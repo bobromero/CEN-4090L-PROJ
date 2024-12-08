@@ -40,12 +40,14 @@ func UpdateHealth():
 		healthBar.visible = true
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
-	player = body
-	player_chase = true
+	if body.has_method("player"):
+		player = body
+		player_chase = true
 
 func _on_detection_area_body_exited(body: Node2D) -> void:
-	player = null
-	player_chase = false
+	if body.has_method("player"):
+		player = null
+		player_chase = false
 
 func apply_knockback_to_enemy():
 	if not knockback_enabled and player != null:
