@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdlgfgbwyrp1"]
+
+[ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="1_h0mjv"]
+[ext_resource type="PackedScene" uid="uid://dwp0sxgwj1q2c" path="res://Prefabs/Enemy.tscn" id="2_3rkxy"]
+
+[node name="EnemyTest" type="Node2D"]
+
+[node name="CharacterBody2D5" parent="." instance=ExtResource("1_h0mjv")]
+position = Vector2(128, 268)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_3rkxy")]
+position = Vector2(986, 398)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("2_3rkxy")]
+position = Vector2(931, 44)
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("2_3rkxy")]
+position = Vector2(616, 183)
+
+[node name="CharacterBody2D4" parent="." instance=ExtResource("2_3rkxy")]
+position = Vector2(1093, 169)

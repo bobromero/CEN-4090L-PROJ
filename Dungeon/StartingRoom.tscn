@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://8ccgrlyc3env"]
+[gd_scene load_steps=7 format=3 uid="uid://dohbsjuucmqvu"]
 
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="1_xx1ce"]
 [ext_resource type="PackedScene" uid="uid://3ym2qlv4tsf1" path="res://Prefabs/platform.tscn" id="2_325f3"]
 [ext_resource type="PackedScene" uid="uid://dwp0sxgwj1q2c" path="res://Prefabs/Enemy.tscn" id="3_hvvu8"]
 [ext_resource type="TileSet" uid="uid://dkt0y153fngne" path="res://Resources/Misc/Dungeon1Tileset.tres" id="3_wp5y6"]
-[ext_resource type="PackedScene" uid="uid://b8wx6t5bexvts" path="res://Prefabs/Coin.tscn" id="5_bn5a2"]
-[ext_resource type="PackedScene" uid="uid://35u4ck4g6nfp" path="res://Prefabs/CoinBig.tscn" id="6_si8d2"]
+[ext_resource type="PackedScene" uid="uid://dj6qxqdr54bih" path="res://Prefabs/Coin.tscn" id="5_bn5a2"]
+[ext_resource type="PackedScene" uid="uid://dpy22wvncade1" path="res://Prefabs/CoinBig.tscn" id="6_si8d2"]
 
 [node name="Node2D" type="Node2D"]
 position = Vector2(-22, 10)
