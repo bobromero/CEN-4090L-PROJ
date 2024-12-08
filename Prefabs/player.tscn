@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bi4ufgbogbq3k"]
+[gd_scene load_steps=21 format=3 uid="uid://bi4ufgbogbq3k"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_6k2tp"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_kg5i0"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://v0cbro57so3r" path="res://Scenes/PauseMenu.tscn" id="5_3m7x6"]
 [ext_resource type="Texture2D" uid="uid://dyf6arh8f1e2n" path="res://Resources/Sprite Sheets/MagicProjectilePrototype-Sheet.png" id="5_ta3cv"]
 [ext_resource type="Texture2D" uid="uid://dpvr860dlbxo5" path="res://Resources/Sprite Sheets/SwordAttackPrototype-Sheet.png" id="6_0ffqo"]
+[ext_resource type="Script" path="res://Prefabs/canon.gd" id="9_8el2b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dg532"]
 atlas = ExtResource("4_aid2j")
@@ -131,6 +132,8 @@ size = Vector2(125.443, 135.518)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_6k2tp")
+Movement = ExtResource("2_mcwbx")
+health = 20.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -173,9 +176,15 @@ shape = SubResource("RectangleShape2D_hladd")
 [node name="HUD" parent="." instance=ExtResource("4_qsuhb")]
 
 [node name="PauseMenu" parent="HUD" instance=ExtResource("5_3m7x6")]
-position = Vector2(441, 431)
+position = Vector2(549, 320)
+
+[node name="canon" type="Node2D" parent="."]
+z_index = 1
+position = Vector2(10, 2)
+script = ExtResource("9_8el2b")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="area_entered" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_area_entered"]
 [connection signal="body_entered" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="body_entered" from="AnimatedSprite2D/AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]

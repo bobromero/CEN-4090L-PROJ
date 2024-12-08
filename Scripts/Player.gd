@@ -13,10 +13,14 @@ var knockback_velocity = Vector2.ZERO
 var knockback_time = 0.0
 var enemies_in_damage_range: Array = []
 
+<<<<<<< HEAD
 @onready var anim = $AnimatedSprite2D
 @onready var attack_cooldown_timer = $AttackCooldown
 
 @export var movement: movement = preload("res://Resources/PlayerResources/PlayerMovement.tres")
+=======
+@export var Movement: movement
+>>>>>>> main
 @export var PlayerInventory: Inventory = preload("res://Resources/PlayerResources/BaseInventory.tres")
 @export var attackRegion: Area2D
 @export var health: float = 100
@@ -30,7 +34,7 @@ var hud: playerHud
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	movement.SetPlayer(self)
+	Movement.SetPlayer(self)
 	hud = $HUD
 	Instance = self
 	
@@ -45,7 +49,18 @@ func _process(delta: float) -> void:
 	UpdateHealth()
 	enemy_attack()
 	
+<<<<<<< HEAD
 	movement._physics_process(delta)
+=======
+	if knockback_time > 0:
+		position += knockback_velocity * delta
+		knockback_time -= delta
+	else:
+		Movement._physics_process(delta)
+	
+	if health <= 0:
+		SceneManager.Player_dead() #transitions to the death screen
+>>>>>>> main
 	
 	if Input.is_action_just_pressed("PrimaryFire"):
 		anim.play("proto_sword_attack")
@@ -125,6 +140,7 @@ func rmScore(amount: int) -> void:
 	if Global.playerScore < 0:
 		Global.playerScore = 0
 
+<<<<<<< HEAD
 func apply_damage_to_enemy() -> void:
 	for enemy in enemies_in_damage_range:
 		if enemy.health > 0:  
@@ -151,3 +167,12 @@ func flash_sprite():
 func _on_damage_cooldown_timeout() -> void:
 	enemy_cooldown = true
 	anim.visible = true
+=======
+static func changePos(newPos:Vector2):
+	Player.Instance.position = newPos;
+
+func _on_player_hitbox_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Door"):
+		var room:DunRoom = area.get_parent() as DunRoom
+		room.TouchedDoor(area)
+>>>>>>> main

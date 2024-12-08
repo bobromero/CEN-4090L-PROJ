@@ -39,6 +39,15 @@ func UpdateHealth():
 	else:
 		healthBar.visible = true
 
+func deal_damage():
+	if player_in_attack_range and Global.player_current_attack == true:
+		health = health - 20
+		health -= 20
+		print("enemy health = ", health)
+		if health <= 0:
+			Global.playerScore +=100
+			self.queue_free()
+
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.has_method("player"):
 		player = body
@@ -67,9 +76,9 @@ func apply_knockback(delta: float) -> void:
 		print("Knockbacked")
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
+	print("hitbox body entered")
 	if body.has_method("player"):
 		player_in_attack_range = true
-		#apply_knockback_to_enemy()
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("player"):
@@ -77,3 +86,9 @@ func _on_hitbox_body_exited(body: Node2D) -> void:
 
 func _on_damage_cooldown_timeout():
 	player_cooldown = true
+	if body.is_in_group("projectiles"):  # added functionality for when an enemy is hit by a projectile.
+		health -= 50
+		if health <= 0:
+			self.queue_free()
+			Global.playerScore +=100
+		apply_knockback_to_enemy()

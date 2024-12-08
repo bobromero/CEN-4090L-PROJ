@@ -7,7 +7,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 	
 func Return_Menu():
@@ -20,7 +20,7 @@ func Player_dead():
 	
 func Enter_level(level: int) -> void:
 	if level == 1:
-		get_tree().change_scene_to_file("res://Dungeon/StartingRoom.tscn")
+		get_tree().change_scene_to_file("res://Scenes/DungeonTest.tscn")
 	else:
 		pass
 

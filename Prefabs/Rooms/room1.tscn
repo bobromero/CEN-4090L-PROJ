@@ -1,0 +1,104 @@
+[gd_scene load_steps=12 format=4 uid="uid://yol1ro8rjrrf"]
+
+[ext_resource type="TileSet" uid="uid://duvtinmkgoayr" path="res://Resources/DefaultTileSet.tres" id="1_gmde7"]
+[ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_ulvmc"]
+[ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="3_3m371"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18yoo"]
+size = Vector2(76, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lh7bp"]
+size = Vector2(77.3333, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ik8b2"]
+size = Vector2(14, 77.8333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p2bf8"]
+size = Vector2(14.6673, 77.6667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sfwml"]
+size = Vector2(79, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jstgi"]
+size = Vector2(78.6667, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ak8co"]
+size = Vector2(20, 71.8333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cstpj"]
+size = Vector2(20, 70.8333)
+
+[node name="TileMapLayer" type="TileMapLayer" node_paths=PackedStringArray("NorthDoor", "SouthDoor", "EastDoor", "WestDoor")]
+scale = Vector2(6, 6)
+tile_map_data = PackedByteArray("AAD9/wEAAAADAAIAAAD9/wIAAAADAAIAAAD8////AAADAAIAAAD7////AAADAAIAAAD6/wEAAAADAAIAAAD6/wIAAAADAAIAAAD7/wIAAAADAAIAAAD7/wEAAAADAAIAAAD8/wEAAAADAAIAAAD8/wIAAAADAAIAAAD+/wAAAAADAAIAAAD+/wEAAAADAAIAAAD+/wIAAAADAAIAAAD//wIAAAADAAIAAAD//wEAAAADAAIAAAD//wAAAAADAAIAAAAAAAAAAAADAAIAAAAAAAEAAAADAAIAAAAAAAIAAAADAAIAAAABAAAAAAADAAIAAAABAP//AAADAAIAAAABAAEAAAADAAIAAAABAAIAAAADAAIAAAACAP//AAADAAIAAAACAAAAAAADAAIAAAACAAEAAAADAAIAAAACAAIAAAADAAIAAAADAAIAAAADAAIAAAADAAEAAAADAAIAAAADAAAAAAADAAIAAAADAP//AAADAAIAAAD5////AAADAAIAAAD5/wAAAAADAAIAAAD5/wIAAAAGAAEAAAD5/wMAAAAGAAEAAAD6/wMAAAAGAAEAAAD7/wMAAAAGAAEAAAD8/wMAAAAGAAEAAAD9/wMAAAAGAAEAAAD+/wMAAAADAAIAAAD//wMAAAADAAIAAAAAAAMAAAADAAIAAAABAAMAAAADAAIAAAACAAMAAAADAAIAAAADAAMAAAAGAAEAAAADAP7/AAADAAIAAAACAP7/AAADAAIAAAABAP7/AAADAAIAAAD6//3/AAADAAIAAAAAAP3/AAADAAIAAAABAP3/AAADAAIAAAACAP3/AAADAAIAAAADAP3/AAADAAIAAAADAPz/AAADAAIAAAADAPv/AAABAAEAAAACAPv/AAADAAIAAAABAPv/AAADAAIAAAAAAPv/AAADAAIAAAD///v/AAADAAIAAAD+//v/AAADAAIAAAD9//v/AAABAAEAAAD8//v/AAABAAEAAAD7//v/AAABAAEAAAD6//v/AAABAAEAAAD5//v/AAABAAEAAAD5//z/AAABAAEAAAAAAP7/AAADAAIAAAD///7/AAADAAIAAAD+//7/AAADAAIAAAD9//7/AAADAAIAAAD8//7/AAADAAIAAAD7//7/AAADAAIAAAD6//7/AAADAAIAAAD5//3/AAADAAIAAAD5//7/AAADAAIAAAD5/wEAAAADAAIAAAD6/wAAAAADAAIAAAD6////AAADAAIAAAD7/wAAAAADAAIAAAD6//z/AAADAAIAAAD7//z/AAADAAIAAAD8//z/AAADAAIAAAD9//z/AAADAAIAAAD+//z/AAADAAIAAAD///z/AAADAAIAAAAAAPz/AAADAAIAAAABAPz/AAADAAIAAAACAPz/AAADAAIAAAD///3/AAADAAIAAAD+//3/AAADAAIAAAD9//3/AAADAAIAAAD8//3/AAADAAIAAAD7//3/AAADAAIAAAD8/wAAAAADAAIAAAD9/wAAAAADAAIAAAD/////AAADAAIAAAAAAP//AAADAAIAAAD+////AAADAAIAAAD9////AAADAAIAAAAEAAIAAAADAAIAAAAEAAEAAAADAAIAAAAEAAMAAAAGAAEAAAAFAAMAAAAGAAEAAAAGAAMAAAAGAAEAAAAGAAIAAAAGAAEAAAAGAAEAAAADAAIAAAAGAAAAAAADAAIAAAAGAP//AAADAAIAAAAGAP7/AAADAAIAAAAGAP3/AAADAAIAAAAGAPz/AAAGAAEAAAAGAPv/AAAGAAEAAAAEAPv/AAAGAAEAAAAFAPv/AAAGAAEAAAAEAPz/AAADAAIAAAAFAPz/AAADAAIAAAAFAP3/AAADAAIAAAAEAP3/AAADAAIAAAAFAP7/AAADAAIAAAAFAP//AAADAAIAAAAEAP7/AAADAAIAAAAEAP//AAADAAIAAAAFAAAAAAADAAIAAAAFAAEAAAADAAIAAAAEAAAAAAADAAIAAAAFAAIAAAADAAIAAAA=")
+tile_set = ExtResource("1_gmde7")
+script = ExtResource("2_ulvmc")
+NorthDoor = NodePath("NorthArea")
+SouthDoor = NodePath("SourthArea")
+EastDoor = NodePath("EastArea")
+WestDoor = NodePath("WestArea")
+
+[node name="NorthArea" type="Area2D" parent="." groups=["Door"]]
+
+[node name="NorthDoor" type="CollisionShape2D" parent="NorthArea"]
+position = Vector2(7.66667, -75.1667)
+shape = SubResource("RectangleShape2D_18yoo")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NorthArea/NorthDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NorthArea/NorthDoor/StaticBody2D"]
+shape = SubResource("RectangleShape2D_lh7bp")
+
+[node name="Sprite2D" type="Sprite2D" parent="NorthArea/NorthDoor/StaticBody2D"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.61849, 0.175)
+texture = ExtResource("3_3m371")
+
+[node name="WestArea" type="Area2D" parent="." groups=["Door"]]
+
+[node name="WestDoor" type="CollisionShape2D" parent="WestArea"]
+position = Vector2(-103.667, -8.5)
+shape = SubResource("RectangleShape2D_ik8b2")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WestArea/WestDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WestArea/WestDoor/StaticBody2D"]
+shape = SubResource("RectangleShape2D_p2bf8")
+
+[node name="Sprite2D" type="Sprite2D" parent="WestArea/WestDoor/StaticBody2D"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.115891, 0.606771)
+texture = ExtResource("3_3m371")
+
+[node name="SourthArea" type="Area2D" parent="." groups=["Door"]]
+
+[node name="SouthDoor" type="CollisionShape2D" parent="SourthArea"]
+position = Vector2(8, 59)
+shape = SubResource("RectangleShape2D_sfwml")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SourthArea/SouthDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SourthArea/SouthDoor/StaticBody2D"]
+shape = SubResource("RectangleShape2D_jstgi")
+
+[node name="Sprite2D" type="Sprite2D" parent="SourthArea/SouthDoor/StaticBody2D"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.61849, 0.175)
+texture = ExtResource("3_3m371")
+
+[node name="EastArea" type="Area2D" parent="." groups=["Door"]]
+
+[node name="EastDoor" type="CollisionShape2D" parent="EastArea"]
+position = Vector2(106.167, -8.16667)
+shape = SubResource("RectangleShape2D_ak8co")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="EastArea/EastDoor"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EastArea/EastDoor/StaticBody2D"]
+position = Vector2(0.167002, -0.416663)
+shape = SubResource("RectangleShape2D_cstpj")
+
+[node name="Sprite2D" type="Sprite2D" parent="EastArea/EastDoor/StaticBody2D"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.154943, 0.576823)
+texture = ExtResource("3_3m371")
