@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var speed = 80    # Higher speed = slower enemy and vice versa
 @export var health = 500
 
+var superMode =false
 var player_in_attack_range = false
 var player_chase = false
 var player = null
@@ -33,6 +34,12 @@ func _physics_process(delta: float) -> void:
 	UpdateHealth()
 	move_and_slide()
 	deal_damage()
+	
+	if health <=150 and superMode == false:
+		superMode = true 
+		_animated_sprite.speed_scale = 3.0
+		speed = 160
+		
 	
 	
 func changeDirection():
