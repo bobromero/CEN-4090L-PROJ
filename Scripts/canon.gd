@@ -4,7 +4,7 @@ extends Node2D
 @onready var projectile = preload("res://Scenes/Projectile.tscn")
 
 var onCooldown = false
-var cooldownTime = 0.2 # sets the cooldown time
+var cooldownTime = 0.1 # sets the cooldown time
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

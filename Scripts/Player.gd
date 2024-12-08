@@ -109,7 +109,9 @@ func _on_player_hitbox_body_exited(body: Node2D) -> void:
 	if body.has_method("boss"):
 		print("boss touched")
 		DecreaseHealth(500)
-
+	if body.is_in_group("enemyprojectile"):
+		DecreaseHealth(20)
+		
 func _on_attack_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy"):
 		enemies_in_damage_range.append(body)
