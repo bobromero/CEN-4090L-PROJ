@@ -21,8 +21,6 @@ func _process(delta: float) -> void:
 	openCondition()
 
 func TouchedDoor(area : Area2D):
-	var MyCSharpScript = load("res://Dungeon/Dungen.cs")
-	var myNode = MyCSharpScript.new()
 	var dir:int = -1
 	if area == NorthDoor:
 		dir = 0

@@ -141,7 +141,3 @@ func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Door"):
 		var room:DunRoom = area.get_parent().get_parent() as DunRoom
 		room.TouchedDoor(area)
-
-
-func _on_player_hitbox_area_exited(area: Area2D) -> void:
-	pass # Replace with function body.

@@ -10,7 +10,7 @@ var cooldownTime = 0.2 # sets the cooldown time
 func _ready() -> void:
 	pass # Replace with function body.
 	
-func _process(delta: float) -> void:	
+func _process(_delta: float) -> void:	
 	if Input.is_action_just_pressed("shoot") and onCooldown == false: #shoots when spacebar is hit
 		shoot()
 		cooldown()
