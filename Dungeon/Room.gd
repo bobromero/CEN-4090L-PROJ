@@ -7,8 +7,11 @@ class_name DunRoom
 @export var EastDoor:Node2D
 @export var WestDoor:Node2D
 
+@export var activationArea:Area2D
+
 func _ready() -> void:
-	pass
+	activationArea.area_entered.connect(WalkedIn)
+
 
 func TouchedDoor(area : Area2D):
 	var MyCSharpScript = load("res://Dungeon/Dungen.cs")
@@ -25,3 +28,9 @@ func TouchedDoor(area : Area2D):
 		
 	#This is an abomination but blame godot not me entirely
 	myNode.ChangeDirection(dir, Player)
+
+func WalkedIn(area:Area2D):
+	var MyCSharpScript = load("res://Dungeon/Dungen.cs")
+	var myNode = MyCSharpScript.new()
+	if area.is_in_group("Player"):
+		myNode.WalkedIn()
