@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://dai362ag542pf"]
+[gd_scene load_steps=8 format=3 uid="uid://dai362ag542pf"]
 
-[ext_resource type="Script" path="res://Scripts/Enemy/flying_enemy.gd" id="1_nw3o4"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_wmwfw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qkpfd"]
@@ -30,7 +29,6 @@ bg_color = Color(0.0628203, 0.375253, 0.0866703, 1)
 bg_color = Color(0.172503, 0.469877, 0.109916, 1)
 
 [node name="FlyingEnemy" type="CharacterBody2D"]
-script = ExtResource("1_nw3o4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1.00024, -2)

@@ -31,8 +31,16 @@ var hud: playerHud
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	movement.SetPlayer(self)
+	anim.connect("animation_finished", Callable(self, "_on_AnimatedSprite_Anim_Finished"))
+	print("Connected animation_finished signal")
 	hud = $HUD
 	Instance = self
+	
+func _on_AnimatedSprite_Anim_Finished():
+	if anim.animation == "magic_projectile" or anim.animation == "proto_sword_attack":
+		print ("Stopping animation")
+		player_attacking = false
+	
 	
 func _equipWeapon():
 	PlayerInventory.Weapon.attackRegion = attackRegion
@@ -57,12 +65,21 @@ func _process(delta: float) -> void:
 		SceneManager.Player_dead() #transitions to the death screen
 	
 	if Input.is_action_just_pressed("PrimaryFire"):
-		anim.play("proto_sword_attack")
+		player_attacking = true
+		if (anim.animation!= "proto_sword_attack"):
+			anim.play("proto_sword_attack")
 		PlayerInventory.Weapon._primaryAttack()
+		
+		
 	
 	if Input.is_action_just_pressed("SecondaryFire"):
-		anim.play("proto_magic_projectile")
+		player_attacking = true
+		if (anim.animation!= "magic_projectile"):
+			anim.play("magic_projectile")
+		print("Playing projecile animation")
 		PlayerInventory.Weapon._secondaryAttack()
+		
+		
 	
 	if health <= 0:
 		SceneManager.Player_dead() #transitions to the death screen
@@ -175,4 +192,5 @@ func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Door"):
 		var room:DunRoom = area.get_parent() as DunRoom
 		room.TouchedDoor(area)
-	
+		
+		
