@@ -26,4 +26,3 @@ position = Vector2(1077, 317)
 
 [node name="FlyingEnemy" parent="." instance=ExtResource("4_4bsyh")]
 position = Vector2(1719, 251)
-script = null
