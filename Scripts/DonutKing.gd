@@ -18,6 +18,7 @@ const JUMP_VELOCITY = -400.0
 
 func _ready() -> void:
 	_animated_sprite.play("default")
+	
 
 func boss():
 	pass
