@@ -9,9 +9,16 @@ class_name DunRoom
 
 @export var activationArea:Area2D
 
+
+var MyCSharpScript
+var myNode
 func _ready() -> void:
+	MyCSharpScript = load("res://Dungeon/Dungen.cs")
+	myNode = MyCSharpScript.new()
 	activationArea.area_entered.connect(WalkedIn)
 
+func _process(delta: float) -> void:
+	openCondition()
 
 func TouchedDoor(area : Area2D):
 	var MyCSharpScript = load("res://Dungeon/Dungen.cs")
@@ -30,7 +37,9 @@ func TouchedDoor(area : Area2D):
 	myNode.ChangeDirection(dir, Player)
 
 func WalkedIn(area:Area2D):
-	var MyCSharpScript = load("res://Dungeon/Dungen.cs")
-	var myNode = MyCSharpScript.new()
 	if area.is_in_group("Player"):
 		myNode.WalkedIn()
+
+func openCondition():
+	if $Entities.get_children().size() == 0:
+		myNode.OpenRoomCondition()

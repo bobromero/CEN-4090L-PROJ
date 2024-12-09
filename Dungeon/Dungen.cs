@@ -393,13 +393,13 @@ public partial class Dungen : Node2D {
 			return;
 		} else {
 			changeRoomTimer = 0;
-			Room.Door.Direction direction = Room.Door.IntToDirection(value);
+			Door.Direction direction = Door.IntToDirection(value);
 
 			if (dungeon.RoomExists(direction)) {
 				dungeon.ChangeActiveRoom(direction);
 
 				//GD.Print("Touched " + Room.Door.IntToDirection(value) + " door, coming out the " + Room.Door.FlipDirection(direction));
-				player.Call("changePos", dungeon.ActiveRoom.doors[Room.Door.FlipDirection(direction)].position);
+				player.Call("changePos", dungeon.ActiveRoom.doors[Door.FlipDirection(direction)].position);
 			}
 			
 		}
@@ -411,6 +411,10 @@ public partial class Dungen : Node2D {
 			dungeon.ActiveRoom.visited = true;
 		}
 	}
+
+	public static void OpenRoomCondition() {
+        dungeon.ActiveRoom.UpdateDoors();
+    }
 	
 	public static double changeRoomTimer = 0;
 
@@ -432,9 +436,9 @@ public partial class Dungen : Node2D {
 		
 		changeRoomTimer += delta;
 		if (Input.IsActionJustPressed("PrimaryFire")) {
-			dungeon.ActiveRoom.UpdateDoors();
-            
-		}
+            dungeon.ActiveRoom.UpdateDoors();
+
+        }
 
 	}
 
