@@ -1,0 +1,131 @@
+[gd_scene load_steps=13 format=4 uid="uid://cwitcieuojxfv"]
+
+[ext_resource type="TileSet" uid="uid://dkt0y153fngne" path="res://Resources/Misc/Dungeon1Tileset.tres" id="1_126ov"]
+[ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="2_ghjoc"]
+[ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_xflwy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7edb"]
+size = Vector2(27, 8.99927)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aucsc"]
+size = Vector2(33, 16.3333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7tcjk"]
+size = Vector2(11, 24.6667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d620i"]
+size = Vector2(15, 31.6667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k36mv"]
+size = Vector2(8.66666, 26.9999)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_smn3i"]
+size = Vector2(16.3333, 32.3333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rpsw"]
+size = Vector2(29.3333, 9.33334)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nj228"]
+size = Vector2(33.834, 16.3327)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_la2bn"]
+size = Vector2(177.333, 81.8333)
+
+[node name="LootRoom0_tscn" type="TileMapLayer" node_paths=PackedStringArray("NorthDoor", "SouthDoor", "EastDoor", "WestDoor", "activationArea")]
+scale = Vector2(6, 6)
+tile_map_data = PackedByteArray("AAD//wAAAQACAAMAAAD/////AQADAAMAAAD///7/AQADAAMAAAAAAP7/AQACAAMAAAAAAP//AQACAAMAAAABAP//AQACAAMAAAABAAAAAQACAAMAAAAAAAAAAQACAAMAAAABAP7/AQADAAMAAAABAAEAAQACAAMAAAAAAAEAAQACAAMAAAD//wEAAQACAAMAAAD+/wAAAQACAAMAAAD+////AQADAAMAAAD+//7/AQACAAMAAAD+/wEAAQACAAMAAAD+//3/AQACAAMAAAD///3/AQACAAMAAAAAAP3/AQACAAMAAAABAP3/AQACAAMAAAACAP//AQACAAMAAAACAP7/AQACAAMAAAACAP3/AQADAAMAAAACAAAAAQACAAMAAAACAAEAAQACAAMAAAD9/wEAAQACAAMAAAD9/wAAAQACAAMAAAD9////AQACAAMAAAD9//7/AQACAAMAAAD9//3/AQACAAMAAAADAP//AQAEAAIAAAAEAP//AQABAAMAAAADAP7/AQAAAAEAAAAEAP7/AQACAAEAAAD8//7/AQACAAEAAAD7//7/AQAAAAEAAAD8////AQABAAMAAAD7////AQAEAAIAAAD8/wAAAQACAAMAAAD7/wAAAQACAAMAAAD6/wAAAQACAAMAAAD6////AQACAAMAAAD6//7/AQACAAMAAAD6//3/AQACAAMAAAD7//3/AQACAAMAAAD8//3/AQACAAMAAAADAP3/AQACAAMAAAAEAP3/AQACAAMAAAAFAP3/AQACAAMAAAAFAP7/AQACAAMAAAAFAP//AQACAAMAAAAFAAAAAQACAAMAAAAEAAAAAQACAAMAAAADAAAAAQACAAMAAAADAAEAAQACAAMAAAAEAAEAAQACAAMAAAD8/wEAAQACAAMAAAD7/wEAAQACAAMAAAD+/wIAAQACAAEAAAABAAIAAQAAAAEAAAAGAAAAAQABAAIAAAAGAP//AQAAAAEAAAAGAP7/AQACAAMAAAAGAP3/AQACAAMAAAD5/wAAAQADAAIAAAD5////AQACAAEAAAD5//7/AQACAAMAAAD5//3/AQACAAMAAAD5//z/AQABAAMAAAD6//z/AQACAAMAAAD6//v/AQACAAAAAAAFAPz/AQACAAMAAAD7//z/AQACAAMAAAD8//z/AQACAAMAAAD9//z/AQACAAMAAAD+//z/AQACAAMAAAD///z/AQACAAMAAAAAAPz/AQACAAMAAAABAPz/AQACAAMAAAACAPz/AQACAAMAAAADAPz/AQACAAMAAAAEAPz/AQACAAMAAAD9/wIAAQABAAEAAAD8/wIAAQABAAEAAAD7/wIAAQABAAEAAAACAAIAAQABAAEAAAADAAIAAQABAAEAAAAEAAIAAQABAAEAAAD6/wIAAQADAAEAAAD6/wEAAQACAAEAAAD5/wEAAQADAAEAAAD5/wIAAQACAAIAAAAGAAEAAQAAAAIAAAAFAAIAAQAAAAIAAAAFAAEAAQAAAAEAAAAGAPz/AQAEAAIAAAD5//v/AQABAAAAAAD7//v/AQACAAAAAAD8//v/AQACAAAAAAD9//v/AQACAAAAAAD+//v/AQABAAMAAAD///v/AQACAAMAAAAAAPv/AQACAAMAAAABAPv/AQAEAAIAAAACAPv/AQADAAAAAAADAPv/AQADAAAAAAAEAPv/AQADAAAAAAAFAPv/AQADAAAAAAAGAPv/AQAEAAAAAAD//wIAAQACAAMAAAAAAAIAAQACAAMAAAA=")
+tile_set = ExtResource("1_126ov")
+script = ExtResource("2_xflwy")
+NorthDoor = NodePath("Doors/NorthArea")
+SouthDoor = NodePath("Doors/SouthArea")
+EastDoor = NodePath("Doors/EastArea")
+WestDoor = NodePath("Doors/WestArea")
+activationArea = NodePath("Activators/Area2D")
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="NorthArea" type="Area2D" parent="Doors" groups=["Door"]]
+position = Vector2(-8.16667, 97.8333)
+
+[node name="NorthDoor" type="CollisionShape2D" parent="Doors/NorthArea"]
+position = Vector2(8, -170.667)
+shape = SubResource("RectangleShape2D_k7edb")
+
+[node name="Blocker" type="StaticBody2D" parent="Doors/NorthArea"]
+position = Vector2(8, -170.667)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/NorthArea/Blocker"]
+position = Vector2(-0.166667, 0.500374)
+shape = SubResource("RectangleShape2D_aucsc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/NorthArea/Blocker"]
+position = Vector2(-0.0833341, 0.250363)
+scale = Vector2(0.238281, 0.123698)
+texture = ExtResource("2_ghjoc")
+
+[node name="EastArea" type="Area2D" parent="Doors" groups=["Door"]]
+position = Vector2(47.6667, -73.5)
+
+[node name="EastDoor" type="CollisionShape2D" parent="Doors/EastArea"]
+position = Vector2(56, 40)
+shape = SubResource("RectangleShape2D_7tcjk")
+
+[node name="Blocker" type="StaticBody2D" parent="Doors/EastArea"]
+position = Vector2(56, 40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/EastArea/Blocker"]
+position = Vector2(0, 1.16666)
+shape = SubResource("RectangleShape2D_d620i")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/EastArea/Blocker"]
+position = Vector2(0.416671, 0.666666)
+scale = Vector2(0.11849, 0.252604)
+texture = ExtResource("2_ghjoc")
+
+[node name="WestArea" type="Area2D" parent="Doors" groups=["Door"]]
+position = Vector2(82, -73)
+
+[node name="WestDoor" type="CollisionShape2D" parent="Doors/WestArea"]
+position = Vector2(-186.5, 39.8333)
+shape = SubResource("RectangleShape2D_k36mv")
+
+[node name="Blocker" type="StaticBody2D" parent="Doors/WestArea"]
+position = Vector2(-186.5, 39.8333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/WestArea/Blocker"]
+shape = SubResource("RectangleShape2D_smn3i")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/WestArea/Blocker"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.121094, 0.25)
+texture = ExtResource("2_ghjoc")
+
+[node name="SouthArea" type="Area2D" parent="Doors" groups=["Door"]]
+position = Vector2(103.5, -70)
+
+[node name="SouthDoor" type="CollisionShape2D" parent="Doors/SouthArea"]
+position = Vector2(-103.667, 110.667)
+shape = SubResource("RectangleShape2D_8rpsw")
+
+[node name="Blocker" type="StaticBody2D" parent="Doors/SouthArea"]
+position = Vector2(-103.667, 110.333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/SouthArea/Blocker"]
+position = Vector2(0.416679, 0)
+shape = SubResource("RectangleShape2D_nj228")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/SouthArea/Blocker"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.246099, 0.127599)
+texture = ExtResource("2_ghjoc")
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Activators" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Activators"]
+position = Vector2(0, -21.3333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Activators/Area2D"]
+position = Vector2(0, 4.58333)
+shape = SubResource("RectangleShape2D_la2bn")
