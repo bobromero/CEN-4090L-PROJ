@@ -135,13 +135,13 @@ public partial class Dungen : Node2D {
 			{
                 foreach (var item in RoomTypeGraph)
                 {
-					GD.Print(item);
+					//GD.Print(item);
                 }
                 var badDirections = GetBadDirections(currentRoom, originalDirection);
 
 
 				//pick and assign room
-				GD.Print((isMain ? " Main Path " : " Side Path ") + currentRoom);
+				//GD.Print((isMain ? " Main Path " : " Side Path ") + currentRoom);
 				var randDirection = Door.GetRandomDirection(badDirections);
 
 				if (randDirection == Door.Direction.Missing) {
@@ -163,6 +163,7 @@ public partial class Dungen : Node2D {
 
 				if (isLoot) {
 					RoomTypeGraph.Add(roomPos, RoomType.Loot);
+					GD.Print("spawned loot");
 				} else {
 					RoomTypeGraph.Add(roomPos, RoomType.Common);
 				}
@@ -176,7 +177,7 @@ public partial class Dungen : Node2D {
 				}
 
 				currentRoom = roomPos;
-				GD.Print("current room: " + currentRoom + (isMain ? " Main Path" : " Side Path"));
+				//GD.Print("current room: " + currentRoom + (isMain ? " Main Path" : " Side Path"));
 			}
 
 
