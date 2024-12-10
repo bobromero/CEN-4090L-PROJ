@@ -2,85 +2,258 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
-using static Dungen;
 using static Dungen.Room;
 
 public partial class Dungen : Node2D {
 	
 	public class Dungeon {
-		public String[] StartPaths = new string[] {
-			"res://Prefabs/Rooms/room0.tscn",
-			"res://Prefabs/Rooms/room1.tscn"
-		};
-		public String[] CommonPaths = new string[] {
-			"res://Prefabs/Rooms/room0.tscn",
-			"res://Prefabs/Rooms/room1.tscn"
-		};
-		public String[] LootPaths = new string[] {
-			"res://Prefabs/Rooms/room0.tscn",
-			"res://Prefabs/Rooms/room1.tscn"
-		};
-		public String[] BossPaths = new string[] {
-			"res://Prefabs/Rooms/room0.tscn",
-			"res://Prefabs/Rooms/room1.tscn"
-		};
+		public String startRooms = "res://Prefabs/Rooms/StartRooms/";
 
-		Room StartRoom;
+		public String commonRooms = "res://Prefabs/Rooms/CommonRooms/";
+
+		public String lootRooms = "res://Prefabs/Rooms/LootRooms/";
+
+		public String bossRooms = "res://Prefabs/Rooms/BossRooms/";
+
+		public String GetRoomPath(Room.RoomType type) {
+
+			Random rand = new Random();
+
+
+			String path = "";
+
+			switch (type) {
+				case Room.RoomType.Common:
+					path = commonRooms;
+					break;
+				case Room.RoomType.Loot:
+					path = lootRooms;
+					break;
+				case Room.RoomType.Boss:
+					path = bossRooms;
+					break;
+				case Room.RoomType.Start:
+					path = startRooms;
+					break;
+				default:
+					break;
+			}
+			//GD.Print("spawning " + type.ToString());
+
+			var dir = DirAccess.Open(path);
+
+			var files = dir.GetFiles();
+			
+			path += files[rand.Next(files.Length)];
+			//GD.Print(dir.GetFiles().Length);
+
+			return path;
+		}
+
+		//Room StartRoom;
 		public Room ActiveRoom;
 
-		public int MaxDepth; // how long before force terminating a path
-		public bool hasBoss = false;
-		public Node HostNode;
+		private bool hasBoss = false;
+		private Node HostNode;
 
 		public Dictionary<Vector2I, Room> RoomGraph = new Dictionary<Vector2I, Room>();
+		public Dictionary<Vector2I, Room.RoomType> RoomTypeGraph = new Dictionary<Vector2I, Room.RoomType>();		
 		//public HashSet<Vector2I> visitedRooms = new HashSet<Vector2I>();
 
-		public Dungeon(Node host, int maxDepth) {
+		//public int MaxDepth; // how long before force terminating a path
+		public int MainPathLength;
+		public float SidePathChance;
+		public int SidePathLength;
+		public int SidePathLengthVariance;
+
+		public Dungeon(Node host, int mainLength, float sideChance, int sideLength, int sideVariance) {
 			HostNode = host;
-			MaxDepth = maxDepth;
+			MainPathLength = mainLength;
+			SidePathChance = sideChance;
+			SidePathLength = sideLength;
+			SidePathLengthVariance = sideVariance;
+		}
+
+		// possibly make it pick rooms first and place them into RoomGraph
+
+		public void DecideRooms() {
+			//create dungeon based on rules like start at 0,0 go in 1 direction
+			//to create a path to the boss and then randomly decide
+			//to create a new branch for extra loot rooms
+
+			RoomTypeGraph.Add(Vector2I.Zero, RoomType.Start);
+
+			//generate y rooms starting with a start room and having a mix of loot and common rooms and ending with a boss room
+			//for each available door in each room
+			//have a x% chance to spawn a side path (so the % chance * 2 per room is the number of side paths)
+			//the side path lasts between a certain range following a similar generation to the main path, only shorter and ending with a loot room
+			//may need a way to tell the player where the boss is, but maybe not
+
+			DecideMainPath();
+
+		}
+
+		private void DecideSidePaths(Vector2I currentRoom, Door.Direction dir) {
+			//random chance per good direction
+			Random rand = new Random();
+
+	//        while (badDirections.Count < 4)
+	//        {
+				
+				//if (rand.NextDouble() < SidePathChance) {
+				//	var plusMinus = rand.Next(2) == 0 ? 1 : -1;
+				//	var variance = rand.Next(SidePathLengthVariance) * plusMinus;
+				//	MakePath(currentRoom, SidePathLength + variance, dir);
+	//            }
+				
+	//        }
+
+			MakePath(currentRoom, SidePathLength, dir, false);
+
+		}
+
+		private List<Door.Direction> GetBadDirections(Vector2I currentRoom, Door.Direction originalDirection) {
+			var badDirections = new List<Door.Direction>() { originalDirection };
+
+			if (originalDirection == Door.Direction.Missing) {
+				badDirections.Remove(Door.Direction.Missing);
+			}
+
+			for (var j = 0; j < 4; j++) {
+				var direction = Door.IntToDirection(j);
+				var location = currentRoom + Door.DirectionToVector2I(direction);
+
+				if (RoomTypeGraph.ContainsKey(location) && direction != originalDirection) {
+					badDirections.Add(direction);
+				}
+			}
+			return badDirections;
+		}
+
+		private void MakePath(Vector2I currentRoom, int pathLength, Door.Direction originalDirection, bool isMain) {
+			for (int i = 0; i < pathLength; i++)
+			{
+                foreach (var item in RoomTypeGraph)
+                {
+					GD.Print(item);
+                }
+                var badDirections = GetBadDirections(currentRoom, originalDirection);
+
+
+				//pick and assign room
+				GD.Print((isMain ? " Main Path " : " Side Path ") + currentRoom);
+				var randDirection = Door.GetRandomDirection(badDirections);
+
+				if (randDirection == Door.Direction.Missing) {
+					currentRoom += Door.DirectionToVector2I(Door.FlipDirection(originalDirection));
+					continue;
+				}
+
+				Random rand = new Random();
+
+				var roomPos = currentRoom + Door.DirectionToVector2I(randDirection);
+
+				if (isMain && i == MainPathLength - 1) {
+					GD.Print("spawned boss");
+					RoomTypeGraph.Add(roomPos, RoomType.Boss);
+					return;
+				}
+
+				var isLoot = rand.Next(4) == 0;
+
+				if (isLoot) {
+					RoomTypeGraph.Add(roomPos, RoomType.Loot);
+				} else {
+					RoomTypeGraph.Add(roomPos, RoomType.Common);
+				}
+
+
+				//generate side paths
+				if (isMain) {
+					badDirections.Add(randDirection);
+
+					DecideSidePaths(currentRoom, Door.GetRandomDirection(badDirections));
+				}
+
+				currentRoom = roomPos;
+				GD.Print("current room: " + currentRoom + (isMain ? " Main Path" : " Side Path"));
+			}
+
+
+			//return badDirections;
+		}
+
+		private void DecideMainPath() {
+			var currentRoom = Vector2I.Zero;
+			var mainPathDirection = Door.GetRandomDirection();
+
+			MakePath(currentRoom, MainPathLength, Door.Direction.Missing, true);
+		}
+
+		public void FillInRooms() {
+			//iterate through room graph and make each room based on the type assigned
+
+			foreach (var room in RoomTypeGraph) {
+				Room newRoom = MakeRoom(room.Key, room.Value);
+
+				RoomGraph.Add(room.Key, newRoom);
+				newRoom.SetRoomActive(false);
+				newRoom.ToggleEntites(false);
+			}
+		}
+
+		private Room MakeRoom(Vector2I graphPos, RoomType type) {
+
+			var path = GetRoomPath(type);
+
+			RandomNumberGenerator rng = new RandomNumberGenerator();
+			var scene = (TileMapLayer)GD.Load<PackedScene>(path).Instantiate();
+			scene.Modulate = Color.Color8((byte)(rng.Randi() % 255), (byte)(rng.Randi() % 255), (byte)(rng.Randi() % 255));
+
+			HostNode.AddChild(scene);
+
+			return new Room(scene, graphPos);
 		}
 
 		public void CreateStartRoom() {
-            TileMapLayer Layer = (TileMapLayer)GD.Load<PackedScene>(StartPaths[0]).Instantiate();
-            HostNode.AddChild(Layer);
+			TileMapLayer Layer = (TileMapLayer)GD.Load<PackedScene>(GetRoomPath(RoomType.Start)).Instantiate();
+			HostNode.AddChild(Layer);
 
-            Room room = new Room(Layer, new Vector2I(0, 0));
-            ActiveRoom = room;
-            RoomGraph.Add(new Vector2I(0, 0), room);
-            room.visited = true;
+			Room room = new Room(Layer, new Vector2I(0, 0));
+			ActiveRoom = room;
+			RoomGraph.Add(new Vector2I(0, 0), room);
+			room.visited = true;
 
 			room.SetRoomActive(false);
-
-            dungeon.ActiveRoom.GenerateNeighbors(dungeon, dungeon.ActiveRoom.id, null, 0);
-        }
+		}
 
 		public bool RoomExists(Room.Door.Direction direction) {
 			return RoomGraph.ContainsKey(Room.Door.DirectionToVector2I(direction) + ActiveRoom.id);
 		}
 
 		public void ChangeActiveRoom(Room.Door.Direction direction) {
+			var coords = ActiveRoom.id + Room.Door.DirectionToVector2I(direction);
 
+			if (ActiveRoom == null) 
+				coords = new Vector2I(0,0);
+
+			ChangeActiveRoom(coords);
+
+		}
+		public void ChangeActiveRoom(Vector2I roomCoords) {
 			//disable all rooms
 
-			foreach (var room in RoomGraph)
-			{
+			foreach (var room in RoomGraph) {
 				room.Value.SetRoomActive(false);
 			}
 
 			//assign active room
 
-			if (ActiveRoom == null) {
-				ActiveRoom = RoomGraph[new Vector2I(0, 0)];
-			} else {
-				ActiveRoom = RoomGraph[ActiveRoom.id + Room.Door.DirectionToVector2I(direction)];
-
-			}
+			ActiveRoom = RoomGraph[roomCoords];
 
 			//enable correct room
 
 			ActiveRoom.SetRoomActive(true);
-
 		}
 	}
 
@@ -102,6 +275,31 @@ public partial class Dungen : Node2D {
 				Missing
 			}
 
+			public static Direction GetRandomDirection(List<Direction> toIgnore = null) {
+				List<Direction> directions = new List<Direction>() { Direction.North, Direction.South, Direction.East, Direction.West};
+
+				if (toIgnore != null) {
+					foreach (var direction in toIgnore) {
+						if (directions.Contains(direction)) {
+							directions.Remove(direction);
+						}
+					}
+				}
+
+				//GD.Print(directions.Count);
+
+				Random rand	= new Random();
+				
+				var size = directions.Count;
+				//GD.Print(directions.Count);
+
+				if (size == 0) {
+					return Direction.Missing;
+				}
+
+				return directions.ToArray()[rand.Next(size)];
+			}
+
 			public static Direction IntToDirection(int number) {
 				switch (number) {
 					case 0:
@@ -114,6 +312,22 @@ public partial class Dungen : Node2D {
 						return Direction.West;
 					default:
 						break;
+				}
+				return Direction.Missing;
+			}
+
+			public static Direction Vector2IToDirection(Vector2I input) {
+				if (input == new Vector2I(0,1)) {
+					return Direction.North;
+				} 
+				else if (input == new Vector2I(0,-1)) {
+					return Direction.South;
+				} 
+				else if (input == new Vector2I(1, 0)) {
+					return Direction.East;
+				} 
+				else if (input == new Vector2I(-1, 0)) {
+					return Direction.West;
 				}
 				return Direction.Missing;
 			}
@@ -184,7 +398,6 @@ public partial class Dungen : Node2D {
 		public Dictionary<Door.Direction, Door> doors;
 		public HashSet<Door.Direction> lockedDoors;
 
-		public Dictionary<Door.Direction, Vector2I> Neighbors;
 
 		public bool visited = false;
 
@@ -198,29 +411,29 @@ public partial class Dungen : Node2D {
 
 		public void SetRoomActive(bool value) {
 
-            // taverse and enable/disable each node for all children of the room.self node
-            foreach (Node2D child in Self.GetChildren())
-            {
+			// taverse and enable/disable each node for all children of the room.self node
+			foreach (Node2D child in Self.GetChildren())
+			{
 				if (child.Name == "Entities") {
 					continue;
 				}
 				UpdateAllChildren(child, value);
-            }
-            ProcessModeEnum procMode = (value ? ProcessModeEnum.Always : ProcessModeEnum.Disabled);
-            Self.Visible = value;
+			}
+			ProcessModeEnum procMode = (value ? ProcessModeEnum.Always : ProcessModeEnum.Disabled);
+			Self.Visible = value;
 			(Self as TileMapLayer).Enabled = value;
-            Self.ProcessMode = procMode;
-            Self.SetProcess(value);
+			Self.ProcessMode = procMode;
+			Self.SetProcess(value);
 
 			UnLockRoom();
-        }
+		}
 
 		private void UpdateAllChildren(Node2D node, bool value) {
 			foreach (Node2D child in node.GetChildren()) {
 				UpdateAllChildren(child, value);
 			}
-            ProcessModeEnum procMode = (value ? ProcessModeEnum.Always : ProcessModeEnum.Disabled);
-            node.Visible = value;
+			ProcessModeEnum procMode = (value ? ProcessModeEnum.Always : ProcessModeEnum.Disabled);
+			node.Visible = value;
 			node.ProcessMode = procMode;
 			node.SetProcess(value);
 		}
@@ -228,21 +441,24 @@ public partial class Dungen : Node2D {
 		public Room(Node2D self, Vector2I pos) {
 			Self = self;
 			id = pos;
-			Neighbors = new Dictionary<Door.Direction, Vector2I>();
 			doors = GetDoors(self);
 			lockedDoors = new HashSet<Door.Direction>();
 		}
 
+		public void ToggleEntites(bool value) {
+			(Self.FindChild("Entities") as Node2D).Visible = value;
+		}
+
 		public void LockDoors() {
-            foreach (var door in doors)
-            {
-                door.Value.IsBlocked = true;
-            }
-        }
+			foreach (var door in doors)
+			{
+				door.Value.IsBlocked = true;
+			}
+		}
 
 		public void UpdateDoors() {
 			UnLockRoom();
-            foreach (var door in doors) {
+			foreach (var door in doors) {
 
 				Vector2I Neighbor = id + Door.DirectionToVector2I(door.Key);
 
@@ -250,12 +466,12 @@ public partial class Dungen : Node2D {
 					lockedDoors.Add(door.Key);
 				}
 
-                door.Value.IsBlocked = lockedDoors.Contains(door.Key);
+				door.Value.IsBlocked = lockedDoors.Contains(door.Key);
 				
 			}
 		}
 
-		public Dictionary<Door.Direction, Door> GetDoors(Node Scene) {
+		private Dictionary<Door.Direction, Door> GetDoors(Node Scene) {
 			Node[] input = Scene.FindChild("Doors").GetChildren(true).ToArray(); // all of the areas only
 
 			Dictionary<Door.Direction, Door> result = new Dictionary<Door.Direction, Door>();
@@ -293,92 +509,15 @@ public partial class Dungen : Node2D {
 			}
 			return result;
 		}
+
+		//public void GetNeighbors() {
+		//	foreach (var door in doors) {
+		//		var dir = Door.DirectionToVector2I
+		//		Neighbors.Add();
+		//	}
+		//	dungeon.RoomGraph
+		//}
 		
-		public void GenerateNeighbors(Dungeon d, Vector2I ParentRoom, Door connectedDoor, int depth) {
-			if (connectedDoor == null) { 
-				connectedDoor = new Door(Door.Direction.Missing, new Vector2(0,0), null,null);
-			}
-			var ParentDir = Door.FlipDirection(connectedDoor.direction);
-
-			Neighbors[ParentDir] = ParentRoom;
-
-			if (depth >= d.MaxDepth) {
-				
-				return;
-			}
-
-			for (int i = 0; i < doors.Count(); i++) {
-				Door workingNeighbor = doors[Door.IntToDirection(i)];
-
-				if (ParentDir == workingNeighbor.direction) {
-					//GD.Print("skipping " + workingNeighbor + " from " + ParentRoom.id);
-					continue;
-				}
-
-				var newPos = id + Door.DirectionToVector2I(workingNeighbor.direction);
-
-				if (!d.RoomGraph.ContainsKey(newPos)) {
-					//GD.Print("spawning " + workingNeighbor + " from " + ParentRoom.id);
-
-					Room room = MakeRoom(d, newPos, depth);
-					Neighbors[workingNeighbor.direction] = room.id;
-					d.RoomGraph.Add(newPos, room);
-
-					room.SetRoomActive(false);
-					room.GenerateNeighbors(d, room.id, workingNeighbor, depth + 1);
-				} else {
-					//GD.Print("skipping " + workingNeighbor + " from " + ParentRoom.id + " room already exists");
-					//Door.Direction flippedDir = Door.FlipDirection(workingNeighbor.direction);
-					//d.RoomGraph[newPos].doors[flippedDir].IsBlocked = false;
-				}
-
-			}
-		}
-
-
-		private Room MakeRoom(Dungeon d, Vector2I graphPos, int depth) {
-			RoomType type;
-
-			if (depth >= d.MaxDepth - 1) {
-				if (d.hasBoss) {
-					type = RoomType.Loot;
-					//add ending common loot room
-				} else {
-					type = RoomType.Boss;
-					d.hasBoss = true;
-				}
-			} else {
-				type = RoomType.Common;
-			}
-
-			String path = "";
-
-			Random rand = new Random();
-			switch (type) {
-				case RoomType.Common:
-					path = d.CommonPaths[rand.Next(0, d.CommonPaths.Count())];
-					//GD.Print("Spawning Common");
-					break;
-				case RoomType.Loot:
-					path = d.LootPaths[rand.Next(0, d.LootPaths.Count())];
-					//GD.Print("Spawning Loot");
-					break;
-				case RoomType.Boss:
-					path = d.BossPaths[rand.Next(0, d.BossPaths.Count())];
-					//GD.Print("Spawning Boss");
-					break;
-				default:
-					break;
-			}
-
-			RandomNumberGenerator rng = new RandomNumberGenerator();
-			var scene = (TileMapLayer)GD.Load<PackedScene>(path).Instantiate();
-			scene.Modulate = Color.Color8((byte)(rng.Randi()%255), (byte)(rng.Randi() % 255), (byte)(rng.Randi() % 255));
-			
-			d.HostNode.AddChild(scene);
-
-			return new Room(scene, graphPos);
-		}
 	}
 
 
@@ -393,13 +532,13 @@ public partial class Dungen : Node2D {
 			return;
 		} else {
 			changeRoomTimer = 0;
-			Door.Direction direction = Door.IntToDirection(value);
+			Room.Door.Direction direction = Room.Door.IntToDirection(value);
 
 			if (dungeon.RoomExists(direction)) {
 				dungeon.ChangeActiveRoom(direction);
 
 				//GD.Print("Touched " + Room.Door.IntToDirection(value) + " door, coming out the " + Room.Door.FlipDirection(direction));
-				player.Call("changePos", dungeon.ActiveRoom.doors[Door.FlipDirection(direction)].position);
+				player.Call("changePos", dungeon.ActiveRoom.doors[Room.Door.FlipDirection(direction)].position);
 			}
 			
 		}
@@ -408,13 +547,14 @@ public partial class Dungen : Node2D {
 	public static void WalkedIn() {
 		if (!dungeon.ActiveRoom.visited) {
 			dungeon.ActiveRoom.LockDoors();
+			dungeon.ActiveRoom.ToggleEntites(true);
 			dungeon.ActiveRoom.visited = true;
 		}
 	}
 
 	public static void OpenRoomCondition() {
-        dungeon.ActiveRoom.UpdateDoors();
-    }
+		dungeon.ActiveRoom.UpdateDoors();
+	}
 	
 	public static double changeRoomTimer = 0;
 
@@ -422,23 +562,24 @@ public partial class Dungen : Node2D {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		if (dungeon == null) {
-			dungeon = new Dungeon(this, 2);
-			dungeon.CreateStartRoom();
+			dungeon = new Dungeon(this, 8, .0f, 3, 1);
+			dungeon.DecideRooms();
+			dungeon.FillInRooms();
 
-			dungeon.ChangeActiveRoom(Door.Direction.Missing);
+			dungeon.ChangeActiveRoom(new Vector2I(0,0));
 
 			dungeon.ActiveRoom.UpdateDoors();
-        }
-    }
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
+		}
+	}
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		
 		changeRoomTimer += delta;
 		if (Input.IsActionJustPressed("PrimaryFire")) {
-            dungeon.ActiveRoom.UpdateDoors();
+			dungeon.ActiveRoom.UpdateDoors();
 
-        }
+		}
 
 	}
 
