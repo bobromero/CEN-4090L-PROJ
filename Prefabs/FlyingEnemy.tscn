@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://dai362ag542pf"]
+
+[ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_wmwfw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qkpfd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wmwfw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c5f08"]
+size = Vector2(705.25, 624.578)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5t23"]
+size = Vector2(127, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bkere"]
+size = Vector2(129.25, 132)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rm4fs"]
+bg_color = Color(0.0628203, 0.375253, 0.0866703, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pl5o7"]
+bg_color = Color(0.172503, 0.469877, 0.109916, 1)
+
+[node name="FlyingEnemy" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.00024, -2)
+rotation = 1.5708
+sprite_frames = SubResource("SpriteFrames_qkpfd")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_c5f08")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.50024, -2)
+shape = SubResource("RectangleShape2D_o5t23")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0.000244141, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1.375, -1)
+shape = SubResource("RectangleShape2D_bkere")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -55.9998
+offset_top = -125.0
+offset_right = 60.0002
+offset_bottom = -98.0
+theme_override_styles/background = SubResource("StyleBoxFlat_rm4fs")
+theme_override_styles/fill = SubResource("StyleBoxFlat_pl5o7")
+show_percentage = false
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

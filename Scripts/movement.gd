@@ -35,20 +35,41 @@ func _physics_process(delta: float) -> void:
 
 
 func _topDownMovement():
+	if player.player_attacking:
+		return
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_vector("left", "right", "up", "down")
 	if direction:
 		player.velocity = direction * SPEED
+		
+		if direction.x > 0:
+			anim.flip_h = false
+			anim.play("Run")
+		elif direction.x < 0:
+			anim.flip_h = true
+			anim.play("Run")
+		elif direction.y > 0:
+			anim.play("Run_down")
+		elif direction.y < 0:
+			anim.play("Run_up")
+		
 		if Input.is_action_pressed("Sprint"):
 			player.velocity *= _sprint_multiplier
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, SPEED)
 		player.velocity.y = move_toward(player.velocity.y, 0, SPEED)
-		anim.play("idle")
+		if (player.player_attacking == false):
+			anim.play("idle")
 		
 		
 	player.move_and_slide()
+	
+#func _on_AnimatedSprite_Anim_Finished():
+#	if anim.animation == "magic_projectile" or anim.animation == "proto_sword_attack":
+#		print ("Stopping animation")
+#		player.player_attacking = false
+#		anim.play("idle")
 
 
 func _platformerMovement(delta: float):

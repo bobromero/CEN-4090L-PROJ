@@ -14,20 +14,28 @@ size = Vector2(250, 100)
 position = Vector2(7, 160)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 3
 position = Vector2(725, 217)
 shape = SubResource("RectangleShape2D_vpxta")
 debug_color = Color(0.122636, 0.583894, 0.759973, 0.42)
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+light_mask = 3
+visibility_layer = 3
 position = Vector2(728, 221)
 scale = Vector2(6.932, 1.05)
 mesh = SubResource("QuadMesh_c2ckj")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_xwkma")]
 position = Vector2(209, 98)
+collision_layer = 1
+collision_mask = 1
+health = 20.0
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("2_y50gh")]
-position = Vector2(1080, 93)
+position = Vector2(1050, 95)
+collision_layer = 3
+collision_mask = 3
 
 [node name="Sprite2D" parent="." instance=ExtResource("3_rabgm")]
 position = Vector2(661, 125)
