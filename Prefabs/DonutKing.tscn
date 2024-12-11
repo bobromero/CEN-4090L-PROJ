@@ -1,27 +1,53 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcf2ml1qumvqj"]
+[gd_scene load_steps=16 format=3 uid="uid://dcf2ml1qumvqj"]
 
 [ext_resource type="Script" path="res://Scripts/DonutKing.gd" id="1_mm1bl"]
 [ext_resource type="Texture2D" uid="uid://d4gqmvo0pqa0i" path="res://Resources/Misc/animation/sprite_sheet.png" id="1_ykx6y"]
+[ext_resource type="Texture2D" uid="uid://cgyq1okxcnno2" path="res://Resources/Misc/animation/sprite_sheet_flash.png" id="2_j5fro"]
 [ext_resource type="Script" path="res://Scripts/kingcanon.gd" id="3_s8fkj"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y3j1f"]
-atlas = ExtResource("1_ykx6y")
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqmll"]
+atlas = ExtResource("2_j5fro")
 region = Rect2(0, 0, 500, 411)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4x1el"]
 atlas = ExtResource("1_ykx6y")
 region = Rect2(500, 0, 500, 411)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sju4c"]
-atlas = ExtResource("1_ykx6y")
+[sub_resource type="AtlasTexture" id="AtlasTexture_uq6c7"]
+atlas = ExtResource("2_j5fro")
 region = Rect2(0, 411, 500, 411)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xii1i"]
 atlas = ExtResource("1_ykx6y")
 region = Rect2(500, 411, 500, 411)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_y3j1f"]
+atlas = ExtResource("1_ykx6y")
+region = Rect2(0, 0, 500, 411)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sju4c"]
+atlas = ExtResource("1_ykx6y")
+region = Rect2(0, 411, 500, 411)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_3gsdi"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqmll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4x1el")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uq6c7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xii1i")
+}],
+"loop": true,
+"name": &"Flash",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y3j1f")
@@ -59,7 +85,8 @@ script = ExtResource("1_mm1bl")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(14, -1)
 sprite_frames = SubResource("SpriteFrames_3gsdi")
-frame_progress = 0.152823
+animation = &"Flash"
+frame_progress = 0.146987
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
 shape = SubResource("CircleShape2D_0l6aa")
@@ -78,6 +105,7 @@ offset_right = 68.0
 offset_bottom = -215.0
 theme_override_styles/background = SubResource("StyleBoxFlat_bxnwv")
 theme_override_styles/fill = SubResource("StyleBoxFlat_wtao5")
+max_value = 500.0
 show_percentage = false
 
 [node name="DamageCooldown" type="Timer" parent="."]
