@@ -559,7 +559,7 @@ public partial class Dungen : Node2D {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		if (dungeon == null) {
-			dungeon = new Dungeon(this, 8, .1f, 3, 1);
+			dungeon = new Dungeon(this, 8, .1f, 4, 1);
 			dungeon.DecideRooms();
 			dungeon.FillInRooms();
 

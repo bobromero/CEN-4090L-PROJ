@@ -4,7 +4,7 @@ class_name Enemy
 
 
 @export var speed = 150    # Higher speed = slower enemy and vice versa
-@export var health = 100
+@export var health = 200
 @export var knockback_strength = 500
 @export var knockback_duration = 0.2
 @export var knockback_enabled = false
@@ -37,7 +37,7 @@ func UpdateHealth():
 	var healthBar = $HealthBar
 	healthBar.value = health
 
-	if health >= 100:
+	if health >= 200:
 		healthBar.visible = false
 	else:
 		healthBar.visible = true
