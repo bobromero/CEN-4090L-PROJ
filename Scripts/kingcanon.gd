@@ -12,7 +12,7 @@ var superMode = false # flag to control the mode
 func _ready() -> void:
 	pass # Replace with function body.
 
-func _process(delta: float) -> void:	#each second it shoots 8 donuts, with the directions rotating 
+func _process(_delta: float) -> void:	#each second it shoots 8 donuts, with the directions rotating 
 	var direction = Vector2.ZERO
 	
 	print(str(King.health))

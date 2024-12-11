@@ -21,6 +21,7 @@ func enemy():
 
 func _physics_process(delta: float) -> void:
 	if knockback_enabled:
+		print("knockback")
 		apply_knockback(delta)
 	elif player_chase:
 		velocity = (player.position - position).normalized() * speed
@@ -76,7 +77,7 @@ func apply_knockback(delta: float) -> void:
 		print("Knockbacked")
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	print("hitbox body entered")
+	#print("hitbox body entered")
 	if body.has_method("player"):
 		player_in_attack_range = true
 

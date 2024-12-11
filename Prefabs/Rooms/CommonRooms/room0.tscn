@@ -1,0 +1,134 @@
+[gd_scene load_steps=14 format=4 uid="uid://tls85rak0606"]
+
+[ext_resource type="TileSet" uid="uid://dkt0y153fngne" path="res://Resources/Misc/Dungeon1Tileset.tres" id="1_qtems"]
+[ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_k5fgo"]
+[ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="3_bph7d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lgrf"]
+size = Vector2(38.3333, 13.9993)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5xxwp"]
+size = Vector2(46.6667, 23.3333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_45w2d"]
+size = Vector2(8.33334, 66.6667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8knn"]
+size = Vector2(14.6667, 77.6667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u4kgy"]
+size = Vector2(8.33334, 70.3333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njli0"]
+size = Vector2(15.6667, 76.3333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4kxj"]
+size = Vector2(64.666, 8.99933)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_137v6"]
+size = Vector2(79.5, 16.666)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iicpt"]
+size = Vector2(209.667, 99.6667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4cq7p"]
+size = Vector2(68.6667, 132.667)
+
+[node name="TileMapLayer" type="TileMapLayer" node_paths=PackedStringArray("NorthDoor", "SouthDoor", "EastDoor", "WestDoor", "activationArea")]
+scale = Vector2(6, 6)
+tile_map_data = PackedByteArray("AAABAPz/AQACAAEAAAACAPz/AQACAAMAAAACAP3/AQACAAMAAAACAP7/AQACAAMAAAABAP3/AQABAAMAAAABAP7/AQACAAMAAAAAAPz/AQABAAEAAAAAAP3/AQAAAAMAAAD///3/AQAEAAIAAAAAAP7/AQACAAMAAAD///z/AQAAAAEAAAD///7/AQACAAMAAAD9////AQACAAMAAAD9/wAAAQACAAMAAAD9/wEAAQABAAEAAAD9/wIAAQAEAAAAAAD8////AQACAAMAAAD7////AQACAAMAAAD6////AQACAAMAAAD6/wAAAQACAAMAAAD6/wEAAQABAAEAAAD6/wIAAQABAAAAAAD7/wIAAQACAAAAAAD7/wEAAQABAAEAAAD7/wAAAQACAAMAAAD8/wAAAQACAAMAAAD8/wEAAQABAAEAAAD8/wIAAQADAAAAAAD+////AQACAAMAAAD+/wAAAQACAAMAAAD+/wEAAQACAAEAAAD+/wIAAQADAAIAAAD//wIAAQACAAMAAAD//wEAAQACAAMAAAD//wAAAQACAAMAAAAAAAAAAQACAAMAAAAAAP//AQACAAMAAAD/////AQADAAMAAAAAAAEAAQACAAMAAAAAAAIAAQACAAMAAAABAAAAAQACAAMAAAABAP//AQACAAMAAAABAAEAAQACAAMAAAABAAIAAQACAAMAAAACAP//AQACAAMAAAACAAAAAQACAAMAAAACAAEAAQACAAMAAAACAAIAAQACAAMAAAAAAPv/AQACAAMAAAD///v/AQACAAMAAAABAPv/AQACAAMAAAACAPv/AQACAAMAAAABAPr/AQACAAMAAAACAPr/AQACAAMAAAABAPn/AQADAAMAAAACAPn/AQADAAMAAAABAPj/AQACAAMAAAACAPj/AQACAAMAAAABAPf/AQACAAMAAAACAPf/AQACAAMAAAABAPb/AQACAAMAAAACAPb/AQACAAMAAAD///b/AQACAAMAAAAAAPb/AQACAAMAAAD///f/AQACAAMAAAAAAPf/AQACAAMAAAD///j/AQACAAMAAAAAAPj/AQACAAMAAAD///n/AQACAAMAAAAAAPn/AQACAAMAAAD///r/AQACAAMAAAAAAPr/AQACAAMAAAADAP//AQABAAIAAAADAP7/AQABAAIAAAADAP3/AQABAAIAAAADAPz/AQABAAIAAAADAPv/AQABAAIAAAADAPr/AQABAAIAAAADAPn/AQABAAIAAAADAPj/AQABAAIAAAADAPf/AQABAAIAAAADAPb/AQABAAIAAAADAPX/AQAEAAAAAAACAPX/AQAEAAIAAAABAPX/AQACAAMAAAAAAPX/AQACAAMAAAD///X/AQACAAMAAAD+//X/AQABAAMAAAD+//b/AQACAAMAAAD+//f/AQADAAMAAAD+//j/AQACAAMAAAD+//n/AQACAAMAAAD+//r/AQACAAMAAAD+//v/AQACAAMAAAD+//z/AQACAAMAAAD+//3/AQACAAMAAAD+//7/AQACAAMAAAD9//7/AQABAAMAAAD8//7/AQAAAAMAAAD7//7/AQAAAAMAAAD6//7/AQAAAAMAAAD5//7/AQAAAAMAAAD5////AQACAAMAAAD5/wAAAQACAAMAAAD5/wEAAQAAAAEAAAD5/wIAAQABAAIAAAD5/wMAAQABAAIAAAD6/wMAAQADAAEAAAD7/wMAAQABAAEAAAD8/wMAAQABAAEAAAD9/wMAAQAAAAIAAAD+/wMAAQADAAIAAAD//wMAAQACAAMAAAAAAAMAAQACAAMAAAABAAMAAQACAAMAAAACAAMAAQACAAMAAAD5/wYAAQACAAMAAAD6/wYAAQACAAMAAAD7/wYAAQAAAAEAAAD8/wYAAQABAAEAAAD9/wYAAQABAAEAAAD+/wYAAQABAAEAAAD//wYAAQABAAEAAAAAAAYAAQABAAEAAAABAAYAAQABAAEAAAACAAYAAQABAAEAAAADAAYAAQAAAAIAAAD4/wYAAQACAAEAAAD3/wYAAQABAAEAAAD2/wYAAQABAAEAAAD1/wYAAQABAAEAAAD0/wYAAQADAAEAAAADAAUAAQABAAIAAAD4//7/AQAAAAMAAAD3//7/AQAAAAMAAAD2//7/AQAAAAMAAAD1//7/AQACAAAAAAD0//7/AQABAAAAAAD0////AQADAAIAAAD0/wAAAQADAAIAAAD0/wEAAQABAAMAAAD0/wIAAQACAAMAAAD0/wMAAQACAAMAAAD0/wQAAQACAAEAAAD0/wUAAQADAAIAAAD1////AQACAAMAAAD2////AQACAAMAAAD3////AQACAAMAAAD4////AQACAAMAAAD4/wAAAQACAAMAAAD3/wAAAQACAAMAAAD2/wAAAQACAAMAAAD1/wAAAQACAAMAAAD1/wEAAQACAAMAAAD2/wEAAQACAAMAAAD3/wEAAQACAAMAAAD4/wEAAQACAAMAAAD4/wIAAQACAAMAAAD3/wIAAQACAAMAAAD2/wIAAQACAAMAAAD1/wIAAQACAAMAAAD1/wMAAQACAAMAAAD1/wQAAQACAAMAAAD1/wUAAQACAAMAAAD2/wUAAQACAAMAAAD3/wUAAQACAAMAAAD4/wUAAQACAAMAAAD5/wUAAQACAAMAAAD6/wUAAQACAAMAAAD7/wUAAQACAAMAAAD8/wUAAQACAAMAAAD9/wUAAQACAAMAAAD+/wUAAQACAAMAAAD//wUAAQACAAMAAAAAAAUAAQACAAMAAAABAAUAAQADAAMAAAACAAUAAQACAAMAAAACAAQAAQACAAMAAAABAAQAAQACAAMAAAAAAAQAAQACAAMAAAD//wQAAQACAAMAAAD+/wQAAQABAAMAAAD9/wQAAQABAAMAAAD8/wQAAQAAAAMAAAD7/wQAAQAAAAMAAAD6/wQAAQAAAAMAAAD5/wQAAQAEAAIAAAD4/wQAAQACAAMAAAD3/wQAAQACAAMAAAD2/wQAAQACAAMAAAD2/wMAAQACAAMAAAD3/wMAAQACAAMAAAD4/wMAAQACAAMAAAD9//3/AQADAAIAAAD9//z/AQADAAIAAAD9//v/AQADAAIAAAD9//r/AQADAAIAAAD9//n/AQADAAIAAAD9//j/AQADAAIAAAD9//f/AQADAAIAAAD9//b/AQADAAIAAAD9//X/AQABAAAAAAADAAAAAQAEAAIAAAADAAEAAQACAAMAAAADAAIAAQACAAMAAAADAAMAAQAAAAEAAAADAAQAAQABAAIAAAD0//3/AQACAAIAAAD1//3/AQACAAIAAAD2//3/AQACAAIAAAD3//3/AQACAAIAAAD4//3/AQACAAIAAAD5//3/AQACAAIAAAD6//3/AQACAAIAAAD7//3/AQACAAIAAAD8//3/AQACAAIAAAD+//T/AQACAAEAAAACAPT/AQAAAAEAAAD8//T/AQAAAAEAAAAEAPT/AQACAAEAAAADAPT/AQABAAEAAAD9//T/AQABAAEAAAD8//X/AQABAAIAAAD8//b/AQABAAIAAAD8//f/AQABAAIAAAD8//j/AQABAAIAAAD8//n/AQABAAIAAAD8//r/AQABAAIAAAD8//v/AQABAAIAAAD8//z/AQAAAAIAAAD7//z/AQABAAEAAAD6//z/AQABAAEAAAD5//z/AQABAAEAAAD4//z/AQABAAEAAAD3//z/AQABAAEAAAD2//z/AQABAAEAAAD1//z/AQABAAEAAAD0//z/AQABAAEAAADz//z/AQAAAAEAAADz//3/AQABAAIAAADz//7/AQABAAIAAADz////AQABAAIAAADz/wAAAQABAAIAAADz/wEAAQAEAAIAAAAEAAAAAQABAAMAAAAEAPX/AQADAAIAAAAEAPb/AQADAAIAAAAEAPf/AQADAAIAAAAEAPj/AQADAAIAAAAEAPn/AQADAAIAAAAEAPr/AQADAAIAAAAEAPv/AQADAAIAAAAEAPz/AQADAAIAAAAEAP3/AQADAAIAAAAEAP7/AQADAAIAAAAEAP//AQADAAIAAAAEAAMAAQACAAEAAAAEAAQAAQADAAIAAAAEAAUAAQADAAIAAAAEAAYAAQADAAIAAAAEAAcAAQABAAMAAAADAAcAAQAAAAMAAAACAAcAAQAAAAMAAAABAAcAAQAAAAMAAAAAAAcAAQAAAAMAAAD//wcAAQAAAAMAAAD+/wcAAQAAAAMAAAD9/wcAAQAAAAMAAAD8/wcAAQAAAAMAAAD7/wcAAQAEAAIAAAD4/wcAAQABAAMAAAD3/wcAAQAAAAMAAAD2/wcAAQAAAAMAAAD1/wcAAQAAAAMAAAD0/wcAAQAAAAMAAADz/wcAAQAEAAIAAADz/wYAAQABAAIAAADz/wUAAQABAAIAAADz/wQAAQAAAAEAAAA=")
+tile_set = ExtResource("1_qtems")
+script = ExtResource("2_k5fgo")
+NorthDoor = NodePath("Doors/NorthArea")
+SouthDoor = NodePath("Doors/SouthArea")
+EastDoor = NodePath("Doors/EastArea")
+WestDoor = NodePath("Doors/WestArea")
+activationArea = NodePath("Activators/Activator1")
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="NorthArea" type="Area2D" parent="Doors" groups=["Door"]]
+
+[node name="NorthDoor" type="CollisionShape2D" parent="Doors/NorthArea"]
+position = Vector2(8, -170.667)
+shape = SubResource("RectangleShape2D_8lgrf")
+
+[node name="Blocker" type="StaticBody2D" parent="Doors/NorthArea"]
+position = Vector2(8, -170.667)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/NorthArea/Blocker"]
+position = Vector2(-0.166667, -0.166306)
+shape = SubResource("RectangleShape2D_5xxwp")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/NorthArea/Blocker"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.363281, 0.175)
+texture = ExtResource("3_bph7d")
+
+[node name="EastArea" type="Area2D" parent="Doors" groups=["Door"]]
+
+[node name="EastDoor" type="CollisionShape2D" parent="Doors/EastArea"]
+position = Vector2(56, 40)
+shape = SubResource("RectangleShape2D_45w2d")
+
+[node name="Blocker" type="StaticBody2D" parent="Doors/EastArea"]
+position = Vector2(56, 40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/EastArea/Blocker"]
+shape = SubResource("RectangleShape2D_v8knn")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/EastArea/Blocker"]
+position = Vector2(-0.0833341, -7.25)
+scale = Vector2(0.110677, 0.235677)
+texture = ExtResource("3_bph7d")
+
+[node name="WestArea" type="Area2D" parent="Doors" groups=["Door"]]
+position = Vector2(1.83333, 6.5)
+
+[node name="WestDoor" type="CollisionShape2D" parent="Doors/WestArea"]
+position = Vector2(-186.5, 39.8333)
+shape = SubResource("RectangleShape2D_u4kgy")
+
+[node name="Blocker" type="StaticBody2D" parent="Doors/WestArea"]
+position = Vector2(-186.5, 39.8333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/WestArea/Blocker"]
+shape = SubResource("RectangleShape2D_njli0")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/WestArea/Blocker"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.105469, 0.252604)
+texture = ExtResource("3_bph7d")
+
+[node name="SouthArea" type="Area2D" parent="Doors" groups=["Door"]]
+position = Vector2(8.33333, -5.16667)
+
+[node name="SouthDoor" type="CollisionShape2D" parent="Doors/SouthArea"]
+position = Vector2(-103.667, 110.667)
+shape = SubResource("RectangleShape2D_g4kxj")
+
+[node name="Blocker" type="StaticBody2D" parent="Doors/SouthArea"]
+position = Vector2(-103.667, 110.333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/SouthArea/Blocker"]
+position = Vector2(0.416679, 0)
+shape = SubResource("RectangleShape2D_137v6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/SouthArea/Blocker"]
+position = Vector2(-0.0833341, 0)
+scale = Vector2(0.266933, 0.127599)
+texture = ExtResource("3_bph7d")
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Activators" type="Node2D" parent="."]
+
+[node name="Activator1" type="Area2D" parent="Activators"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Activators/Activator1"]
+position = Vector2(-61.8333, 40.3333)
+shape = SubResource("RectangleShape2D_iicpt")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Activators/Activator1"]
+position = Vector2(7.66667, -80.5)
+shape = SubResource("RectangleShape2D_4cq7p")

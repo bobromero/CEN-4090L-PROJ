@@ -14,7 +14,7 @@ var knockback_time = 0.0
 var enemies_in_damage_range: Array = []
 
 @onready var anim = $AnimatedSprite2D
-@onready var attack_cooldown_timer = $AttackCooldown
+#@onready var attack_cooldown_timer = $AttackCooldown
 
 @export var movement: movement = preload("res://Resources/PlayerResources/PlayerMovement.tres")
 @export var PlayerInventory: Inventory = preload("res://Resources/PlayerResources/BaseInventory.tres")
@@ -190,7 +190,7 @@ static func changePos(newPos:Vector2):
 
 func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Door"):
-		var room:DunRoom = area.get_parent() as DunRoom
+		var room:DunRoom = area.get_parent().get_parent() as DunRoom
 		room.TouchedDoor(area)
 		
 		
