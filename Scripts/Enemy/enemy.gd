@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+class_name Enemy
+
+
 @export var speed = 150    # Higher speed = slower enemy and vice versa
 @export var health = 100
 @export var knockback_strength = 500
@@ -7,24 +10,23 @@ extends CharacterBody2D
 @export var knockback_enabled = false
 @export var knockback_timer = 1.0 
 
+@onready var coin = preload("res://Prefabs/Coin.tscn")
+
 var player_in_attack_range = false
 var player_chase = false
-var player = null
+var player : CharacterBody2D = null
 var knockback_velocity = Vector2.ZERO
 var player_cooldown = true
 
 func _ready() -> void:
-	add_to_group("Enemy")
-
-func enemy():
 	pass
 
 func _physics_process(delta: float) -> void:
 	if knockback_enabled:
-		print("knockback")
+		#print("knockback")
 		apply_knockback(delta)
 	elif player_chase:
-		velocity = (player.position - position).normalized() * speed
+		velocity = (player.global_position - global_position).normalized() * speed
 	else:
 		velocity = Vector2.ZERO
 	
@@ -39,15 +41,17 @@ func UpdateHealth():
 		healthBar.visible = false
 	else:
 		healthBar.visible = true
-
-func deal_damage():
-	if player_in_attack_range and Global.player_current_attack == true:
-		health = health - 20
-		health -= 20
-		print("enemy health = ", health)
-		if health <= 0:
-			Global.playerScore +=100
+		
+	if health <= 0:
+			SpawnCoin()			
 			self.queue_free()
+			
+func SpawnCoin():
+	var instance :Node2D = coin.instantiate()
+	instance.global_position = global_position;
+	instance.scale = Vector2(.25,.25)
+	get_tree().current_scene.add_child(instance)
+
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.has_method("player"):
@@ -74,15 +78,20 @@ func apply_knockback(delta: float) -> void:
 	if knockback_timer <= 0:
 		knockback_enabled = false
 		knockback_velocity = Vector2.ZERO  # Reset knockback velocity after knockback ends
-		print("Knockbacked")
+		#print("Knockbacked")
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	#print("hitbox body entered")
-	if body.has_method("player"):
+	print("hitbox body entered")
+	if body.is_in_group("Player"):
+		print("is player")
+		body.call("enemy_attack")
 		player_in_attack_range = true
 
+func TakeDamage(amount : int):
+	health -= amount;
+
 func _on_hitbox_body_exited(body: Node2D) -> void:
-	if body.has_method("player"):
+	if body.is_in_group("Player"):
 		player_in_attack_range = false
 
 func _on_damage_cooldown_timeout():
@@ -92,4 +101,4 @@ func _on_damage_cooldown_timeout():
 	#	if health <= 0:
 	#		self.queue_free()
 	#		Global.playerScore +=100
-	#	apply_knockback_to_enemy()
+	apply_knockback_to_enemy()

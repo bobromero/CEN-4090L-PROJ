@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://cwitcieuojxfv"]
+[gd_scene load_steps=15 format=4 uid="uid://cwitcieuojxfv"]
 
 [ext_resource type="TileSet" uid="uid://dkt0y153fngne" path="res://Resources/Misc/Dungeon1Tileset.tres" id="1_126ov"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="2_ghjoc"]
 [ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_xflwy"]
+[ext_resource type="PackedScene" uid="uid://35u4ck4g6nfp" path="res://Prefabs/CoinBig.tscn" id="4_0dtce"]
+[ext_resource type="PackedScene" uid="uid://b8wx6t5bexvts" path="res://Prefabs/Coin.tscn" id="5_eexhu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7edb"]
 size = Vector2(27, 8.99927)
@@ -129,3 +131,21 @@ position = Vector2(0, -21.3333)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Activators/Area2D"]
 position = Vector2(0, 4.58333)
 shape = SubResource("RectangleShape2D_la2bn")
+
+[node name="Loot" type="Node2D" parent="."]
+
+[node name="Sprite2D4" parent="Loot" instance=ExtResource("5_eexhu")]
+position = Vector2(-19.8333, -34.6667)
+
+[node name="Sprite2D2" parent="Loot" instance=ExtResource("4_0dtce")]
+position = Vector2(-6.49999, -100.333)
+scale = Vector2(0.05, 0.05)
+
+[node name="Sprite2D" parent="Loot" instance=ExtResource("5_eexhu")]
+position = Vector2(8.16667, -55.8333)
+
+[node name="Sprite2D3" parent="Loot" instance=ExtResource("5_eexhu")]
+position = Vector2(-69.1667, 13.6667)
+
+[node name="Sprite2D5" parent="Loot" instance=ExtResource("5_eexhu")]
+position = Vector2(53, -77.3333)

@@ -98,6 +98,7 @@ public partial class Dungen : Node2D {
 			Random rand = new Random();
 
 			if (rand.NextDouble() < SidePathChance) {
+				GD.Print("umm no way");
                 var plusMinus = rand.Next(2) == 0 ? 1 : -1;
                 var variance = rand.Next(SidePathLengthVariance) * plusMinus;
                 MakePath(currentRoom, SidePathLength + variance, dir, false);
@@ -204,6 +205,8 @@ public partial class Dungen : Node2D {
 			scene.Modulate = Color.Color8((byte)(rng.Randi() % 255), (byte)(rng.Randi() % 255), (byte)(rng.Randi() % 255));
 
 			HostNode.AddChild(scene);
+
+			scene.AddToGroup("hitable");
 
 			return new Room(scene, graphPos);
 		}
@@ -498,6 +501,8 @@ public partial class Dungen : Node2D {
 
 				Door door = new Door (dir, _offset, doorNode, blocker);
 
+				door.blocker.AddToGroup("hitable");
+
 				result.Add(dir, door);
 			}
 			return result;
@@ -555,7 +560,7 @@ public partial class Dungen : Node2D {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		if (dungeon == null) {
-			dungeon = new Dungeon(this, 8, .0f, 3, 1);
+			dungeon = new Dungeon(this, 8, .1f, 3, 1);
 			dungeon.DecideRooms();
 			dungeon.FillInRooms();
 
