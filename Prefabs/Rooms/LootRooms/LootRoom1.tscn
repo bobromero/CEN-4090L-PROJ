@@ -1,8 +1,11 @@
-[gd_scene load_steps=16 format=4 uid="uid://dprcwwkcikx4u"]
+[gd_scene load_steps=19 format=4 uid="uid://dprcwwkcikx4u"]
 
 [ext_resource type="TileSet" uid="uid://dkt0y153fngne" path="res://Resources/Misc/Dungeon1Tileset.tres" id="1_n7rey"]
 [ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_do120"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="3_316lu"]
+[ext_resource type="PackedScene" uid="uid://dwp0sxgwj1q2c" path="res://Prefabs/Enemy.tscn" id="4_nhl5o"]
+[ext_resource type="PackedScene" uid="uid://35u4ck4g6nfp" path="res://Prefabs/CoinBig.tscn" id="4_vq2ah"]
+[ext_resource type="PackedScene" uid="uid://b8wx6t5bexvts" path="res://Prefabs/Coin.tscn" id="5_5ya4n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7edb"]
 size = Vector2(27, 8.99927)
@@ -131,6 +134,10 @@ texture = ExtResource("3_316lu")
 
 [node name="Entities" type="Node2D" parent="."]
 
+[node name="CharacterBody2D5" parent="Entities" instance=ExtResource("4_nhl5o")]
+position = Vector2(176.167, 44.8333)
+scale = Vector2(0.1, 0.1)
+
 [node name="Activators" type="Node2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="Activators"]
@@ -151,3 +158,20 @@ shape = SubResource("RectangleShape2D_pkn1j")
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Activators/Area2D"]
 position = Vector2(16.8333, -82.3334)
 shape = SubResource("RectangleShape2D_ig0tp")
+
+[node name="Loot" type="Node2D" parent="."]
+
+[node name="Sprite2D2" parent="Loot" instance=ExtResource("4_vq2ah")]
+position = Vector2(106.667, -12.3333)
+
+[node name="Sprite2D" parent="Loot" instance=ExtResource("5_5ya4n")]
+position = Vector2(19.1667, -47)
+scale = Vector2(0.05, 0.05)
+
+[node name="Sprite2D3" parent="Loot" instance=ExtResource("5_5ya4n")]
+position = Vector2(154.667, -72.5)
+scale = Vector2(0.05, 0.05)
+
+[node name="Sprite2D4" parent="Loot" instance=ExtResource("5_5ya4n")]
+position = Vector2(5.66667, 23.6667)
+scale = Vector2(0.05, 0.05)
