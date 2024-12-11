@@ -2,6 +2,7 @@ extends TileMapLayer
 
 class_name DunRoom
 
+
 @export var NorthDoor:Node2D
 @export var SouthDoor:Node2D
 @export var EastDoor:Node2D
@@ -9,6 +10,7 @@ class_name DunRoom
 
 @export var activationArea:Area2D
 
+static var RoomScale:Vector2 = Vector2(10,10)
 
 var MyCSharpScript
 var myNode
@@ -16,6 +18,8 @@ func _ready() -> void:
 	MyCSharpScript = load("res://Dungeon/Dungen.cs")
 	myNode = MyCSharpScript.new()
 	activationArea.area_entered.connect(WalkedIn)
+	
+	scale = RoomScale
 
 func _process(delta: float) -> void:
 	openCondition()
