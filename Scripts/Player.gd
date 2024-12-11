@@ -14,7 +14,7 @@ var knockback_time = 0.0
 var enemies_in_damage_range: Array = []
 
 @onready var anim = $AnimatedSprite2D
-@onready var attack_cooldown_timer = $AttackCooldown
+#@onready var attack_cooldown_timer = $AttackCooldown
 
 @export var movement: movement = preload("res://Resources/PlayerResources/PlayerMovement.tres")
 @export var PlayerInventory: Inventory = preload("res://Resources/PlayerResources/BaseInventory.tres")
