@@ -21,7 +21,7 @@ func _ready() -> void:
 	
 	scale = RoomScale
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	openCondition()
 
 func TouchedDoor(area : Area2D):
