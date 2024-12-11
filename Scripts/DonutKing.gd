@@ -30,6 +30,8 @@ func boss():
 func _physics_process(delta: float) -> void:
 	movement_timer += delta
 	
+	if health != MaxHealth:
+		Global.isInBossFight = true
 	if movement_timer >= time_to_change_direction:
 		changeDirection()
 		movement_timer = 0
