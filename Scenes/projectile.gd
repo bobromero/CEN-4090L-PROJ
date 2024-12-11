@@ -10,6 +10,8 @@ var initialPos : Vector2
 var initialRot : float
 var zAxis : int
 
+var host : String
+
 func _ready(): 
 	global_position = initialPos
 	global_rotation = initialRot
@@ -33,14 +35,14 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if (area.is_in_group("hitable")):
+	if (!area.is_in_group(host) and area.is_in_group("hitable")):
 		if area.has_method("TakeDamage"):
 			area.call("TakeDamage", Damage)
 		queue_free()
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if (body.is_in_group("hitable")):
+	if (!body.is_in_group(host) and body.is_in_group("hitable")):
 		if body.has_method("TakeDamage"):
 			body.call("TakeDamage", Damage)
 		queue_free()

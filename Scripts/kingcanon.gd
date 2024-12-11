@@ -17,8 +17,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:	#each second it shoots 8 donuts, with the directions rotating 
 	var direction = Vector2.ZERO
 	
-	print(str(King.health))
-	
 	if King.health <= 100:
 		superMode = true
 	if superMode == true: #makes it alot harder when the king is low on health
@@ -49,6 +47,8 @@ func shoot(direction):
 	instance.initialPos = global_position
 	instance.initialRot = direction.angle()
 	instance.zAxis = z_index-1
+	
+	instance.host = "Enemy"
 	
 	get_tree().current_scene.add_child(instance)
 	

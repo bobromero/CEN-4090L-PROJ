@@ -51,7 +51,6 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	UpdateHealth()
-	enemy_attack()
 	
 	movement._physics_process(delta)
 
@@ -103,7 +102,7 @@ func RemoveFromInventory(id: int):
 func IncreaseHealth(num: float):
 	health += num
 	
-func DecreaseHealth(num: float):
+func TakeDamage(num: int):
 	health -= num
 	
 func UpdateHealth():
@@ -125,9 +124,7 @@ func _on_player_hitbox_body_exited(body: Node2D) -> void:
 		enemy_in_attack_range = false
 	if body.has_method("boss"):
 		print("boss touched")
-		DecreaseHealth(500)
-	if body.is_in_group("enemyprojectile"):
-		DecreaseHealth(20)
+		TakeDamage(50)
 		
 func _on_attack_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy"):
@@ -141,11 +138,10 @@ func _on_attack_hitbox_body_exited(body: Node2D) -> void:
 		enemy_in_damage_range = false
 
 func enemy_attack():
-	if enemy_in_attack_range and enemy_cooldown == true:
-		health -= 10
-		flash_sprite()
-		enemy_cooldown = false
-		$DamageCooldown.start()
+	TakeDamage(10)
+	flash_sprite()
+	enemy_cooldown = false
+	$DamageCooldown.start()
 
 func player():
 	pass

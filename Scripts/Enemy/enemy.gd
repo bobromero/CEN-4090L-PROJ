@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+class_name Enemy
+
+
 @export var speed = 150    # Higher speed = slower enemy and vice versa
 @export var health = 100
 @export var knockback_strength = 500
@@ -20,7 +23,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if knockback_enabled:
-		print("knockback")
+		#print("knockback")
 		apply_knockback(delta)
 	elif player_chase:
 		velocity = (player.global_position - global_position).normalized() * speed
@@ -49,12 +52,6 @@ func SpawnCoin():
 	instance.scale = Vector2(.25,.25)
 	get_tree().current_scene.add_child(instance)
 
-func deal_damage():
-	if player_in_attack_range and Global.player_current_attack == true:
-		health = health - 20
-		health -= 20
-		print("enemy health = ", health)
-		
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.has_method("player"):
@@ -81,18 +78,20 @@ func apply_knockback(delta: float) -> void:
 	if knockback_timer <= 0:
 		knockback_enabled = false
 		knockback_velocity = Vector2.ZERO  # Reset knockback velocity after knockback ends
-		print("Knockbacked")
+		#print("Knockbacked")
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	#print("hitbox body entered")
-	if body.is_in_group("player"):
+	print("hitbox body entered")
+	if body.is_in_group("Player"):
+		print("is player")
+		body.call("enemy_attack")
 		player_in_attack_range = true
 
 func TakeDamage(amount : int):
 	health -= amount;
 
 func _on_hitbox_body_exited(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("Player"):
 		player_in_attack_range = false
 
 func _on_damage_cooldown_timeout():
