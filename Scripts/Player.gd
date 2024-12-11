@@ -37,7 +37,7 @@ func _ready() -> void:
 	Instance = self
 	
 func _on_AnimatedSprite_Anim_Finished():
-	if anim.animation == "magic_projectile" or anim.animation == "proto_sword_attack":
+	if anim.animation == "magic_projectile" or anim.animation == "Sword":
 		print ("Stopping animation")
 		player_attacking = false
 	
@@ -66,8 +66,8 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("PrimaryFire"):
 		player_attacking = true
-		if (anim.animation!= "proto_sword_attack"):
-			anim.play("proto_sword_attack")
+		if (anim.animation!= "Sword"):
+			anim.play("Sword")
 		PlayerInventory.Weapon._primaryAttack()
 		
 		
