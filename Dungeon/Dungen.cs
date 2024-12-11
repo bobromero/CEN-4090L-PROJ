@@ -205,6 +205,8 @@ public partial class Dungen : Node2D {
 
 			HostNode.AddChild(scene);
 
+			scene.AddToGroup("hitable");
+
 			return new Room(scene, graphPos);
 		}
 
@@ -497,6 +499,8 @@ public partial class Dungen : Node2D {
 				var blocker = input[i].GetChild<Node2D>(1);
 
 				Door door = new Door (dir, _offset, doorNode, blocker);
+
+				door.blocker.AddToGroup("hitable");
 
 				result.Add(dir, door);
 			}
