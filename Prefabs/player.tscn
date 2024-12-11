@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bi4ufgbogbq3k"]
+[gd_scene load_steps=54 format=3 uid="uid://bi4ufgbogbq3k"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_6k2tp"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="1_kg5i0"]
@@ -6,10 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://dfxhh31w04j86" path="res://Resources/Sprite Sheets/Run_Down-Sheet.png" id="3_dpgn4"]
 [ext_resource type="Texture2D" uid="uid://c5e380t4edlmi" path="res://Resources/Sprite Sheets/IdleAnimation-Sheet.png" id="4_aid2j"]
 [ext_resource type="Texture2D" uid="uid://hx1imumb3wpm" path="res://Resources/Sprite Sheets/Magic_Projectile-Sheet.png" id="4_evtvo"]
-[ext_resource type="PackedScene" uid="uid://crfhhwn3fbdrv" path="res://Prefabs/hud.tscn" id="4_qsuhb"]
-[ext_resource type="PackedScene" uid="uid://c3h0cupr5voit" path="res://Scenes/PauseMenu.tscn" id="5_3m7x6"]
+
+[ext_resource type="PackedScene" uid="uid://dxkljmk6sj4gd" path="res://Prefabs/hud.tscn" id="4_qsuhb"]
+[ext_resource type="PackedScene" uid="uid://v0cbro57so3r" path="res://Scenes/PauseMenu.tscn" id="5_3m7x6"]
+[ext_resource type="Texture2D" uid="uid://dr16b8idvf0u0" path="res://Resources/Sprite Sheets/Sword-Sheet.png" id="5_8hjrn"]
+
 [ext_resource type="Texture2D" uid="uid://dpvr860dlbxo5" path="res://Resources/Sprite Sheets/SwordAttackPrototype-Sheet.png" id="6_0ffqo"]
+[ext_resource type="Texture2D" uid="uid://ceg740xfobqtj" path="res://Resources/Sprite Sheets/Sword_down-Sheet.png" id="6_0x6k1"]
 [ext_resource type="Texture2D" uid="uid://5lrs1ssx06b7" path="res://Resources/Sprite Sheets/Run_Up-Sheet.png" id="7_lg1xa"]
+[ext_resource type="Texture2D" uid="uid://cxeava81kq41a" path="res://Resources/Sprite Sheets/Sword_up-Sheet.png" id="7_uaxjb"]
 [ext_resource type="Script" path="res://Scripts/canon.gd" id="9_8el2b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aarxu"]
@@ -59,6 +64,54 @@ region = Rect2(36, 0, 18, 25)
 [sub_resource type="AtlasTexture" id="AtlasTexture_aj0v0"]
 atlas = ExtResource("7_lg1xa")
 region = Rect2(54, 0, 18, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n7fbb"]
+atlas = ExtResource("5_8hjrn")
+region = Rect2(0, 0, 31, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wfh6k"]
+atlas = ExtResource("5_8hjrn")
+region = Rect2(31, 0, 31, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrwkw"]
+atlas = ExtResource("5_8hjrn")
+region = Rect2(62, 0, 31, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5aufu"]
+atlas = ExtResource("5_8hjrn")
+region = Rect2(93, 0, 31, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2y15d"]
+atlas = ExtResource("6_0x6k1")
+region = Rect2(0, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8mer"]
+atlas = ExtResource("6_0x6k1")
+region = Rect2(30, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0003y"]
+atlas = ExtResource("6_0x6k1")
+region = Rect2(60, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xs2rt"]
+atlas = ExtResource("6_0x6k1")
+region = Rect2(90, 0, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c605o"]
+atlas = ExtResource("7_uaxjb")
+region = Rect2(0, 0, 28, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuwgt"]
+atlas = ExtResource("7_uaxjb")
+region = Rect2(28, 0, 28, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnf1b"]
+atlas = ExtResource("7_uaxjb")
+region = Rect2(56, 0, 28, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_htgwq"]
+atlas = ExtResource("7_uaxjb")
+region = Rect2(84, 0, 28, 25)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dg532"]
 atlas = ExtResource("4_aid2j")
@@ -151,6 +204,57 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_n7fbb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wfh6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rrwkw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5aufu")
+}],
+"loop": false,
+"name": &"Sword",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2y15d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8mer")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0003y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xs2rt")
+}],
+"loop": false,
+"name": &"Sword_down",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c605o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vuwgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnf1b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_htgwq")
+}],
+"loop": false,
+"name": &"Sword_up",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_kg5i0")
 }],
 "loop": true,
@@ -234,7 +338,9 @@ attackRegion = NodePath("AnimatedSprite2D/AttackHitbox")
 texture_filter = 1
 scale = Vector2(5, 5.387)
 sprite_frames = SubResource("SpriteFrames_aobjg")
-animation = &"proto_sword_attack"
+animation = &"Sword"
+frame = 3
+frame_progress = 1.0
 
 [node name="PlayerHitbox" type="Area2D" parent="AnimatedSprite2D" groups=["Inventory", "Player"]]
 collision_layer = 13
