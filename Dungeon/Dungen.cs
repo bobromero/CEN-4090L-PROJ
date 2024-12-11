@@ -97,19 +97,11 @@ public partial class Dungen : Node2D {
 			//random chance per good direction
 			Random rand = new Random();
 
-	//        while (badDirections.Count < 4)
-	//        {
-				
-				//if (rand.NextDouble() < SidePathChance) {
-				//	var plusMinus = rand.Next(2) == 0 ? 1 : -1;
-				//	var variance = rand.Next(SidePathLengthVariance) * plusMinus;
-				//	MakePath(currentRoom, SidePathLength + variance, dir);
-	//            }
-				
-	//        }
-
-			MakePath(currentRoom, SidePathLength, dir, false);
-
+			if (rand.NextDouble() < SidePathChance) {
+                var plusMinus = rand.Next(2) == 0 ? 1 : -1;
+                var variance = rand.Next(SidePathLengthVariance) * plusMinus;
+                MakePath(currentRoom, SidePathLength + variance, dir, false);
+            }
 		}
 
 		private List<Door.Direction> GetBadDirections(Vector2I currentRoom, Door.Direction originalDirection) {
