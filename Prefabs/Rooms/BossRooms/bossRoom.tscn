@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=4 uid="uid://b2mjgx3hfyjg2"]
+[gd_scene load_steps=15 format=4 uid="uid://b2mjgx3hfyjg2"]
 
 [ext_resource type="TileSet" uid="uid://dkt0y153fngne" path="res://Resources/Misc/Dungeon1Tileset.tres" id="1_wjv18"]
 [ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_cr1x6"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="3_km6jk"]
 [ext_resource type="PackedScene" uid="uid://dcf2ml1qumvqj" path="res://Prefabs/DonutKing.tscn" id="4_ayjso"]
+[ext_resource type="Script" path="res://Prefabs/Rooms/BossRooms/spawner.gd" id="5_yx6ck"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_518u7"]
 size = Vector2(27, 8.99927)
@@ -133,3 +134,27 @@ position = Vector2(0, -21.3333)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Activators/Area2D"]
 position = Vector2(1, 10.0166)
 shape = SubResource("RectangleShape2D_ihtqp")
+
+[node name="Spawner" type="Node2D" parent="."]
+position = Vector2(-85.5, 1.7)
+script = ExtResource("5_yx6ck")
+
+[node name="Spawner2" type="Node2D" parent="."]
+position = Vector2(91.6, -1.2)
+script = ExtResource("5_yx6ck")
+
+[node name="Spawner3" type="Node2D" parent="."]
+position = Vector2(-0.100006, -54.7)
+script = ExtResource("5_yx6ck")
+
+[node name="Spawner4" type="Node2D" parent="."]
+position = Vector2(-0.300003, 53.4)
+script = ExtResource("5_yx6ck")
+
+[node name="Spawner5" type="Node2D" parent="."]
+position = Vector2(-102.2, -150.8)
+script = ExtResource("5_yx6ck")
+
+[node name="Spawner6" type="Node2D" parent="."]
+position = Vector2(90.9, -151.2)
+script = ExtResource("5_yx6ck")

@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cnlnuht3fk5cn"]
+[gd_scene load_steps=4 format=3 uid="uid://cnlnuht3fk5cn"]
 
 [ext_resource type="PackedScene" uid="uid://dcf2ml1qumvqj" path="res://Prefabs/DonutKing.tscn" id="1_nb4la"]
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="2_5a3xs"]
+[ext_resource type="Script" path="res://Prefabs/Rooms/BossRooms/spawner.gd" id="3_8emw8"]
 
 [node name="BossTest" type="Node2D"]
+position = Vector2(126, 49)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_nb4la")]
-position = Vector2(129, 159)
+position = Vector2(269, 227)
 
 [node name="CharacterBody2D2" parent="." instance=ExtResource("2_5a3xs")]
-position = Vector2(665, 951)
+position = Vector2(577, 948)
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(763, 483)
+script = ExtResource("3_8emw8")
