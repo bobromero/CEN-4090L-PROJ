@@ -3,6 +3,8 @@ extends Node2D
 @onready var King = get_parent()
 @onready var projectile = preload("res://Scenes/DonutProjectile.tscn")
 
+@export var Damage:int = 25
+
 var onCooldown = false
 var cooldownTime = 1 # sets the cooldown time
 var rotation_angle = 25  #for near death mode.
@@ -35,8 +37,8 @@ func _process(_delta: float) -> void:	#each second it shoots 8 donuts, with the 
 
 
 func shoot(direction):
-	var instance = projectile.instantiate()
-	
+	var instance : Projectile = projectile.instantiate()
+	instance.Damage = Damage
 
 	if direction == Vector2.ZERO:
 		direction = Vector2.DOWN #shoots right by default

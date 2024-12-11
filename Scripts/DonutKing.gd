@@ -62,6 +62,10 @@ func UpdateHealth():
 		healthBar.visible = false
 	else:
 		healthBar.visible = true
+		
+	if health <= 0:
+		Global.playerScore +=1000
+		SceneManager.Win()
 
 func deal_damage():
 	if player_in_attack_range and Global.player_current_attack == true:
@@ -73,12 +77,13 @@ func deal_damage():
 			self.queue_free()
 
 
-
-
-func _on_d_khitbox_body_entered(body: Node2D) -> void:
-	if body.is_in_group("projectiles"):  # added functionality for when an enemy is hit by a projectile.
-		health -= 50
-		if health <= 0:
-			self.queue_free()
-			Global.playerScore +=1000
-			SceneManager.Win()
+func TakeDamage(amount: int):
+	health-=amount
+#
+#func _on_d_khitbox_body_entered(body: Node2D) -> void:
+	#if body.is_in_group("projectiles"):  # added functionality for when an enemy is hit by a projectile.
+		#health -= 50
+		#if health <= 0:
+			#self.queue_free()
+			#Global.playerScore +=1000
+			#SceneManager.Win()
