@@ -10,7 +10,7 @@ var cooldownTime = 0.4 # sets the cooldown time
 func _ready() -> void:
 	pass # Replace with function body.
 
-func _process(delta: float) -> void:	
+func _process(_delta: float) -> void:	
 	var direction = Vector2.ZERO
 	
 	if Input.is_action_pressed("Rightarrow"):

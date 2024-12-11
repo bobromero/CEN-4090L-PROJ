@@ -6,9 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://dfxhh31w04j86" path="res://Resources/Sprite Sheets/Run_Down-Sheet.png" id="3_dpgn4"]
 [ext_resource type="Texture2D" uid="uid://c5e380t4edlmi" path="res://Resources/Sprite Sheets/IdleAnimation-Sheet.png" id="4_aid2j"]
 [ext_resource type="Texture2D" uid="uid://hx1imumb3wpm" path="res://Resources/Sprite Sheets/Magic_Projectile-Sheet.png" id="4_evtvo"]
+
 [ext_resource type="PackedScene" uid="uid://dxkljmk6sj4gd" path="res://Prefabs/hud.tscn" id="4_qsuhb"]
 [ext_resource type="PackedScene" uid="uid://v0cbro57so3r" path="res://Scenes/PauseMenu.tscn" id="5_3m7x6"]
 [ext_resource type="Texture2D" uid="uid://dr16b8idvf0u0" path="res://Resources/Sprite Sheets/Sword-Sheet.png" id="5_8hjrn"]
+
 [ext_resource type="Texture2D" uid="uid://dpvr860dlbxo5" path="res://Resources/Sprite Sheets/SwordAttackPrototype-Sheet.png" id="6_0ffqo"]
 [ext_resource type="Texture2D" uid="uid://ceg740xfobqtj" path="res://Resources/Sprite Sheets/Sword_down-Sheet.png" id="6_0x6k1"]
 [ext_resource type="Texture2D" uid="uid://5lrs1ssx06b7" path="res://Resources/Sprite Sheets/Run_Up-Sheet.png" id="7_lg1xa"]
@@ -312,7 +314,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v134q"]
-size = Vector2(27.0584, 27.1619)
+size = Vector2(19.6, 21.1621)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r470o"]
 size = Vector2(38.4638, 38.7715)
@@ -324,12 +326,13 @@ bg_color = Color(0, 0.835294, 0, 1)
 bg_color = Color(0.36502, 0.997787, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hladd"]
-size = Vector2(125.443, 135.518)
+size = Vector2(97.2379, 114.995)
 
-[node name="CharacterBody2D2" type="CharacterBody2D" groups=["Player"]]
+[node name="CharacterBody2D2" type="CharacterBody2D" node_paths=PackedStringArray("attackRegion") groups=["Player"]]
 collision_layer = 13
 collision_mask = 13
 script = ExtResource("1_6k2tp")
+attackRegion = NodePath("AnimatedSprite2D/AttackHitbox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["Player"]]
 texture_filter = 1
@@ -344,7 +347,7 @@ collision_layer = 13
 collision_mask = 13
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/PlayerHitbox" groups=["Player"]]
-position = Vector2(4.68839e-07, -0.146032)
+position = Vector2(4.68839e-07, 0.371264)
 shape = SubResource("RectangleShape2D_v134q")
 
 [node name="AttackHitbox" type="Area2D" parent="AnimatedSprite2D" groups=["Player"]]
@@ -369,6 +372,7 @@ show_percentage = false
 one_shot = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="." groups=["Player"]]
+position = Vector2(0.604958, 2.50455)
 rotation = 0.00411673
 shape = SubResource("RectangleShape2D_hladd")
 
@@ -383,6 +387,7 @@ position = Vector2(-5, 1)
 script = ExtResource("9_8el2b")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="area_entered" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_area_entered"]
 [connection signal="body_entered" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_body_entered"]
 [connection signal="body_exited" from="AnimatedSprite2D/PlayerHitbox" to="." method="_on_player_hitbox_body_exited"]
 [connection signal="body_entered" from="AnimatedSprite2D/AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]
