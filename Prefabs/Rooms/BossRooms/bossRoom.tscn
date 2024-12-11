@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_cr1x6"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="3_km6jk"]
 [ext_resource type="PackedScene" uid="uid://dcf2ml1qumvqj" path="res://Prefabs/DonutKing.tscn" id="4_ayjso"]
-[ext_resource type="Script" path="res://Prefabs/Rooms/BossRooms/spawner.gd" id="5_yx6ck"]
+[ext_resource type="Script" path="res://Scripts/spawner.gd" id="5_yx6ck"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_518u7"]
 size = Vector2(27, 8.99927)
