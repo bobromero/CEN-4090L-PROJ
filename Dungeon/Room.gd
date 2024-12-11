@@ -36,7 +36,14 @@ func TouchedDoor(area : Area2D):
 		dir = 3
 		
 	#This is an abomination but blame godot not me entirely
-	myNode.ChangeDirection(dir, Player)
+	Player.Instance.canMove = false
+	#PlayerCamera.Instance.TransitionIn()
+	
+	myNode.ChangeDirection(dir, Player, PlayerCamera.Instance)
+	PlayerCamera.Instance.TransitionOut()
+	Player.Instance.canMove = true
+	
+	
 
 func WalkedIn(area:Area2D):
 	if area.is_in_group("Player"):

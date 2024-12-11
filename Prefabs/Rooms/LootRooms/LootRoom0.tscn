@@ -139,7 +139,6 @@ position = Vector2(-19.8333, -34.6667)
 
 [node name="Sprite2D2" parent="Loot" instance=ExtResource("4_0dtce")]
 position = Vector2(-6.49999, -100.333)
-scale = Vector2(0.05, 0.05)
 
 [node name="Sprite2D" parent="Loot" instance=ExtResource("5_eexhu")]
 position = Vector2(8.16667, -55.8333)

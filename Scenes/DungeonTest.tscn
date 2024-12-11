@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cugjeg0waq10y"]
+[gd_scene load_steps=7 format=3 uid="uid://cugjeg0waq10y"]
 
 [ext_resource type="PackedScene" uid="uid://c4nut2v2efpkm" path="res://Dungeon/DungeonGen.tscn" id="2_u23mn"]
 [ext_resource type="TileSet" uid="uid://duvtinmkgoayr" path="res://Resources/DefaultTileSet.tres" id="2_xn7yb"]
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="3_3ii1w"]
 [ext_resource type="Script" path="res://Dungeon/Dungen.cs" id="3_gsvc2"]
+[ext_resource type="Script" path="res://Scripts/Camera.gd" id="4_20nn1"]
+[ext_resource type="PackedScene" uid="uid://biriw6vj6qn8l" path="res://Prefabs/scene_transition.tscn" id="5_316a1"]
 
 [node name="DungeonTest" type="Node2D"]
 
@@ -13,6 +15,13 @@ script = ExtResource("3_gsvc2")
 [node name="TileMapLayer" parent="DungeonManager" instance=ExtResource("2_u23mn")]
 tile_set = ExtResource("2_xn7yb")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("3_3ii1w")]
+[node name="Camera2D" type="Camera2D" parent="."]
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+script = ExtResource("4_20nn1")
 
-[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+[node name="SceneTransition" parent="Camera2D" instance=ExtResource("5_316a1")]
+scale = Vector2(100, 100)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_3ii1w")]

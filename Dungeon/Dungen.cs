@@ -126,10 +126,6 @@ public partial class Dungen : Node2D {
 		private void MakePath(Vector2I currentRoom, int pathLength, Door.Direction originalDirection, bool isMain) {
 			for (int i = 0; i < pathLength; i++)
 			{
-				foreach (var item in RoomTypeGraph)
-				{
-					//GD.Print(item);
-				}
 				var badDirections = GetBadDirections(currentRoom, originalDirection);
 
 
@@ -250,6 +246,8 @@ public partial class Dungen : Node2D {
 			//enable correct room
 
 			ActiveRoom.SetRoomActive(true);
+
+			
 		}
 	}
 
@@ -525,20 +523,20 @@ public partial class Dungen : Node2D {
 
 	public static double RoomChangeBuffer = 2;
 
-	public static void ChangeDirection(int value, GodotObject player) {
+	public static void ChangeDirection(int value, GodotObject player, GodotObject playerCamera) {
 		if (changeRoomTimer < RoomChangeBuffer) {
 			return;
 		} else {
 			changeRoomTimer = 0;
 			Room.Door.Direction direction = Room.Door.IntToDirection(value);
-
+			
 			if (dungeon.RoomExists(direction)) {
 				dungeon.ChangeActiveRoom(direction);
 
 				//GD.Print("Touched " + Room.Door.IntToDirection(value) + " door, coming out the " + Room.Door.FlipDirection(direction));
 				player.Call("changePos", dungeon.ActiveRoom.doors[Room.Door.FlipDirection(direction)].position);
-			}
-			
+				playerCamera.Call("TransitionIn");
+            }
 		}
 	}
 
@@ -548,6 +546,7 @@ public partial class Dungen : Node2D {
 			dungeon.ActiveRoom.ToggleEntites(true);
 			dungeon.ActiveRoom.visited = true;
 		}
+
 	}
 
 	public static void OpenRoomCondition() {
