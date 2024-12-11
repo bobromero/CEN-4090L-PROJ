@@ -24,6 +24,13 @@ var enemies_in_damage_range: Array = []
 @export var knockback_duration = 0.2
 @export var attack_duration = 1
 
+var attack_animations: Dictionary = {
+	"magic_projectile": true,
+	"Sword": true,
+	"Sword_up": true,
+	"Sword_down": true,
+}
+
 var hud: playerHud
 
 # @export var Score: int = 0
@@ -36,9 +43,13 @@ func _ready() -> void:
 	hud = $HUD
 	Instance = self
 	
+# Called when signal is set to alert that the animation has ended. Enusres that
+# idle animation restarts after player is finished attacking
 func _on_AnimatedSprite_Anim_Finished():
-	if anim.animation == "magic_projectile" or anim.animation == "Sword":
-		print ("Stopping animation")
+	if anim.animation in attack_animations:
+		if anim.animation == "magic_projectile" or anim.animation == "Sword":
+			print ("Stopping animation")
+		
 		player_attacking = false
 	
 	
@@ -54,7 +65,9 @@ func _process(delta: float) -> void:
 	enemy_attack()
 	
 	movement._physics_process(delta)
-
+	var direction := Input.get_vector("left", "right", "up", "down")
+	#Gets direction since from input since I can't get it from movement.gd
+	
 	if knockback_time > 0:
 		position += knockback_velocity * delta
 		knockback_time -= delta
@@ -64,10 +77,16 @@ func _process(delta: float) -> void:
 	if health <= 0:
 		SceneManager.Player_dead() #transitions to the death screen
 	
-	if Input.is_action_just_pressed("PrimaryFire"):
+	if Input.is_action_just_pressed("PrimaryFire"):	#Plays different directinal animations
 		player_attacking = true
-		if (anim.animation!= "Sword"):
+		if direction.y > 0:
+			anim.play("Sword_down")
+		elif direction.y < 0:
+			anim.play("Sword_up")
+		elif (anim.animation!= "Sword"):
 			anim.play("Sword")
+		
+	
 		PlayerInventory.Weapon._primaryAttack()
 		
 		
@@ -80,7 +99,6 @@ func _process(delta: float) -> void:
 		PlayerInventory.Weapon._secondaryAttack()
 		
 		
-	
 	if health <= 0:
 		SceneManager.Player_dead() #transitions to the death screen
 		
