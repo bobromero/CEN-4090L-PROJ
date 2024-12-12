@@ -336,9 +336,7 @@ attackRegion = NodePath("AnimatedSprite2D/AttackHitbox")
 texture_filter = 1
 scale = Vector2(5, 5.387)
 sprite_frames = SubResource("SpriteFrames_aobjg")
-animation = &"Sword"
-frame = 3
-frame_progress = 1.0
+animation = &"Run"
 
 [node name="PlayerHitbox" type="Area2D" parent="AnimatedSprite2D" groups=["Inventory", "Player"]]
 collision_layer = 13

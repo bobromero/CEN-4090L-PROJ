@@ -5,7 +5,7 @@ class_name movement
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -600.0
-var _sprint_multiplier = 1.2
+var _sprint_multiplier = 1.4
 @export var _isPlatformer: bool = false
 
 var player:CharacterBody2D
@@ -40,6 +40,7 @@ func _topDownMovement():
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_vector("left", "right", "up", "down")
+	
 	if direction:
 		player.velocity = direction * SPEED
 		
@@ -56,21 +57,19 @@ func _topDownMovement():
 		
 		if Input.is_action_pressed("Sprint"):
 			player.velocity *= _sprint_multiplier
+			anim.speed_scale = 2
+		else:
+			anim.speed_scale = 1
 	else:
 		player.velocity.x = move_toward(player.velocity.x, 0, SPEED)
 		player.velocity.y = move_toward(player.velocity.y, 0, SPEED)
 		if (player.player_attacking == false):
+			anim.speed_scale = 1
 			anim.play("idle")
 		
 		
 	player.move_and_slide()
 	
-#func _on_AnimatedSprite_Anim_Finished():
-#	if anim.animation == "magic_projectile" or anim.animation == "proto_sword_attack":
-#		print ("Stopping animation")
-#		player.player_attacking = false
-#		anim.play("idle")
-
 
 func _platformerMovement(delta: float):
 	#Checks if any of the three timers are currently running
