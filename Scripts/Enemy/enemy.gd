@@ -7,6 +7,8 @@ extends CharacterBody2D
 @export var knockback_enabled = false
 @export var knockback_timer = 1.0 
 
+@onready var anim = $AnimatedSprite2D
+
 var player_in_attack_range = false
 var player_chase = false
 var player = null
@@ -28,6 +30,21 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 	
+	if velocity != Vector2.ZERO:
+		if abs(velocity.x) > abs(velocity.y):
+			if velocity.x > 0:
+				anim.flip_h = false
+			if velocity.x < 0:
+				anim.flip_h = true
+			anim.play("Run")
+		else:
+			if velocity.y > 0:
+				anim.play("Run_down")
+			else:
+				anim.play("Run_up")
+	else:
+		anim.play("Idle")
+				
 	UpdateHealth()
 	move_and_slide()
 

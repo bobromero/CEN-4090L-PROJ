@@ -98,10 +98,10 @@ public partial class Dungen : Node2D {
 			Random rand = new Random();
 
 			if (rand.NextDouble() < SidePathChance) {
-                var plusMinus = rand.Next(2) == 0 ? 1 : -1;
-                var variance = rand.Next(SidePathLengthVariance) * plusMinus;
-                MakePath(currentRoom, SidePathLength + variance, dir, false);
-            }
+				var plusMinus = rand.Next(2) == 0 ? 1 : -1;
+				var variance = rand.Next(SidePathLengthVariance) * plusMinus;
+				MakePath(currentRoom, SidePathLength + variance, dir, false);
+			}
 		}
 
 		private List<Door.Direction> GetBadDirections(Vector2I currentRoom, Door.Direction originalDirection) {
@@ -125,11 +125,11 @@ public partial class Dungen : Node2D {
 		private void MakePath(Vector2I currentRoom, int pathLength, Door.Direction originalDirection, bool isMain) {
 			for (int i = 0; i < pathLength; i++)
 			{
-                foreach (var item in RoomTypeGraph)
-                {
+				foreach (var item in RoomTypeGraph)
+				{
 					//GD.Print(item);
-                }
-                var badDirections = GetBadDirections(currentRoom, originalDirection);
+				}
+				var badDirections = GetBadDirections(currentRoom, originalDirection);
 
 
 				//pick and assign room
