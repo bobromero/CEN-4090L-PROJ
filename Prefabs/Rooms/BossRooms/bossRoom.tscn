@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=4 uid="uid://b2mjgx3hfyjg2"]
+[gd_scene load_steps=16 format=4 uid="uid://b2mjgx3hfyjg2"]
 
 [ext_resource type="TileSet" uid="uid://dkt0y153fngne" path="res://Resources/Misc/Dungeon1Tileset.tres" id="1_wjv18"]
 [ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_cr1x6"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="3_km6jk"]
 [ext_resource type="PackedScene" uid="uid://dcf2ml1qumvqj" path="res://Prefabs/DonutKing.tscn" id="4_ayjso"]
 [ext_resource type="Script" path="res://Scripts/spawner.gd" id="5_yx6ck"]
+[ext_resource type="AudioStream" uid="uid://b5fiuvryn5812" path="res://Resources/Music/Boss music.mp3" id="6_xjs01"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_518u7"]
 size = Vector2(27, 8.99927)
@@ -158,3 +159,8 @@ script = ExtResource("5_yx6ck")
 [node name="Spawner6" type="Node2D" parent="."]
 position = Vector2(90.9, -151.2)
 script = ExtResource("5_yx6ck")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_xjs01")
+autoplay = true
+parameters/looping = true

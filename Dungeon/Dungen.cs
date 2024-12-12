@@ -535,7 +535,7 @@ public partial class Dungen : Node2D {
 				//GD.Print("Touched " + Room.Door.IntToDirection(value) + " door, coming out the " + Room.Door.FlipDirection(direction));
 				player.Call("changePos", dungeon.ActiveRoom.doors[Room.Door.FlipDirection(direction)].position);
 				playerCamera.Call("TransitionIn");
-            }
+			}
 		}
 	}
 
