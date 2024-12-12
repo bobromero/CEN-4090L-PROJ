@@ -206,7 +206,7 @@ public partial class Dungen : Node2D {
 
 			RandomNumberGenerator rng = new RandomNumberGenerator();
 			var scene = (TileMapLayer)GD.Load<PackedScene>(path).Instantiate();
-			scene.Modulate = Color.Color8((byte)(rng.Randi() % 255), (byte)(rng.Randi() % 255), (byte)(rng.Randi() % 255));
+			scene.Modulate = Color.Color8((byte)((rng.Randi() % 200) + 55), (byte)((rng.Randi() % 200) + 55), (byte)((rng.Randi() % 200) + 55));
 
 			HostNode.AddChild(scene);
 
@@ -513,15 +513,6 @@ public partial class Dungen : Node2D {
 			}
 			return result;
 		}
-
-		//public void GetNeighbors() {
-		//	foreach (var door in doors) {
-		//		var dir = Door.DirectionToVector2I
-		//		Neighbors.Add();
-		//	}
-		//	dungeon.RoomGraph
-		//}
-		
 	}
 
 
@@ -570,14 +561,14 @@ public partial class Dungen : Node2D {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		if (dungeon == null) {
-			dungeon = new Dungeon(this, 8, .1f, 4, 1);
+			dungeon = new Dungeon(this, 6, .1f, 4, 1);
 			dungeon.DecideRooms();
 			dungeon.FillInRooms();
 
 			dungeon.ChangeActiveRoom(new Vector2I(0,0));
 
 			dungeon.ActiveRoom.UpdateDoors();
-		}
+		} 
 	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -585,7 +576,7 @@ public partial class Dungen : Node2D {
 		
 		changeRoomTimer += delta;
 		if (Input.IsActionJustPressed("PrimaryFire")) {
-			dungeon.ActiveRoom.UpdateDoors();
+			//dungeon.ActiveRoom.UpdateDoors();
 
 		}
 

@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var _animated_sprite = $AnimatedSprite2D
 @export var speed = 80    # Higher speed = slower enemy and vice versa
 var health
-@export var MaxHealth = 1000
+@export var MaxHealth = 850
 
 var superMode =false
 var player_in_attack_range = false
@@ -22,7 +22,6 @@ const JUMP_VELOCITY = -400.0
 func _ready() -> void:
 	_animated_sprite.play("default")
 	health = MaxHealth
-	
 
 func boss():
 	pass
