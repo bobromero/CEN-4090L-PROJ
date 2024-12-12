@@ -36,12 +36,18 @@ func _on_resume_pressed() -> void:
 
 func _on_restart_pressed() -> void:
 	resume()
-	get_tree().reload_current_scene()
-	
+	get_tree().change_scene_to_file("res://Scenes/DungeonTest.tscn")
+	resetDungeon()
 	pass # Replace with function body.
 
 
 func _on_return_menu_pressed() -> void:
 	resume()
 	SceneManager.Return_Menu()
+	resetDungeon()
 	pass # Replace with function body.
+
+func resetDungeon():
+	var MyCSharpScript = load("res://Dungeon/Dungen.cs")
+	var myNode = MyCSharpScript.new()
+	myNode.call("DeleteDungeon")

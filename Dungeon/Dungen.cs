@@ -555,6 +555,9 @@ public partial class Dungen : Node2D {
 	
 	public static double changeRoomTimer = 0;
 
+	public static void DeleteDungeon() {
+		dungeon = null;
+	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {

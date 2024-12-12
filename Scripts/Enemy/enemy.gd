@@ -4,7 +4,8 @@ class_name Enemy
 
 
 @export var speed = 150    # Higher speed = slower enemy and vice versa
-@export var health = 200
+var health
+@export var MaxHealth = 200
 @export var knockback_strength = 500
 @export var knockback_duration = 0.2
 @export var knockback_enabled = false
@@ -19,7 +20,9 @@ var knockback_velocity = Vector2.ZERO
 var player_cooldown = true
 
 func _ready() -> void:
-	pass
+	health = MaxHealth
+	var healthBar:ProgressBar = $HealthBar
+	healthBar.max_value = MaxHealth
 
 func _physics_process(delta: float) -> void:
 	if knockback_enabled:
@@ -37,14 +40,14 @@ func UpdateHealth():
 	var healthBar = $HealthBar
 	healthBar.value = health
 
-	if health >= 200:
+	if health >= MaxHealth:
 		healthBar.visible = false
 	else:
 		healthBar.visible = true
 		
 	if health <= 0:
-			SpawnCoin()			
-			self.queue_free()
+		SpawnCoin()
+		self.queue_free()
 			
 func SpawnCoin():
 	var instance :Node2D = coin.instantiate()
