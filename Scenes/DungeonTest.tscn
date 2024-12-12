@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bi4ufgbogbq3k" path="res://Prefabs/player.tscn" id="3_3ii1w"]
 [ext_resource type="Script" path="res://Dungeon/Dungen.cs" id="3_gsvc2"]
 [ext_resource type="Script" path="res://Scripts/Camera.gd" id="4_20nn1"]
-[ext_resource type="PackedScene" uid="uid://biriw6vj6qn8l" path="res://Prefabs/scene_transition.tscn" id="5_316a1"]
+[ext_resource type="PackedScene" path="res://Prefabs/scene_transition.tscn" id="5_316a1"]
 
 [node name="DungeonTest" type="Node2D"]
 

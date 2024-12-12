@@ -177,7 +177,6 @@ scale = Vector2(0.1, 0.1)
 collision_layer = 34
 collision_mask = 33
 
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" groups=["hitable"]]
 visible = false
 position = Vector2(-0.375, 0.375)
