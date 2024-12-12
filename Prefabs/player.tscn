@@ -367,6 +367,7 @@ theme_override_colors/font_color = Color(0.400191, 1, 0.369743, 1)
 theme_override_colors/font_outline_color = Color(0, 0.892672, 0, 1)
 theme_override_styles/background = SubResource("StyleBoxFlat_hbex3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_1bhd7")
+max_value = 200.0
 show_percentage = false
 
 [node name="DamageCooldown" type="Timer" parent="."]
