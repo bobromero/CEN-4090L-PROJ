@@ -147,13 +147,14 @@ func _on_player_hitbox_body_exited(body: Node2D) -> void:
 		TakeDamage(50)
 		
 func _on_attack_hitbox_body_entered(body: Node2D) -> void:
-	if body.has_method("enemy"):
+	print(body.name)
+	if body.is_in_group("Enemy"):
 		enemies_in_damage_range.append(body)
 		enemy_in_damage_range = true
 		Global.player_attack_connect = true
 
 func _on_attack_hitbox_body_exited(body: Node2D) -> void:
-	if body.has_method("enemy"):
+	if body.is_in_group("Enemy"):
 		enemies_in_damage_range.erase(body)
 		enemy_in_damage_range = false
 

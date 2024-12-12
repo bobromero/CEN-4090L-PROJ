@@ -12,11 +12,18 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var enemies = get_tree().get_nodes_in_group("Enemy")
 	var pos : Vector2 = Vector2.ZERO
-	for e in enemies:
-		pos += (e as Node2D).global_position
-	global_position = Player.Instance.global_position
+	
+	if Global.isInBossFight:
+		var enemies = get_tree().get_nodes_in_group("Enemy")
+		for e in enemies:
+			pos += (e as Node2D).global_position
+		
+		pos+=Player.Instance.global_position
+		global_position = pos / (enemies.size() )
+		zoom = Vector2.ONE * .5
+	else:
+		global_position = Player.Instance.global_position
 	
 
 

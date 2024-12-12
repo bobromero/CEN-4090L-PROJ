@@ -86,7 +86,7 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 
 func apply_knockback_to_enemy():
 	if not knockback_enabled and player != null:
-		var knockback_direction = (position - player.position).normalized()
+		var knockback_direction = (global_position - player.global_position).normalized()
 		knockback_velocity = knockback_direction * knockback_strength
 		knockback_enabled = true
 		knockback_timer = knockback_duration
