@@ -195,8 +195,6 @@ func flash_sprite():
 	await get_tree().create_timer(0.1).timeout
 	if $DamageCooldown.is_stopped():
 		anim.visible = true 
-	else:
-		flash_sprite()
 
 func _on_damage_cooldown_timeout() -> void:
 	enemy_cooldown = true
