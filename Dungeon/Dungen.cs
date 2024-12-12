@@ -575,7 +575,7 @@ public partial class Dungen : Node2D {
 		
 		changeRoomTimer += delta;
 		if (Input.IsActionJustPressed("PrimaryFire")) {
-			dungeon.ActiveRoom.UpdateDoors();
+			//dungeon.ActiveRoom.UpdateDoors();
 
 		}
 
