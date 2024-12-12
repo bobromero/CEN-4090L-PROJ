@@ -14,15 +14,24 @@ var knockback_time = 0.0
 var enemies_in_damage_range: Array = []
 
 @onready var anim = $AnimatedSprite2D
-@onready var attack_cooldown_timer = $AttackCooldown
+#@onready var attack_cooldown_timer = $AttackCooldown
 
-@export var movement: movement = preload("res://Resources/PlayerResources/PlayerMovement.tres")
-@export var PlayerInventory: Inventory = preload("res://Resources/PlayerResources/BaseInventory.tres")
+@onready var movement: movement = preload("res://Resources/PlayerResources/PlayerMovement.tres")
+@onready var PlayerInventory: Inventory = preload("res://Resources/PlayerResources/BaseInventory.tres")
 @export var attackRegion: Area2D
 @export var health: float = 100
 @export var knockback_strength = 100
 @export var knockback_duration = 0.2
 @export var attack_duration = 1
+
+var canMove = true;
+
+var attack_animations: Dictionary = {
+	"magic_projectile": true,
+	"Sword": true,
+	"Sword_up": true,
+	"Sword_down": true,
+}
 
 var hud: playerHud
 
@@ -36,9 +45,13 @@ func _ready() -> void:
 	hud = $HUD
 	Instance = self
 	
+# Called when signal is set to alert that the animation has ended. Enusres that
+# idle animation restarts after player is finished attacking
 func _on_AnimatedSprite_Anim_Finished():
-	if anim.animation == "magic_projectile" or anim.animation == "proto_sword_attack":
-		print ("Stopping animation")
+	if anim.animation in attack_animations:
+		if anim.animation == "magic_projectile" or anim.animation == "Sword":
+			print ("Stopping animation")
+		
 		player_attacking = false
 	
 	
@@ -51,10 +64,11 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	UpdateHealth()
-	enemy_attack()
 	
 	movement._physics_process(delta)
-
+	var direction := Input.get_vector("left", "right", "up", "down")
+	#Gets direction since from input since I can't get it from movement.gd
+	
 	if knockback_time > 0:
 		position += knockback_velocity * delta
 		knockback_time -= delta
@@ -64,10 +78,16 @@ func _process(delta: float) -> void:
 	if health <= 0:
 		SceneManager.Player_dead() #transitions to the death screen
 	
-	if Input.is_action_just_pressed("PrimaryFire"):
+	if Input.is_action_just_pressed("PrimaryFire"):	#Plays different directinal animations
 		player_attacking = true
-		if (anim.animation!= "proto_sword_attack"):
-			anim.play("proto_sword_attack")
+		if direction.y > 0:
+			anim.play("Sword_down")
+		elif direction.y < 0:
+			anim.play("Sword_up")
+		elif (anim.animation!= "Sword"):
+			anim.play("Sword")
+		
+	
 		PlayerInventory.Weapon._primaryAttack()
 		
 		
@@ -80,7 +100,6 @@ func _process(delta: float) -> void:
 		PlayerInventory.Weapon._secondaryAttack()
 		
 		
-	
 	if health <= 0:
 		SceneManager.Player_dead() #transitions to the death screen
 		
@@ -103,7 +122,7 @@ func RemoveFromInventory(id: int):
 func IncreaseHealth(num: float):
 	health += num
 	
-func DecreaseHealth(num: float):
+func TakeDamage(num: int):
 	health -= num
 	
 func UpdateHealth():
@@ -125,9 +144,7 @@ func _on_player_hitbox_body_exited(body: Node2D) -> void:
 		enemy_in_attack_range = false
 	if body.has_method("boss"):
 		print("boss touched")
-		DecreaseHealth(500)
-	if body.is_in_group("enemyprojectile"):
-		DecreaseHealth(20)
+		TakeDamage(50)
 		
 func _on_attack_hitbox_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy"):
@@ -141,11 +158,10 @@ func _on_attack_hitbox_body_exited(body: Node2D) -> void:
 		enemy_in_damage_range = false
 
 func enemy_attack():
-	if enemy_in_attack_range and enemy_cooldown == true:
-		health -= 10
-		flash_sprite()
-		enemy_cooldown = false
-		$DamageCooldown.start()
+	TakeDamage(10)
+	flash_sprite()
+	enemy_cooldown = false
+	$DamageCooldown.start()
 
 func player():
 	pass
@@ -190,7 +206,7 @@ static func changePos(newPos:Vector2):
 
 func _on_player_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Door"):
-		var room:DunRoom = area.get_parent() as DunRoom
+		var room:DunRoom = area.get_parent().get_parent() as DunRoom
 		room.TouchedDoor(area)
 		
 		

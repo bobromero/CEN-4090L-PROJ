@@ -1,0 +1,129 @@
+[gd_scene load_steps=13 format=4 uid="uid://bapx4byqxwpe1"]
+
+[ext_resource type="TileSet" uid="uid://dkt0y153fngne" path="res://Resources/Misc/Dungeon1Tileset.tres" id="1_feb3a"]
+[ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_rf87u"]
+[ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="3_ja6bj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nbugm"]
+size = Vector2(20, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kye7e"]
+size = Vector2(27.3333, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n237g"]
+size = Vector2(9, 30.6667)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dlmj5"]
+size = Vector2(15.3333, 31.3333)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6ymc"]
+size = Vector2(6.99998, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_naidc"]
+size = Vector2(14, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y4x4c"]
+size = Vector2(20, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_igk13"]
+size = Vector2(31.3333, 13.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iicpt"]
+size = Vector2(153, 150.333)
+
+[node name="TileMapLayer" type="TileMapLayer" node_paths=PackedStringArray("NorthDoor", "SouthDoor", "EastDoor", "WestDoor", "activationArea") groups=["hitable"]]
+position = Vector2(-3, 102)
+scale = Vector2(6, 6)
+tile_map_data = PackedByteArray("AAD//wAAAQACAAMAAAD/////AQACAAMAAAAAAP//AQACAAMAAAAAAAAAAQACAAMAAAABAAAAAQAAAAEAAAABAP//AQACAAMAAAABAP7/AQACAAMAAAAAAP7/AQACAAMAAAD///7/AQACAAMAAAD///3/AQACAAMAAAAAAP3/AQACAAMAAAABAP3/AQACAAMAAAD+//3/AQACAAMAAAD+//7/AQACAAMAAAD+////AQACAAMAAAD+/wAAAQACAAEAAAD+/wEAAQABAAMAAAD//wEAAQACAAMAAAAAAAEAAQACAAMAAAABAAEAAQAEAAIAAAACAP//AQABAAIAAAACAAAAAQAAAAIAAAACAAEAAQAAAAMAAAADAP//AQACAAIAAAADAAAAAQACAAIAAAAEAAAAAQACAAIAAAAEAP//AQACAAIAAAAFAAAAAQABAAAAAAAFAP//AQACAAIAAAAFAAEAAQABAAMAAAAEAAEAAQAAAAMAAAADAAEAAQAAAAMAAAACAP7/AQAAAAEAAAADAP7/AQABAAEAAAAEAP7/AQABAAEAAAAFAP7/AQAEAAEAAAD9/wEAAQAAAAMAAAD8/wEAAQAAAAMAAAD7/wEAAQAAAAMAAAD6/wEAAQAEAAIAAAD6/wAAAQABAAIAAAD6////AQAEAAAAAAD6//7/AQABAAEAAAD9/wAAAQADAAEAAAD9////AQADAAIAAAD9//7/AQACAAEAAAD7//7/AQABAAEAAAD8//7/AQABAAEAAAD7////AQACAAIAAAD8////AQACAAIAAAD8/wAAAQACAAIAAAD7/wAAAQACAAIAAAD///z/AQAAAAMAAAAAAPz/AQAAAAMAAAABAPz/AQABAAMAAAD+//z/AQAEAAIAAAD+//v/AQABAAIAAAD+//r/AQABAAIAAAABAPv/AQADAAIAAAABAPr/AQADAAIAAAABAPn/AQACAAEAAAD+//n/AQAAAAEAAAD///n/AQABAAEAAAAAAPn/AQABAAEAAAD///r/AQACAAIAAAD///v/AQACAAIAAAAAAPv/AQACAAIAAAAAAPr/AQACAAIAAAACAP3/AQACAAMAAAACAPz/AQACAAMAAAADAPz/AQACAAMAAAADAP3/AQACAAMAAAADAPv/AQACAAMAAAACAPv/AQACAAMAAAACAPr/AQACAAMAAAADAPr/AQACAAMAAAACAPn/AQACAAMAAAADAPn/AQACAAMAAAAEAPz/AQACAAMAAAAEAPv/AQACAAMAAAD9//3/AQACAAMAAAD8//3/AQACAAMAAAD8//z/AQACAAMAAAD9//z/AQACAAMAAAD9//v/AQACAAMAAAD8//v/AQACAAMAAAD7//z/AQACAAMAAAD7//v/AQACAAMAAAD8//r/AQACAAMAAAD9//r/AQACAAMAAAD9//n/AQACAAMAAAD8//n/AQACAAMAAAD8//j/AQACAAMAAAD9//j/AQACAAMAAAD+//j/AQACAAMAAAD///j/AQACAAMAAAAAAPj/AQACAAMAAAABAPj/AQACAAMAAAACAPj/AQACAAMAAAADAPj/AQACAAMAAAD9//f/AQACAAMAAAACAPf/AQACAAMAAAD+//f/AQACAAMAAAD///f/AQACAAMAAAAAAPf/AQACAAMAAAABAPf/AQACAAMAAAD///b/AQACAAMAAAAAAPb/AQACAAMAAAADAPf/AQAEAAIAAAAEAPr/AQACAAMAAAD7//r/AQACAAMAAAD7//n/AQACAAMAAAD7//j/AQACAAMAAAD8//b/AQABAAAAAAD9//b/AQACAAAAAAD+//b/AQABAAMAAAABAPb/AQAEAAIAAAACAPb/AQADAAAAAAADAPb/AQAEAAAAAAD8//f/AQABAAMAAAD7//f/AQACAAAAAAD6//f/AQABAAAAAAD6//j/AQADAAIAAAD6//n/AQADAAIAAAD6//z/AQACAAMAAAD6//v/AQABAAMAAAD7//3/AQACAAMAAAD6//r/AQADAAIAAAAFAPr/AQABAAIAAAAEAPj/AQACAAMAAAAEAPn/AQACAAMAAAAFAPn/AQABAAIAAAAFAPj/AQABAAIAAAAEAPf/AQADAAAAAAAFAPf/AQAEAAAAAAAFAPz/AQACAAMAAAAFAPv/AQAEAAIAAAAEAP3/AQACAAMAAAAFAP3/AQACAAMAAAD6//3/AQACAAMAAAAEAPb/AQACAAIAAAAFAPb/AQACAAIAAAAFAPX/AQACAAIAAAAEAPX/AQACAAIAAAADAPX/AQACAAIAAAACAPX/AQACAAIAAAD6//b/AQACAAIAAAD7//b/AQACAAIAAAD7//X/AQACAAIAAAD6//X/AQAAAAIAAAD8//X/AQACAAIAAAD9//X/AQACAAIAAAD+//X/AQADAAIAAAABAPX/AQABAAIAAAD5//r/AQACAAIAAAD5//n/AQACAAIAAAD5//j/AQACAAIAAAD5//f/AQACAAIAAAAGAPr/AQACAAIAAAAGAPn/AQACAAIAAAAGAPj/AQACAAIAAAAGAPf/AQACAAIAAAD5//v/AQACAAAAAAD4//v/AQAEAAIAAAD4//7/AQABAAEAAAD5//7/AQABAAEAAAD5//z/AQADAAMAAAD5//3/AQADAAMAAAAGAPz/AQACAAMAAAAGAP3/AQACAAMAAAAGAPv/AQADAAAAAAAHAPv/AQAAAAMAAAAHAP7/AQACAAEAAAAGAP7/AQAEAAEAAAAHAPr/AQACAAIAAAD4//r/AQABAAIAAAD///X/AQACAAMAAAAAAPX/AQACAAMAAAD5////AQADAAAAAAD4////AQAAAAMAAAD3////AQAEAAIAAAD3//7/AQAAAAEAAAD4//n/AQABAAIAAAD4//j/AQABAAIAAAD4//f/AQABAAIAAAD4//b/AQAAAAEAAAD5//b/AQAAAAIAAAD5//X/AQAAAAEAAAD6//T/AQAAAAEAAAD7//T/AQABAAEAAAD8//T/AQABAAEAAAD9//T/AQABAAEAAAD+//T/AQACAAEAAAABAPT/AQAAAAEAAAACAPT/AQABAAEAAAADAPT/AQABAAEAAAAEAPT/AQABAAEAAAAFAPT/AQABAAEAAAAGAPT/AQACAAEAAAAHAPX/AQACAAEAAAAIAPb/AQACAAEAAAAGAPX/AQADAAEAAAAHAPb/AQADAAEAAAAIAPf/AQADAAIAAAAIAPj/AQADAAIAAAAIAPn/AQADAAIAAAAIAPr/AQADAAIAAAAIAPv/AQABAAMAAAAHAPn/AQACAAIAAAAHAPj/AQACAAIAAAAHAPf/AQACAAIAAAAGAPb/AQACAAIAAAAHAP//AQADAAIAAAAHAAAAAQABAAMAAAAGAAAAAQACAAAAAAAGAP//AQACAAIAAAA=")
+tile_set = ExtResource("1_feb3a")
+script = ExtResource("2_rf87u")
+NorthDoor = NodePath("Doors/NorthArea")
+SouthDoor = NodePath("Doors/SouthArea")
+EastDoor = NodePath("Doors/EastArea")
+WestDoor = NodePath("Doors/WestArea")
+activationArea = NodePath("Activators/Activator1")
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="NorthArea" type="Area2D" parent="Doors" groups=["Door"]]
+
+[node name="NorthDoor" type="CollisionShape2D" parent="Doors/NorthArea"]
+position = Vector2(-0.5, -155)
+shape = SubResource("RectangleShape2D_nbugm")
+
+[node name="Blocker" type="StaticBody2D" parent="Doors/NorthArea"]
+position = Vector2(8, -170.667)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/NorthArea/Blocker"]
+position = Vector2(-7.83333, 15.0004)
+shape = SubResource("RectangleShape2D_kye7e")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/NorthArea/Blocker"]
+position = Vector2(-8.33333, 14.3337)
+scale = Vector2(0.240885, 0.175)
+texture = ExtResource("3_ja6bj")
+
+[node name="EastArea" type="Area2D" parent="Doors" groups=["Door"]]
+
+[node name="EastDoor" type="CollisionShape2D" parent="Doors/EastArea"]
+position = Vector2(88.1667, -46.8333)
+shape = SubResource("RectangleShape2D_n237g")
+
+[node name="Blocker" type="StaticBody2D" parent="Doors/EastArea"]
+position = Vector2(56, 40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/EastArea/Blocker"]
+position = Vector2(32.1667, -88)
+shape = SubResource("RectangleShape2D_dlmj5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/EastArea/Blocker"]
+position = Vector2(31.8333, -88)
+scale = Vector2(0.110677, 0.257813)
+texture = ExtResource("3_ja6bj")
+
+[node name="WestArea" type="Area2D" parent="Doors" groups=["Door"]]
+
+[node name="WestDoor" type="CollisionShape2D" parent="Doors/WestArea"]
+position = Vector2(-88, -48)
+shape = SubResource("RectangleShape2D_n6ymc")
+
+[node name="Blocker" type="StaticBody2D" parent="Doors/WestArea"]
+position = Vector2(-186.5, 39.8333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/WestArea/Blocker"]
+position = Vector2(98.6667, -88.3333)
+shape = SubResource("RectangleShape2D_naidc")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/WestArea/Blocker"]
+position = Vector2(98.5, -88)
+scale = Vector2(0.117188, 0.239583)
+texture = ExtResource("3_ja6bj")
+
+[node name="SouthArea" type="Area2D" parent="Doors" groups=["Door"]]
+position = Vector2(0, -3.83333)
+
+[node name="SouthDoor" type="CollisionShape2D" parent="Doors/SouthArea"]
+position = Vector2(0.333333, 29.1667)
+shape = SubResource("RectangleShape2D_y4x4c")
+
+[node name="Blocker" type="StaticBody2D" parent="Doors/SouthArea"]
+position = Vector2(0.500008, 25.3333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/SouthArea/Blocker"]
+position = Vector2(-0.333341, 3.24999)
+shape = SubResource("RectangleShape2D_igk13")
+
+[node name="Sprite2D" type="Sprite2D" parent="Doors/SouthArea/Blocker"]
+position = Vector2(-0.333341, 3.16666)
+scale = Vector2(0.251302, 0.101563)
+texture = ExtResource("3_ja6bj")
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Activators" type="Node2D" parent="."]
+
+[node name="Activator1" type="Area2D" parent="Activators"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Activators/Activator1"]
+position = Vector2(0.5, -64.6667)
+shape = SubResource("RectangleShape2D_iicpt")
