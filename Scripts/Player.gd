@@ -129,7 +129,7 @@ func UpdateHealth():
 	var healthBar = $HealthBar
 	healthBar.value = health
 	
-	if health >= 100:
+	if health >= 200:
 		healthBar.visible = false
 	else:
 		healthBar.visible = true
