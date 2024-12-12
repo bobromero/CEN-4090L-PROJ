@@ -15,16 +15,16 @@ func _process(delta: float) -> void:
 	var pos : Vector2 = Vector2.ZERO
 	
 	if Global.isInBossFight:
-		var enemies = get_tree().get_nodes_in_group("Enemy")
-		for e in enemies:
-			pos += (e as Node2D).global_position
-		
-		pos+=Player.Instance.global_position
-		global_position = pos / (enemies.size() )
+		#var enemies = get_tree().get_nodes_in_group("Enemy")
+		#for e in enemies:
+			#pos += (e as Node2D).global_position
+		#
+		#pos+=Player.Instance.global_position
+		#global_position = pos / (enemies.size() )
 		zoom = Vector2.ONE * .5
+		global_position = Vector2.ZERO
 	else:
 		global_position = Player.Instance.global_position
-	
 
 
 func TransitionIn():
