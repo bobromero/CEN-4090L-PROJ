@@ -16,13 +16,15 @@ var enemies_in_damage_range: Array = []
 @onready var anim = $AnimatedSprite2D
 #@onready var attack_cooldown_timer = $AttackCooldown
 
-@export var movement: movement = preload("res://Resources/PlayerResources/PlayerMovement.tres")
-@export var PlayerInventory: Inventory = preload("res://Resources/PlayerResources/BaseInventory.tres")
+@onready var movement: movement = preload("res://Resources/PlayerResources/PlayerMovement.tres")
+@onready var PlayerInventory: Inventory = preload("res://Resources/PlayerResources/BaseInventory.tres")
 @export var attackRegion: Area2D
 @export var health: float = 100
 @export var knockback_strength = 100
 @export var knockback_duration = 0.2
 @export var attack_duration = 1
+
+var canMove = true;
 
 var attack_animations: Dictionary = {
 	"magic_projectile": true,

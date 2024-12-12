@@ -47,7 +47,7 @@ activationArea = NodePath("Activators/Area2D")
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="NorthArea" type="Area2D" parent="Doors" groups=["Door"]]
-position = Vector2(-8.16667, 97.8333)
+position = Vector2(-10.8333, 100)
 
 [node name="NorthDoor" type="CollisionShape2D" parent="Doors/NorthArea"]
 position = Vector2(74.6667, -247.167)
@@ -62,7 +62,7 @@ shape = SubResource("RectangleShape2D_aucsc")
 
 [node name="Sprite2D" type="Sprite2D" parent="Doors/NorthArea/Blocker"]
 position = Vector2(-0.0833341, 0.250363)
-scale = Vector2(0.238281, 0.123698)
+scale = Vector2(0.259114, 0.123698)
 texture = ExtResource("2_ghjoc")
 
 [node name="EastArea" type="Area2D" parent="Doors" groups=["Door"]]
@@ -139,7 +139,6 @@ position = Vector2(-19.8333, -34.6667)
 
 [node name="Sprite2D2" parent="Loot" instance=ExtResource("4_0dtce")]
 position = Vector2(-6.49999, -100.333)
-scale = Vector2(0.05, 0.05)
 
 [node name="Sprite2D" parent="Loot" instance=ExtResource("5_eexhu")]
 position = Vector2(8.16667, -55.8333)

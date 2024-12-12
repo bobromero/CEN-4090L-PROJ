@@ -4,11 +4,15 @@ class_name Enemy
 
 
 @export var speed = 150    # Higher speed = slower enemy and vice versa
-@export var health = 100
+var health
+@export var MaxHealth = 200
 @export var knockback_strength = 500
 @export var knockback_duration = 0.2
 @export var knockback_enabled = false
 @export var knockback_timer = 1.0 
+
+
+@onready var anim = $AnimatedSprite2D
 
 @onready var coin = preload("res://Prefabs/Coin.tscn")
 
@@ -19,7 +23,9 @@ var knockback_velocity = Vector2.ZERO
 var player_cooldown = true
 
 func _ready() -> void:
-	pass
+	health = MaxHealth
+	var healthBar:ProgressBar = $HealthBar
+	healthBar.max_value = MaxHealth
 
 func _physics_process(delta: float) -> void:
 	if knockback_enabled:
@@ -30,6 +36,21 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 	
+	if velocity != Vector2.ZERO:
+		if abs(velocity.x) > abs(velocity.y):
+			if velocity.x > 0:
+				anim.flip_h = false
+			if velocity.x < 0:
+				anim.flip_h = true
+			anim.play("Run")
+		else:
+			if velocity.y > 0:
+				anim.play("Run_down")
+			else:
+				anim.play("Run_up")
+	else:
+		anim.play("Idle")
+				
 	UpdateHealth()
 	move_and_slide()
 
@@ -37,14 +58,14 @@ func UpdateHealth():
 	var healthBar = $HealthBar
 	healthBar.value = health
 
-	if health >= 100:
+	if health >= MaxHealth:
 		healthBar.visible = false
 	else:
 		healthBar.visible = true
 		
 	if health <= 0:
-			SpawnCoin()			
-			self.queue_free()
+		SpawnCoin()
+		self.queue_free()
 			
 func SpawnCoin():
 	var instance :Node2D = coin.instantiate()
