@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 	if Global.isInBossFight == true and canSpawn == true:
 		spawn_enemy()
 		canSpawn = false
-		await get_tree().create_timer(15.0).timeout
+		await get_tree().create_timer(30.0).timeout
 		canSpawn = true
 		
 

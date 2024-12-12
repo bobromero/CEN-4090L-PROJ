@@ -133,10 +133,10 @@ animations = [{
 size = Vector2(1434, 1196)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3lx8q"]
-size = Vector2(101, 140)
+size = Vector2(80, 126)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_du47y"]
-size = Vector2(105.25, 144.75)
+size = Vector2(720.75, 1219.25)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mjb5g"]
 bg_color = Color(0, 0.835294, 0, 1)
@@ -147,7 +147,7 @@ bg_color = Color(0.364706, 0.996078, 0, 1)
 [node name="CharacterBody2D5" type="CharacterBody2D" groups=["Enemy", "hitable"]]
 light_mask = 3
 visibility_layer = 3
-collision_layer = 2
+collision_layer = 1026
 collision_priority = 0.1
 script = ExtResource("2_qhkco")
 knockback_enabled = true
@@ -178,8 +178,8 @@ collision_layer = 34
 collision_mask = 33
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" groups=["hitable"]]
-visible = false
 position = Vector2(-0.375, 0.375)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_du47y")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
