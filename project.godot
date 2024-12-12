@@ -39,6 +39,7 @@ hitable=""
 projectiles=""
 Door=""
 enemyprojectile=""
+Enemy=""
 
 [input]
 

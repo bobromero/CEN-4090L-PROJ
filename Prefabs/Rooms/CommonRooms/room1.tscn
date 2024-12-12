@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=4 uid="uid://yol1ro8rjrrf"]
+[gd_scene load_steps=14 format=4 uid="uid://yol1ro8rjrrf"]
 
 [ext_resource type="TileSet" uid="uid://dkt0y153fngne" path="res://Resources/Misc/Dungeon1Tileset.tres" id="1_nasl7"]
 [ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_2ys2e"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="3_gx5m8"]
+[ext_resource type="PackedScene" uid="uid://dwp0sxgwj1q2c" path="res://Prefabs/Enemy.tscn" id="4_6c55v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_18yoo"]
 size = Vector2(24.6667, 11.9999)
@@ -127,3 +128,11 @@ position = Vector2(0.5, -6.5)
 shape = SubResource("RectangleShape2D_gsbib")
 
 [node name="Entities" type="Node2D" parent="."]
+
+[node name="CharacterBody2D5" parent="Entities" instance=ExtResource("4_6c55v")]
+position = Vector2(-45.5, -9.33333)
+scale = Vector2(0.1, 0.1)
+
+[node name="CharacterBody2D6" parent="Entities" instance=ExtResource("4_6c55v")]
+position = Vector2(46, -11.8333)
+scale = Vector2(0.1, 0.1)

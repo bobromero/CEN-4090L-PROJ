@@ -1,8 +1,10 @@
-[gd_scene load_steps=13 format=4 uid="uid://cwitcieuojxfv"]
+[gd_scene load_steps=15 format=4 uid="uid://cwitcieuojxfv"]
 
 [ext_resource type="TileSet" uid="uid://dkt0y153fngne" path="res://Resources/Misc/Dungeon1Tileset.tres" id="1_126ov"]
 [ext_resource type="Texture2D" uid="uid://b7lvcwis7yke7" path="res://icon.svg" id="2_ghjoc"]
 [ext_resource type="Script" path="res://Dungeon/Room.gd" id="2_xflwy"]
+[ext_resource type="PackedScene" uid="uid://35u4ck4g6nfp" path="res://Prefabs/CoinBig.tscn" id="4_0dtce"]
+[ext_resource type="PackedScene" uid="uid://b8wx6t5bexvts" path="res://Prefabs/Coin.tscn" id="5_eexhu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k7edb"]
 size = Vector2(27, 8.99927)
@@ -45,7 +47,7 @@ activationArea = NodePath("Activators/Area2D")
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="NorthArea" type="Area2D" parent="Doors" groups=["Door"]]
-position = Vector2(-8.16667, 97.8333)
+position = Vector2(-10.8333, 100)
 
 [node name="NorthDoor" type="CollisionShape2D" parent="Doors/NorthArea"]
 position = Vector2(74.6667, -247.167)
@@ -60,7 +62,7 @@ shape = SubResource("RectangleShape2D_aucsc")
 
 [node name="Sprite2D" type="Sprite2D" parent="Doors/NorthArea/Blocker"]
 position = Vector2(-0.0833341, 0.250363)
-scale = Vector2(0.238281, 0.123698)
+scale = Vector2(0.259114, 0.123698)
 texture = ExtResource("2_ghjoc")
 
 [node name="EastArea" type="Area2D" parent="Doors" groups=["Door"]]
@@ -129,3 +131,20 @@ position = Vector2(0, -21.3333)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Activators/Area2D"]
 position = Vector2(0, 4.58333)
 shape = SubResource("RectangleShape2D_la2bn")
+
+[node name="Loot" type="Node2D" parent="."]
+
+[node name="Sprite2D4" parent="Loot" instance=ExtResource("5_eexhu")]
+position = Vector2(-19.8333, -34.6667)
+
+[node name="Sprite2D2" parent="Loot" instance=ExtResource("4_0dtce")]
+position = Vector2(-6.49999, -100.333)
+
+[node name="Sprite2D" parent="Loot" instance=ExtResource("5_eexhu")]
+position = Vector2(8.16667, -55.8333)
+
+[node name="Sprite2D3" parent="Loot" instance=ExtResource("5_eexhu")]
+position = Vector2(-69.1667, 13.6667)
+
+[node name="Sprite2D5" parent="Loot" instance=ExtResource("5_eexhu")]
+position = Vector2(53, -77.3333)

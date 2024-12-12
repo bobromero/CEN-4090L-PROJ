@@ -41,6 +41,7 @@ func shoot(direction):
 	instance.initialPos = global_position
 	instance.initialRot = direction.angle()
 	instance.zAxis = z_index-1
+	instance.host = "Player"
 	
 	get_tree().current_scene.add_child(instance)
 	
