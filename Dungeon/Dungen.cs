@@ -98,6 +98,9 @@ public partial class Dungen : Node2D {
 			Random rand = new Random();
 
 			if (rand.NextDouble() < SidePathChance) {
+
+				GD.Print("umm no way");
+
 				var plusMinus = rand.Next(2) == 0 ? 1 : -1;
 				var variance = rand.Next(SidePathLengthVariance) * plusMinus;
 				MakePath(currentRoom, SidePathLength + variance, dir, false);
@@ -125,10 +128,12 @@ public partial class Dungen : Node2D {
 		private void MakePath(Vector2I currentRoom, int pathLength, Door.Direction originalDirection, bool isMain) {
 			for (int i = 0; i < pathLength; i++)
 			{
+
 				foreach (var item in RoomTypeGraph)
 				{
 					//GD.Print(item);
 				}
+
 				var badDirections = GetBadDirections(currentRoom, originalDirection);
 
 
@@ -205,6 +210,8 @@ public partial class Dungen : Node2D {
 
 			HostNode.AddChild(scene);
 
+			scene.AddToGroup("hitable");
+
 			return new Room(scene, graphPos);
 		}
 
@@ -247,6 +254,8 @@ public partial class Dungen : Node2D {
 			//enable correct room
 
 			ActiveRoom.SetRoomActive(true);
+
+			
 		}
 	}
 
@@ -498,6 +507,8 @@ public partial class Dungen : Node2D {
 
 				Door door = new Door (dir, _offset, doorNode, blocker);
 
+				door.blocker.AddToGroup("hitable");
+
 				result.Add(dir, door);
 			}
 			return result;
@@ -520,20 +531,20 @@ public partial class Dungen : Node2D {
 
 	public static double RoomChangeBuffer = 2;
 
-	public static void ChangeDirection(int value, GodotObject player) {
+	public static void ChangeDirection(int value, GodotObject player, GodotObject playerCamera) {
 		if (changeRoomTimer < RoomChangeBuffer) {
 			return;
 		} else {
 			changeRoomTimer = 0;
 			Room.Door.Direction direction = Room.Door.IntToDirection(value);
-
+			
 			if (dungeon.RoomExists(direction)) {
 				dungeon.ChangeActiveRoom(direction);
 
 				//GD.Print("Touched " + Room.Door.IntToDirection(value) + " door, coming out the " + Room.Door.FlipDirection(direction));
 				player.Call("changePos", dungeon.ActiveRoom.doors[Room.Door.FlipDirection(direction)].position);
-			}
-			
+				playerCamera.Call("TransitionIn");
+            }
 		}
 	}
 
@@ -543,6 +554,7 @@ public partial class Dungen : Node2D {
 			dungeon.ActiveRoom.ToggleEntites(true);
 			dungeon.ActiveRoom.visited = true;
 		}
+
 	}
 
 	public static void OpenRoomCondition() {
@@ -551,11 +563,14 @@ public partial class Dungen : Node2D {
 	
 	public static double changeRoomTimer = 0;
 
+	public static void DeleteDungeon() {
+		dungeon = null;
+	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		if (dungeon == null) {
-			dungeon = new Dungeon(this, 8, .0f, 3, 1);
+			dungeon = new Dungeon(this, 8, .1f, 4, 1);
 			dungeon.DecideRooms();
 			dungeon.FillInRooms();
 

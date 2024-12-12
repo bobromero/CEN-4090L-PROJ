@@ -144,10 +144,13 @@ bg_color = Color(0, 0.835294, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_26e3e"]
 bg_color = Color(0.364706, 0.996078, 0, 1)
 
-[node name="CharacterBody2D5" type="CharacterBody2D"]
+[node name="CharacterBody2D5" type="CharacterBody2D" groups=["Enemy", "hitable"]]
 light_mask = 3
 visibility_layer = 3
+collision_layer = 2
+collision_priority = 0.1
 script = ExtResource("2_qhkco")
+knockback_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -157,6 +160,8 @@ sprite_frames = SubResource("SpriteFrames_2qvhs")
 animation = &"Run_up"
 
 [node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 position = Vector2(41, -17)
@@ -167,11 +172,13 @@ light_mask = 16
 visibility_layer = 16
 shape = SubResource("RectangleShape2D_3lx8q")
 
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 3
-collision_mask = 3
+[node name="Hitbox" type="Area2D" parent="." groups=["Enemy"]]
+scale = Vector2(0.1, 0.1)
+collision_layer = 34
+collision_mask = 33
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" groups=["hitable"]]
 visible = false
 position = Vector2(-0.375, 0.375)
 shape = SubResource("RectangleShape2D_du47y")
